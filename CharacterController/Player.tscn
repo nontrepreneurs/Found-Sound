@@ -1,37 +1,54 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://CharacterController/Controller.gd" type="Script" id=1]
-[ext_resource path="res://CharacterController/playerGrey_walk1.png" type="Texture" id=2]
-[ext_resource path="res://CharacterController/playerGrey_up1.png" type="Texture" id=3]
-[ext_resource path="res://CharacterController/playerGrey_walk2.png" type="Texture" id=4]
-[ext_resource path="res://CharacterController/playerGrey_up2.png" type="Texture" id=5]
+[ext_resource path="res://CharacterController/FOLEYvers1_sheet_upscaled.png" type="Texture" id=2]
+
+[sub_resource type="AtlasTexture" id=3]
+flags = 4
+atlas = ExtResource( 2 )
+region = Rect2( 0, 0, 48, 66 )
+
+[sub_resource type="AtlasTexture" id=4]
+flags = 4
+atlas = ExtResource( 2 )
+region = Rect2( 96, 0, 48, 66 )
+
+[sub_resource type="AtlasTexture" id=5]
+flags = 4
+atlas = ExtResource( 2 )
+region = Rect2( 144, 0, 48, 66 )
+
+[sub_resource type="AtlasTexture" id=6]
+flags = 4
+atlas = ExtResource( 2 )
+region = Rect2( 0, 0, 48, 66 )
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
-"frames": [ ExtResource( 2 ) ],
+"frames": [ SubResource( 3 ) ],
 "loop": true,
 "name": "idle",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 2 ), ExtResource( 4 ) ],
+"frames": [ SubResource( 4 ) ],
 "loop": true,
-"name": "walking",
+"name": "walkingDown",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 3 ), ExtResource( 5 ) ],
+"frames": [ SubResource( 5 ) ],
 "loop": true,
 "name": "walkingUp",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 3 ), ExtResource( 5 ) ],
+"frames": [ SubResource( 6 ) ],
 "loop": true,
-"name": "walkingDown",
+"name": "walking",
 "speed": 5.0
 } ]
 
 [sub_resource type="CapsuleShape2D" id=2]
-radius = 25.4825
-height = 18.4669
+radius = 21.4119
+height = 40.2894
 
 [node name="Player" type="KinematicBody2D"]
 script = ExtResource( 1 )
@@ -40,7 +57,7 @@ __meta__ = {
 }
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
-scale = Vector2( 0.5, 0.5 )
+scale = Vector2( 1.5, 1.5 )
 frames = SubResource( 1 )
 animation = "idle"
 playing = true
