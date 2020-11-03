@@ -1,0 +1,18 @@
+[gd_resource type="Resource" load_steps=2 format=2]
+
+[ext_resource path="res://Inventory/Inventory.gd" type="Script" id=1]
+
+[resource]
+script = ExtResource( 1 )
+consumables = {
+
+}
+motifs = {
+
+}
+equipment = {
+
+}
+items = {
+
+}
