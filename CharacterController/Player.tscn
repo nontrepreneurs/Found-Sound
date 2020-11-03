@@ -13,9 +13,9 @@ animations = [ {
 "name": "idle",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 3 ), ExtResource( 5 ) ],
+"frames": [ ExtResource( 2 ), ExtResource( 4 ) ],
 "loop": true,
-"name": "walkingDown",
+"name": "walking",
 "speed": 5.0
 }, {
 "frames": [ ExtResource( 3 ), ExtResource( 5 ) ],
@@ -23,9 +23,9 @@ animations = [ {
 "name": "walkingUp",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 2 ), ExtResource( 4 ) ],
+"frames": [ ExtResource( 3 ), ExtResource( 5 ) ],
 "loop": true,
-"name": "walking",
+"name": "walkingDown",
 "speed": 5.0
 } ]
 
@@ -47,3 +47,10 @@ playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 2 )
+
+[node name="Camera2D" type="Camera2D" parent="."]
+current = true
+zoom = Vector2( 1.5, 1.5 )
+drag_margin_h_enabled = true
+drag_margin_v_enabled = true
+smoothing_speed = 20.0
