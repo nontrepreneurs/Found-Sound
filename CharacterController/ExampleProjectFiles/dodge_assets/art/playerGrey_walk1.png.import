@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/playerGrey_up2.png-640691f37952dcdd80c8b26d218b96c8.stex"
+path="res://.import/playerGrey_walk1.png-174ae67c0fe79183bf801d180ce73180.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://CharacterController/dodge_assets/art/playerGrey_up2.png"
-dest_files=[ "res://.import/playerGrey_up2.png-640691f37952dcdd80c8b26d218b96c8.stex" ]
+source_file="res://CharacterController/ExampleProjectFiles/dodge_assets/art/playerGrey_walk1.png"
+dest_files=[ "res://.import/playerGrey_walk1.png-174ae67c0fe79183bf801d180ce73180.stex" ]
 
 [params]
 

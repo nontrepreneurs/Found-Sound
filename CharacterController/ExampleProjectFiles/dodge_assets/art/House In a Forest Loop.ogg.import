@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/House In a Forest Loop.ogg-4e4d8a7d230c1d730a78d8e5abbb2623.oggstr"
+
+[deps]
+
+source_file="res://CharacterController/ExampleProjectFiles/dodge_assets/art/House In a Forest Loop.ogg"
+dest_files=[ "res://.import/House In a Forest Loop.ogg-4e4d8a7d230c1d730a78d8e5abbb2623.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0
