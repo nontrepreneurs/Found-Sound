@@ -1,0 +1,4 @@
+.DS_*
+.import
+.mono
+mono_crash*
