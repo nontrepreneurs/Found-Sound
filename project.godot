@@ -47,6 +47,7 @@ _global_script_class_icons={
 config/name="go2020"
 config/icon="res://icon.png"
 
+
 [autoload]
 
 ItemInterface="*res://Components/Item/Interface.gd"
