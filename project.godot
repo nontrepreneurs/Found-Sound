@@ -8,15 +8,52 @@
 
 config_version=4
 
-_global_script_classes=[  ]
+_global_script_classes=[ {
+"base": "Item",
+"class": "Consumable",
+"language": "GDScript",
+"path": "res://Components/Item/Consumable/Consumable.gd"
+}, {
+"base": "Resource",
+"class": "Inventory",
+"language": "GDScript",
+"path": "res://Components/Inventory/Inventory.gd"
+}, {
+"base": "Resource",
+"class": "Item",
+"language": "GDScript",
+"path": "res://Components/Item/Item.gd"
+}, {
+"base": "Item",
+"class": "Motif",
+"language": "GDScript",
+"path": "res://Components/Item/Motif/Motif.gd"
+}, {
+"base": "KinematicBody2D",
+"class": "Player",
+"language": "GDScript",
+"path": "res://Scenes/UnitTest/UnitTestPlayer.gd"
+} ]
 _global_script_class_icons={
-
+"Consumable": "",
+"Inventory": "",
+"Item": "",
+"Motif": "",
+"Player": ""
 }
 
 [application]
 
 config/name="go2020"
 config/icon="res://icon.png"
+
+
+[autoload]
+
+ItemInterface="*res://Components/Item/Interface.gd"
+ItemDatabase="*res://Global/Managers/ItemDatabase.gd"
+Filesystem="*res://Global/Helpers/Filesystem.gd"
+GameManager="*res://Global/Managers/GameManager.gd"
 
 [input]
 
