@@ -1,0 +1,48 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://SamplerAbility/Sampleable.tscn" type="PackedScene" id=1]
+[ext_resource path="res://SamplerAbility/SamplerAbility.tscn" type="PackedScene" id=2]
+[ext_resource path="res://SamplerAbility/SampleWaves.shader" type="Shader" id=3]
+[ext_resource path="res://icon.png" type="Texture" id=4]
+
+[sub_resource type="ShaderMaterial" id=2]
+shader = ExtResource( 3 )
+shader_param/center = null
+shader_param/force = null
+shader_param/size = null
+shader_param/thickness = null
+
+[sub_resource type="ShaderMaterial" id=4]
+shader = ExtResource( 3 )
+shader_param/center = Vector2( 0.529, 0.495 )
+shader_param/force = 0.105
+shader_param/size = 0.26
+shader_param/thickness = 0.022
+
+[node name="Node2D" type="Node2D"]
+material = SubResource( 2 )
+
+[node name="Sampler" parent="." instance=ExtResource( 2 )]
+
+[node name="TextureRect" type="TextureRect" parent="."]
+margin_right = 1038.0
+margin_bottom = 614.0
+texture = ExtResource( 4 )
+stretch_mode = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+visible = false
+material = SubResource( 4 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Sampleable" parent="." instance=ExtResource( 1 )]
+position = Vector2( 250, 250 )
