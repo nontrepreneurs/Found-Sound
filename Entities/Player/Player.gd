@@ -1,4 +1,6 @@
 extends KinematicBody2D
+class_name Player
+
 
 const IDLE = "idle"
 const WALKING = "walking"
@@ -16,8 +18,22 @@ var screen_size
 var heading = Vector2()
 var velocity = Vector2()
 
+
+var inventoryComponent = load("res://Components/Inventory.gd")
+var inventory: Inventory = inventoryComponent.new()
+
+var identityComponent = load("res://Components/Identity.gd")
+var identity: Identity = identityComponent.new()
+
+
 func _ready():
+	identity.setCharacter("Foley")
 	screen_size = get_viewport_rect().size
+	var character: Character = identity.get_character()
+	$AnimatedSprite.frames = character.frames
+	$CollisionShape2D.shape = character.collision_shape
+
+
 	
 func _process(delta):
 	update_heading()

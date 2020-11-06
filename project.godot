@@ -9,33 +9,45 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "Resource",
+"class": "Character",
+"language": "GDScript",
+"path": "res://Models/Character/Character.gd"
+}, {
 "base": "Item",
 "class": "Consumable",
 "language": "GDScript",
-"path": "res://Components/Item/Consumable/Consumable.gd"
+"path": "res://Models/Item/Consumable/Consumable.gd"
+}, {
+"base": "Resource",
+"class": "Identity",
+"language": "GDScript",
+"path": "res://Components/Identity.gd"
 }, {
 "base": "Resource",
 "class": "Inventory",
 "language": "GDScript",
-"path": "res://Components/Inventory/Inventory.gd"
+"path": "res://Components/Inventory.gd"
 }, {
 "base": "Resource",
 "class": "Item",
 "language": "GDScript",
-"path": "res://Components/Item/Item.gd"
+"path": "res://Models/Item/Item.gd"
 }, {
 "base": "Item",
 "class": "Motif",
 "language": "GDScript",
-"path": "res://Components/Item/Motif/Motif.gd"
+"path": "res://Models/Item/Motif/Motif.gd"
 }, {
 "base": "KinematicBody2D",
 "class": "Player",
 "language": "GDScript",
-"path": "res://Scenes/UnitTest/UnitTestPlayer.gd"
+"path": "res://Entities/Player/Player.gd"
 } ]
 _global_script_class_icons={
+"Character": "",
 "Consumable": "",
+"Identity": "",
 "Inventory": "",
 "Item": "",
 "Motif": "",
@@ -49,9 +61,10 @@ config/icon="res://icon.png"
 
 [autoload]
 
-ItemInterface="*res://Components/Item/Interface.gd"
-ItemDatabase="*res://Global/Managers/ItemDatabase.gd"
 Filesystem="*res://Global/Helpers/Filesystem.gd"
+ItemInterface="*res://Models/Item/Interface.gd"
+ItemState="*res://Global/State/ItemState.gd"
+CharacterState="*res://Global/State/CharacterState.gd"
 GameManager="*res://Global/Managers/GameManager.gd"
 
 [input]

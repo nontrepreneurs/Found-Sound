@@ -68,7 +68,7 @@ func addItem(type: String, name: String, quantity: int = 1):
 		printerr("Inventory.addItem(): cannot add a negative number.")
 		return
 	
-	var item = ItemDatabase._fetch_item(type, name)
+	var item = ItemState._fetch_item(type, name)
 	var types = ItemInterface.ItemTypes
 	var signalPayload = {"type": type, "name": name }
 	if item:

@@ -2,7 +2,7 @@ extends Node
 
 var resources = Dictionary()
 
-var itemPath = "res://Components/Item"
+var itemPath = "res://Models/Item"
 func _generateResourcePath(itemType: String):
 	return "{itemPath}/{itemType}/Resources".format({
 		"itemPath": itemPath,
@@ -22,7 +22,7 @@ var itemConstructorProps = [
 
 func fileHandler(name: String, path: String, details: Dictionary):
 	if path.get_extension() == "tres":
-		resources[details.type][name.to_lower().get_basename()] = load(path) 
+		resources[details.type][name.to_lower().get_basename()] = load(path)
 
 var fh = funcref(self, "fileHandler")
 
