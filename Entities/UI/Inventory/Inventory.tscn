@@ -1,0 +1,23 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Entities/UI/Inventory/Inventory.gd" type="Script" id=1]
+
+[node name="Inventory" type="Panel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="GridContainer" type="GridContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -700.56
+margin_top = -364.065
+margin_right = -720.56
+margin_bottom = -384.065
+columns = 4
+__meta__ = {
+"_edit_use_anchors_": false
+}

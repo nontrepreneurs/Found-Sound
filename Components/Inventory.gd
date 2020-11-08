@@ -1,7 +1,6 @@
-extends Resource
+extends Component
 class_name Inventory
 
-signal inventory_changed
 signal change_generic(invChange)
 #signal change_equipment(invChange)
 signal change_motifs(invChange)
@@ -11,16 +10,17 @@ signal itemExistsFailure(item)
 signal itemQuantityExceeded(item)
 signal itemTypeUnknown(item, type)
 
-export var _items: Dictionary = {
-	"generic": {},
-	"equipment": {},
-	"motifs": {},
-	"consumables": {}
-} setget set_items, get_items
+func _init():
+	component = {
+		"generic": {},
+		"equipment": {},
+		"motifs": {},
+		"consumables": {}
+	} 
 
 
 func _itemExistenceGuard(item: Item, type: String):
-	if not _items[type].has(item.name):
+	if not component[type].has(item.name):
 		return true
 	else:
 		printerr("Inventory._itemExistenceGuard(): singleton item already exists")
@@ -28,7 +28,7 @@ func _itemExistenceGuard(item: Item, type: String):
 		return false
 		
 func _itemTypeGuard(item: Item, type: String):
-	if _items.keys().has(type):
+	if component.keys().has(type):
 		return _itemExistenceGuard(item, type)
 	else:
 		printerr("Inventory.addItem(): unknown item type - {type}".format({ "type": type } ))
@@ -37,14 +37,14 @@ func _itemTypeGuard(item: Item, type: String):
 	
 func addGeneric(item: Item, type: String):
 	if _itemTypeGuard(item, type):
-		_items[type][item.name] = item
+		component[type][item.name] = item
 	
 
 func addConsumable(item: Consumable, quantity: int):
 	var norm = 0
 	var max_stack = item.max_stack_size if item.stackable else 1
 
-	var consumables = _items["consumables"]
+	var consumables = component["consumables"]
 	
 	if consumables.has(item.name) and consumables[item.name].has("count"):
 		var count = consumables[item.name].count
@@ -57,7 +57,7 @@ func addConsumable(item: Consumable, quantity: int):
 		printerr("Inventory._processConsumableItem(): stack of items exceeded. normalizing...")
 		emit_signal("itemQuantityExceeded", item)
 
-	_items["consumables"][item.name] = {
+	component["consumables"][item.name] = {
 		"item": item,
 		"count": norm
 	}	
@@ -85,18 +85,7 @@ func addItem(type: String, name: String, quantity: int = 1):
 			_:
 				printerr("Inventory.addItem(): item did not match any types")
 				return
-		emit_signal("inventory_changed", self)
+		emit_signal("component_changed", self)
 	else:
 		printerr("Inventory.addItem(): could not find item")
-
-				
-func set_items(new_items):
-	_items = new_items
-	emit_signal("inventory_changed", self)
-
-func get_items():
-	return _items
-	
-func get_item(type: String, name: String):
-	pass
 

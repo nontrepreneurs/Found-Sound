@@ -14,17 +14,22 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Models/Character/Character.gd"
 }, {
+"base": "Resource",
+"class": "Component",
+"language": "GDScript",
+"path": "res://Components/Component.gd"
+}, {
 "base": "Item",
 "class": "Consumable",
 "language": "GDScript",
 "path": "res://Models/Item/Consumable/Consumable.gd"
 }, {
-"base": "Resource",
+"base": "Component",
 "class": "Identity",
 "language": "GDScript",
 "path": "res://Components/Identity.gd"
 }, {
-"base": "Resource",
+"base": "Component",
 "class": "Inventory",
 "language": "GDScript",
 "path": "res://Components/Inventory.gd"
@@ -46,6 +51,7 @@ _global_script_classes=[ {
 } ]
 _global_script_class_icons={
 "Character": "",
+"Component": "",
 "Consumable": "",
 "Identity": "",
 "Inventory": "",

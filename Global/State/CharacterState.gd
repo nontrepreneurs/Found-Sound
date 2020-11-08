@@ -27,7 +27,6 @@ func _loadResources():
 
 func _ready():
 	_loadResources()
-	print(resources)
 
 func _fetch_character(name: String):
 	if resources.has(name):

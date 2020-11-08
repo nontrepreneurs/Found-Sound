@@ -2,57 +2,83 @@ extends Node
 
 signal player_initialized
 
-onready var player = initialize_player()
-
+var player: Player
 
 const InventoryFile = "user://PlayerInventory.tres"
 const IdentityFile = "user://PlayerIdentity.tres"
 
 
-const PlayerProps: Dictionary = {
+const Components: Dictionary = {
 	inventory = { file = InventoryFile },
 	identity =  { file = IdentityFile }
 }
 
-func redraw():
-	for key in PlayerProps:
-		# connect a part of of the PropTree
-		player[key].connect(
-			"{key}_changed".format({ key = key}), 
-			self, 
-			"_on_player_{key}_changed".format({ key = key})
-		)
-		
-		var existing = load(PlayerProps[key].file)
-		if existing:
-			if key == "inventory":
-				player.inventory.set_items(existing.get_items())
-			elif key == "identity":
-				player.identity.set_character(existing.get_character())
-		else:
-			print("doesnt exist")
-			# determine initial values
-			
-
-func initialize_player():
-	player = get_tree().get_root().get_node("/root/World/Player")
-	
-
+func _process(delta):
 	if not player:
-		printerr("ya fucked it")
-		return
-				
-	emit_signal("player_initialized", player)
-	
-	redraw()
-	
+		initializePlayer()
 
+# connections callback functions to slices of component state
+func registerComponentConnection(connectionKey: String):
+	var connectionCallback = 	"_on_player_{key}_changed".format({ key = connectionKey})
+	player[connectionKey].connect(
+		"component_changed", 
+		self, 
+		connectionCallback
+	)
 
+#	setup each component of a player if its the start of the game
+func initializeComponent(key: String):
+#	determine if this is a new game somehow
+#	eventually prompt player for some of this info
+	match key:
+		"identity":	
+			initializeIdentity()
+		"inventory":
+			initializeInventory()
+
+# will load currently save component files, or generate new ones.
+func setComponents(key: String):
+	var resource: Component = load(Components[key].file)
+	if resource != null:
+		player[key].setComponent(resource.getComponent())
+	else:
+		print("resource doesnt exist: ", key)
+		initializeComponent(key)
+	
+func registerPlayerComponents():
+	for key in Components:
+		registerComponentConnection(key)
+		setComponents(key)
+
+func initializePlayer():
+	player = get_tree().get_root().get_node("/root/World/Player")
+	if player:
+		print("initializing player")
+		emit_signal("player_initialized", player)
+		registerPlayerComponents()
+	else: 
+		printerr("GameManager.initialize_player(): no player found")
+
+### Inventory
 func _on_player_inventory_changed(inventory):
 	ResourceSaver.save(InventoryFile, inventory)
-	
-func _on_player_identity_changed(identity):
+func initializeInventory():
+	player.inventory.addItem("motifs", "solemn")
+	player.inventory.addItem("consumables", "rustytunacan")
+
+
+func _on_player_identity_changed(identity: Identity):
 	ResourceSaver.save(IdentityFile, identity)
-	
+func initializeIdentity():
+	player.identity.setCharacter("Foley")
+
+
+func _clear_player_state():
+	printerr("DELETING PLAYER STATE")
+	var dir = Directory.new()
+	for key in Components:
+		dir.remove(Components[key].file)
+
 func _ready():
-	Directory.new().remove("user://inventory.tres")
+	_clear_player_state()
+	initializePlayer()

@@ -24,14 +24,15 @@ var inventory: Inventory = inventoryComponent.new()
 
 var identityComponent = load("res://Components/Identity.gd")
 var identity: Identity = identityComponent.new()
-
+onready var character: Character = identity.getComponent()
 
 func _ready():
-	identity.setCharacter("Foley")
+	print("PLAYER READY")
 	screen_size = get_viewport_rect().size
-	var character: Character = identity.get_character()
+	# character setup
 	$AnimatedSprite.frames = character.frames
 	$CollisionShape2D.shape = character.collision_shape
+
 
 
 	

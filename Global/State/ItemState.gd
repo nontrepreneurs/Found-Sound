@@ -33,6 +33,7 @@ func _loadResources():
 
 
 func _fetch_item(type: String, name: String):
+	print("RESOURCES:  ->", resources)
 	if resources.has(type):
 		if resources[type].has(name.to_lower()):
 			return resources[type][name.to_lower()]

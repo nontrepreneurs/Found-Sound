@@ -4,9 +4,9 @@
 
 [resource]
 script = ExtResource( 1 )
-name = "Suspicious Cheesecake"
-short_name = "Sus. Cake"
-description = "A totally normal slice of \"Elbertson's Own\" brand Cheesecake."
+name = "Rusty Tuna Can"
+short_name = "Rusty TC"
+description = "Smells a little fishy..."
 type = 1
-stackable = true
-max_stack_size = 5
+stackable = false
+max_stack_size = 1
