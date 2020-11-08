@@ -13,7 +13,6 @@ func _input(event):
 			$GameMenu.hide()
 			player.canMove = true
 
-		
 
 func _on_Exit_pressed():
 	$GameMenu.hide()

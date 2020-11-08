@@ -26,7 +26,7 @@ anchor_bottom = 1.0
 margin_left = 10.0
 margin_top = 20.0
 margin_right = -10.0
-margin_bottom = -150.0
+margin_bottom = -500.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -41,7 +41,7 @@ __meta__ = {
 
 [node name="Left" type="VBoxContainer" parent="GameMenu/Container/HBoxContainer"]
 margin_right = 200.0
-margin_bottom = 910.0
+margin_bottom = 280.0
 custom_constants/separation = 10
 
 [node name="Main Game Info Panel" type="Panel" parent="GameMenu/Container/HBoxContainer/Left"]
@@ -56,22 +56,21 @@ __meta__ = {
 }
 
 [node name="Sprite" type="Sprite" parent="GameMenu/Container/HBoxContainer/Left/Main Game Info Panel"]
-position = Vector2( 65.8516, 142.165 )
-scale = Vector2( 4.94903, 4.59782 )
+position = Vector2( 69.6121, 153.134 )
+scale = Vector2( 3.79662, 3.52719 )
 texture = ExtResource( 5 )
 offset = Vector2( 10, 0 )
 region_enabled = true
 region_rect = Rect2( 0, 0, 48, 64 )
 
 [node name="Label" type="Label" parent="GameMenu/Container/HBoxContainer/Left/Main Game Info Panel"]
-anchor_left = 0.5
-anchor_right = 0.5
-anchor_bottom = 1.0
-margin_left = -26.0
-margin_right = 26.0
+anchor_right = 1.0
+margin_left = 12.6158
+margin_top = 9.70449
+margin_right = -20.3842
+margin_bottom = 57.7045
 text = "Foley
-Age 22
-Level 2"
+"
 valign = 1
 __meta__ = {
 "_edit_use_anchors_": false
@@ -82,6 +81,7 @@ margin_top = 210.0
 margin_right = 200.0
 margin_bottom = 240.0
 rect_min_size = Vector2( 0, 30 )
+focus_neighbour_right = NodePath("../../Panels/Inventory")
 theme = SubResource( 1 )
 custom_styles/hover = ExtResource( 3 )
 custom_styles/focus = ExtResource( 3 )
@@ -94,12 +94,11 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Exit" type="Button" parent="GameMenu/Container/HBoxContainer/Left"]
+[node name="ExitButton" type="Button" parent="GameMenu/Container/HBoxContainer/Left"]
 margin_top = 250.0
 margin_right = 200.0
 margin_bottom = 280.0
 rect_min_size = Vector2( 0, 30 )
-mouse_filter = 2
 theme = SubResource( 1 )
 custom_styles/hover = ExtResource( 3 )
 custom_styles/focus = ExtResource( 3 )
@@ -111,7 +110,7 @@ text = "Exit"
 [node name="Panels" type="HBoxContainer" parent="GameMenu/Container/HBoxContainer"]
 margin_left = 205.0
 margin_right = 505.0
-margin_bottom = 910.0
+margin_bottom = 280.0
 rect_min_size = Vector2( 300, 0 )
 custom_constants/separation = 4
 
@@ -120,7 +119,7 @@ visible = false
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_right = 300.0
-margin_bottom = 430.0
+margin_bottom = 280.0
 [connection signal="focus_exited" from="GameMenu" to="." method="_on_GameMenu_focus_exited"]
 [connection signal="toggled" from="GameMenu/Container/HBoxContainer/Left/InventoryButton" to="GameMenu/Container/HBoxContainer/Panels/Inventory" method="_on_InventoryButton_toggled"]
-[connection signal="pressed" from="GameMenu/Container/HBoxContainer/Left/Exit" to="." method="_on_Exit_pressed"]
+[connection signal="pressed" from="GameMenu/Container/HBoxContainer/Left/ExitButton" to="." method="_on_Exit_pressed"]

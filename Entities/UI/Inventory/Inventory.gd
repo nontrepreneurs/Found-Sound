@@ -48,6 +48,7 @@ func _on_player_inventory_changed(inv: Inventory):
 func _on_InventoryButton_toggled(button_pressed):
 	if button_pressed:
 		show()
+		$ItemList.grab_focus()
 	else:
 		hide()
 	pass # Replace with function body.
@@ -67,6 +68,8 @@ func renderInventoryList(inventoryTopic: String):
 	$ItemList.clear()
 	
 	$ItemList.add_item("<< Back", null, true)
+
+	
 	var inv = inventory.getComponent()
 	for item in inv[inventoryTopic].values():
 		var text
