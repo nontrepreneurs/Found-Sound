@@ -13,3 +13,6 @@ data_*/
 mono_crash*
 
 MichaelsTestingArea
+
+.DS_*
+mono_crash*
