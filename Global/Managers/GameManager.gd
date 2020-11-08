@@ -13,9 +13,9 @@ const Components: Dictionary = {
 	identity =  { file = IdentityFile }
 }
 
-func _process(delta):
-	if not player:
-		initializePlayer()
+#func _process(delta):
+#	if not player:
+#		initializePlayer()
 
 # connections callback functions to slices of component state
 func registerComponentConnection(connectionKey: String):
@@ -80,5 +80,15 @@ func _clear_player_state():
 		dir.remove(Components[key].file)
 
 func _ready():
-	_clear_player_state()
-	initializePlayer()
+	var context = get_tree().get_current_scene().get_name()
+	if context != "StartMenu":
+		_clear_player_state()
+		initializePlayer()
+		
+
+func playSound(sound):
+	var audio = AudioStreamPlayer2D.new()
+	add_child(audio)
+	print("playing", audio.playing)
+	audio.stream = sound
+	audio.play(0)

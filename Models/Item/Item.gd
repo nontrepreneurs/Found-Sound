@@ -7,3 +7,7 @@ export(String) var description = ""
 export var texture : Texture
 
 export(ItemInterface.ItemTypes) var type = ItemInterface.ItemTypes.GENERIC
+
+
+func onUse():
+	print("I was used...")

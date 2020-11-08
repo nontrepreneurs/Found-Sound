@@ -25,6 +25,8 @@ var inventory: Inventory = inventoryComponent.new()
 var identityComponent = load("res://Components/Identity.gd")
 var identity: Identity = identityComponent.new()
 onready var character: Character = identity.getComponent()
+onready var canMove = true
+
 
 func _ready():
 	print("PLAYER READY")
@@ -46,6 +48,9 @@ func _physics_process(delta):
 
 func update_heading():
 	# calculate X heading
+	if !canMove:
+		return
+	
 	if Input.is_action_just_pressed(UI_RIGHT):
 		heading.x = 1
 	elif Input.is_action_just_released(UI_RIGHT):

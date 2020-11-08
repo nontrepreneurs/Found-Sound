@@ -89,3 +89,7 @@ func addItem(type: String, name: String, quantity: int = 1):
 	else:
 		printerr("Inventory.addItem(): could not find item")
 
+
+func getItem(name: String):
+	print(name)
+	return ItemState._fetch_item("motifs", name)
