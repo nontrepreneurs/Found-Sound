@@ -70,21 +70,31 @@ func update_heading():
 		heading.y = 1 if Input.is_action_pressed(UI_DOWN) else 0
 
 func update_animations():
+	$AnimatedSprite.play()
 	if heading != Vector2.ZERO:
 		if heading.x != 0:
+
 			$AnimatedSprite.flip_h = heading.x < 0
 		if switch_diagonal_animation:
 			if heading.y != 0:
-				$AnimatedSprite.animation = WALKING_UP if heading.y < 0 else WALKING_DOWN
+				changeAnimation(WALKING_UP if heading.y < 0 else WALKING_DOWN)
+#				$AnimatedSprite.animation = WALKING_UP if heading.y < 0 else WALKING_DOWN
 			else:
-				$AnimatedSprite.animation = WALKING
+				changeAnimation(WALKING)
+#				$AnimatedSprite.animation = WALKING
 		else:
 			if heading.x != 0:
-				$AnimatedSprite.animation = WALKING
+				changeAnimation(WALKING)
+#				$AnimatedSprite.animation = WALKING
 			else:
-				$AnimatedSprite.animation = WALKING_UP if heading.y < 0 else WALKING_DOWN
+				changeAnimation(WALKING_UP if heading.y < 0 else WALKING_DOWN)
 	else:
-		$AnimatedSprite.animation = IDLE
+		changeAnimation(IDLE)
+
+
+func changeAnimation(truth: String):
+	if $AnimatedSprite.animation != truth:
+		$AnimatedSprite.animation = truth
 
 func update_velocity():
 	if heading != Vector2.ZERO:

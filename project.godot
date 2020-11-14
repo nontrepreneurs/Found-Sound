@@ -72,6 +72,7 @@ ItemInterface="*res://Models/Item/Interface.gd"
 ItemState="*res://Global/State/ItemState.gd"
 CharacterState="*res://Global/State/CharacterState.gd"
 GameManager="*res://Global/Managers/GameManager.gd"
+DialogManager="*res://Global/Managers/DialogManager.gd"
 
 [display]
 

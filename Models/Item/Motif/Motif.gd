@@ -3,11 +3,13 @@ class_name Motif
 
 export(AudioStreamSample) var sound
 
-var player = AudioStreamPlayer2D.new()
+var player = AudioStreamPlayer.new()
 
 func _init():
 	type = ItemInterface.ItemTypes.MOTIF
+
 	
 func onUse():
-	GameManager.playSound(sound)
+	GameManager.playSound(sound) 
+	DialogManager.queueDialog(description)
 # maybe make a disposal function?

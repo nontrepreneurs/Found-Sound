@@ -7,6 +7,6 @@
 script = ExtResource( 1 )
 name = "Solemn"
 short_name = ""
-description = ""
+description = "A solemn melody floats through the air..."
 type = 2
 sound = ExtResource( 2 )

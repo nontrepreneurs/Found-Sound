@@ -2,6 +2,8 @@ extends Panel
 
 onready var motifList: ItemList = ItemList.new().set_name("MotifList")
 
+signal inventory_item_selected()
+
 func _init():
 	GameManager.connect(
 		"player_initialized", self, "_on_player_initialized")
@@ -51,7 +53,6 @@ func _on_InventoryButton_toggled(button_pressed):
 		$ItemList.grab_focus()
 	else:
 		hide()
-	pass # Replace with function body.
 
 
 func renderFromArray(array):
@@ -92,6 +93,10 @@ func _on_ItemList_item_activated(index):
 		var item: Item = inventory.getItem(inventoryTopic)
 		if item != null and item.has_method("onUse"):
 			item.onUse()
+
+		hide()
+		emit_signal("inventory_item_selected")
+		
 	
 
 
