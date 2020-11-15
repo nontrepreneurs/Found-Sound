@@ -1,19 +1,34 @@
 extends Area2D
 
-
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
+const RECORD_ACTION = "ui_accept"
+const PLAY_SOUND_ACTION = "ui_cancel"
 
 var is_recording = false
+var recorded_sound = null
+var sound_source = null
 
-# Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	sound_source = $Sampleable
 
+func _process(delta):
+	if Input.is_action_just_pressed(RECORD_ACTION):
+		record_sound()
+	if Input.is_action_just_pressed(PLAY_SOUND_ACTION):
+		play_sound()
+	
 func record_sound():
-	pass
+	print("RECORDING SOUND BOI")
+	var sampleables = get_sampleables()
+	for sampleable in sampleables:
+		if sampleable.get_is_playing():
+			recorded_sound = sampleable.get_sound()
+			sound_source.set_sound(recorded_sound)
+			print("Sound recorded!")
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
+func play_sound():
+	print("PLAYING SOUND BOI")
+	if sound_source.has_sound():
+		sound_source.play_sound()
+
+func get_sampleables():
+	return get_overlapping_areas()
