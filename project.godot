@@ -43,12 +43,10 @@ _global_script_classes=[ {
 "class": "Motif",
 "language": "GDScript",
 "path": "res://Models/Item/Motif/Motif.gd"
-
 }, {
 "base": "KinematicBody2D",
 "class": "Player",
 "language": "GDScript",
-
 "path": "res://Entities/Player/Player.gd"
 } ]
 _global_script_class_icons={
@@ -73,8 +71,9 @@ Filesystem="*res://Global/Helpers/Filesystem.gd"
 ItemInterface="*res://Models/Item/Interface.gd"
 ItemState="*res://Global/State/ItemState.gd"
 CharacterState="*res://Global/State/CharacterState.gd"
-GameManager="*res://Global/Managers/GameManager.gd"
+MusicManager="*res://Global/Managers/MusicManager/MusicManager.tscn"
 DialogManager="*res://Global/Managers/DialogManager.gd"
+GameManager="*res://Global/Managers/GameManager.gd"
 
 [display]
 
@@ -85,7 +84,6 @@ window/size/test_height=1080
 window/dpi/allow_hidpi=true
 window/stretch/mode="2d"
 window/stretch/aspect="keep"
-
 
 [input]
 

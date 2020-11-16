@@ -36,8 +36,6 @@ func _ready():
 	$CollisionShape2D.shape = character.collision_shape
 
 
-
-	
 func _process(delta):
 	update_heading()
 	update_animations()

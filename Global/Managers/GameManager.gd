@@ -84,7 +84,7 @@ func _ready():
 	if context != "StartMenu":
 		_clear_player_state()
 		initializePlayer()
-		
+	MusicManager.playMusic("cutetheme")
 
 func playSound(sound):
 	var audio = AudioStreamPlayer2D.new()

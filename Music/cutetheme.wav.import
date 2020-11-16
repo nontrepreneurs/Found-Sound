@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/cutetheme.wav-a77a1044321b1a72c740ef23566d2caa.sample"
+
+[deps]
+
+source_file="res://Music/cutetheme.wav"
+dest_files=[ "res://.import/cutetheme.wav-a77a1044321b1a72c740ef23566d2caa.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0
