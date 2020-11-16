@@ -1,12 +1,17 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Entities/Collidable/colliders.png" type="Texture" id=1]
+[ext_resource path="res://SamplerAbility/SoundSource.tscn" type="PackedScene" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
 custom_solver_bias = 1.0
 extents = Vector2( 33.7235, 13.0451 )
 
 [node name="RockA" type="StaticBody2D"]
+
+[node name="SoundSource" parent="." instance=ExtResource( 2 )]
+is_playing = true
+sound = "i am a rock"
 
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 1 )

@@ -3,14 +3,14 @@
 [ext_resource path="res://SamplerAbility/SoundSource.gd" type="Script" id=1]
 [ext_resource path="res://SamplerAbility/SampleWaves.shader" type="Shader" id=2]
 
-[sub_resource type="ShaderMaterial" id=2]
+[sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 2 )
 shader_param/center = Vector2( 0.5, 0.5 )
 shader_param/force = 2.344
 shader_param/size = 1.0
 shader_param/thickness = 0.118
 
-[sub_resource type="CircleShape2D" id=1]
+[sub_resource type="CircleShape2D" id=2]
 radius = 137.077
 
 [sub_resource type="Animation" id=3]
@@ -39,7 +39,7 @@ __meta__ = {
 }
 
 [node name="ColorRect" type="ColorRect" parent="."]
-material = SubResource( 2 )
+material = SubResource( 1 )
 margin_left = -512.0
 margin_top = -512.0
 margin_right = 512.0
@@ -49,7 +49,7 @@ __meta__ = {
 }
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource( 1 )
+shape = SubResource( 2 )
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
