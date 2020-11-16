@@ -13,9 +13,15 @@ _global_script_classes=[ {
 "class": "SoundListener",
 "language": "GDScript",
 "path": "res://SamplerAbility/SoundListener.gd"
+}, {
+"base": "Area2D",
+"class": "SoundSource",
+"language": "GDScript",
+"path": "res://SamplerAbility/SoundSource.gd"
 } ]
 _global_script_class_icons={
-"SoundListener": ""
+"SoundListener": "",
+"SoundSource": ""
 }
 
 [application]

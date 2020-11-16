@@ -8,7 +8,7 @@ var recorded_sound = null
 var sound_source = null
 
 func _ready():
-	sound_source = $Sampleable
+	sound_source = $SoundSource
 
 func _process(delta):
 	if Input.is_action_just_pressed(RECORD_ACTION):
@@ -26,9 +26,10 @@ func record_sound():
 			print("Sound recorded!")
 
 func play_sound():
-	print("PLAYING SOUND BOI")
 	if sound_source.has_sound():
 		sound_source.play_sound()
+	else:
+		print("No sound recorded!")
 
 func get_sampleables():
 	return get_overlapping_areas()

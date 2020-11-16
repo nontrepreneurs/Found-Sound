@@ -1,6 +1,6 @@
 [gd_scene load_steps=10 format=2]
 
-[ext_resource path="res://SamplerAbility/Sampleable.tscn" type="PackedScene" id=1]
+[ext_resource path="res://SamplerAbility/SoundSource.tscn" type="PackedScene" id=1]
 [ext_resource path="res://SamplerAbility/SamplerAbility.tscn" type="PackedScene" id=2]
 [ext_resource path="res://SamplerAbility/SampleWaves.shader" type="Shader" id=3]
 [ext_resource path="res://icon.png" type="Texture" id=4]
@@ -17,7 +17,7 @@ shader_param/thickness = null
 
 [sub_resource type="Animation" id=2]
 resource_name = "PlaySoundTest"
-length = 10.0
+length = 6.0
 loop = true
 tracks/0/type = "method"
 tracks/0/path = NodePath("AnimationPlayer/Sampleable")
@@ -32,6 +32,18 @@ tracks/0/keys = {
 "args": [  ],
 "method": "play_sound"
 } ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("AnimationPlayer/Sampleable:is_playing")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 2 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
 }
 
 [node name="Node2D" type="Node2D"]
@@ -68,6 +80,7 @@ anims/PlaySoundTest = SubResource( 2 )
 
 [node name="Sampleable" parent="AnimationPlayer" instance=ExtResource( 1 )]
 position = Vector2( 789.634, 442.385 )
+sound = "some_dank_sound"
 
 [node name="SoundListener" parent="." instance=ExtResource( 6 )]
 
