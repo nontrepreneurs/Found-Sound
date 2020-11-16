@@ -1,0 +1,138 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://Entities/UI/UI.gd" type="Script" id=1]
+[ext_resource path="res://Entities/UI/Assets/BoxStyle.tres" type="StyleBox" id=2]
+[ext_resource path="res://Entities/UI/Assets/BoxStyleFocus.tres" type="StyleBox" id=3]
+[ext_resource path="res://Entities/UI/Inventory/Inventory.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Models/Character/Resources/Foley/assets/foley.png" type="Texture" id=5]
+[ext_resource path="res://Entities/UI/DialogBox/DialogBox.tscn" type="PackedScene" id=6]
+
+
+
+[sub_resource type="Theme" id=1]
+
+[node name="UI" type="CanvasLayer"]
+process_priority = 1
+script = ExtResource( 1 )
+
+[node name="GameMenu" type="Popup" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="GameMenu"]
+margin_left = 10.0
+margin_top = 10.0
+margin_right = 1270.0
+margin_bottom = 290.0
+custom_constants/separation = 5
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Left" type="VBoxContainer" parent="GameMenu/HBoxContainer"]
+margin_right = 200.0
+margin_bottom = 280.0
+custom_constants/separation = 10
+
+[node name="Main Game Info Panel" type="Panel" parent="GameMenu/HBoxContainer/Left"]
+margin_right = 200.0
+margin_bottom = 200.0
+grow_horizontal = 2
+rect_min_size = Vector2( 200, 200 )
+rect_clip_content = true
+custom_styles/panel = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Sprite" type="Sprite" parent="GameMenu/HBoxContainer/Left/Main Game Info Panel"]
+visible = false
+position = Vector2( 69.6121, 153.134 )
+scale = Vector2( 3.79662, 3.52719 )
+texture = ExtResource( 5 )
+offset = Vector2( 10, 0 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 48, 64 )
+
+[node name="Label" type="Label" parent="GameMenu/HBoxContainer/Left/Main Game Info Panel"]
+anchor_right = 1.0
+margin_left = 12.6158
+margin_top = 9.70449
+margin_right = -20.3842
+margin_bottom = 57.7045
+text = "Foley
+"
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="InventoryButton" type="Button" parent="GameMenu/HBoxContainer/Left"]
+margin_top = 210.0
+margin_right = 200.0
+margin_bottom = 240.0
+rect_min_size = Vector2( 0, 30 )
+focus_neighbour_right = NodePath("../../Panels/Inventory")
+theme = SubResource( 1 )
+custom_styles/hover = ExtResource( 3 )
+custom_styles/focus = ExtResource( 3 )
+custom_styles/normal = ExtResource( 2 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_colors/font_color_hover = Color( 1, 1, 1, 1 )
+toggle_mode = true
+text = "Inventory"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ExitButton" type="Button" parent="GameMenu/HBoxContainer/Left"]
+margin_top = 250.0
+margin_right = 200.0
+margin_bottom = 280.0
+rect_min_size = Vector2( 0, 30 )
+theme = SubResource( 1 )
+custom_styles/hover = ExtResource( 3 )
+custom_styles/focus = ExtResource( 3 )
+custom_styles/normal = ExtResource( 2 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_colors/font_color_hover = Color( 1, 1, 1, 1 )
+text = "Exit"
+
+[node name="Panels" type="HBoxContainer" parent="GameMenu/HBoxContainer"]
+margin_left = 205.0
+margin_right = 505.0
+margin_bottom = 280.0
+rect_min_size = Vector2( 300, 0 )
+custom_constants/separation = 4
+
+[node name="Inventory" parent="GameMenu/HBoxContainer/Panels" instance=ExtResource( 4 )]
+visible = false
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 300.0
+margin_bottom = 280.0
+
+[node name="Control" type="VBoxContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 10.0
+margin_right = -10.0
+margin_bottom = -10.0
+alignment = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="DialogBox" parent="Control" instance=ExtResource( 6 )]
+visible = false
+anchor_right = 0.0
+margin_top = 410.0
+margin_right = 1260.0
+margin_bottom = 710.0
+[connection signal="focus_exited" from="GameMenu" to="." method="_on_GameMenu_focus_exited"]
+[connection signal="toggled" from="GameMenu/HBoxContainer/Left/InventoryButton" to="GameMenu/HBoxContainer/Panels/Inventory" method="_on_InventoryButton_toggled"]
+[connection signal="pressed" from="GameMenu/HBoxContainer/Left/ExitButton" to="." method="_on_Exit_pressed"]
+[connection signal="inventory_item_selected" from="GameMenu/HBoxContainer/Panels/Inventory" to="." method="_on_Inventory_inventory_item_selected"]

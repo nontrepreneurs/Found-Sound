@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Entities/Collidable/colliders.png" type="Texture" id=1]
+
+[node name="HouseWhite" type="RigidBody2D"]
+
+[node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 400, 0, 270, 245 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+position = Vector2( 0.33493, 0 )
+polygon = PoolVector2Array( -132.935, -54.7529, -102.343, -49.3944, -70.5266, -43.031, 26.1297, -50.801, 131.963, -34.1223, 133.468, 12.0587, 126.934, 12.4802, 127.145, 88.5653, 16.9165, 89.4084, 15.8627, 115.121, -24.3929, 116.175, -25.8682, 119.126, -83.8278, 119.758, -85.3031, 116.386, -127.456, 116.597, -126.402, 20.4892, -132.935, 17.5385, -133.146, -56.439 )
