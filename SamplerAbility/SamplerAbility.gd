@@ -1,7 +1,7 @@
 extends Area2D
 
-const RECORD_ACTION = "ui_accept"
-const PLAY_SOUND_ACTION = "ui_cancel"
+const RECORD_ACTION = "record_sound"
+const PLAY_SOUND_ACTION = "play_sound"
 
 var is_recording = false
 var recorded_sound = null

@@ -19,4 +19,5 @@ func listen() -> void:
 	var sound_sources = get_overlapping_areas()
 	for sound_source in sound_sources:
 		if sound_source.get_is_playing():
+			print("I HEARD: ", sound_source.get_sound())
 			emit_signal("heard_sound", sound_source.get_sound())
