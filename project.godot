@@ -9,6 +9,16 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "Area2D",
+"class": "SoundListener",
+"language": "GDScript",
+"path": "res://SamplerAbility/SoundListener.gd"
+}, {
+"base": "Area2D",
+"class": "SoundSource",
+"language": "GDScript",
+"path": "res://SamplerAbility/SoundSource.gd"
+}, {
 "base": "Resource",
 "class": "Character",
 "language": "GDScript",
@@ -52,6 +62,8 @@ _global_script_classes=[ {
 "path": "res://Entities/Player/Player.gd"
 } ]
 _global_script_class_icons={
+"SoundListener": "",
+"SoundSource": "",
 "Character": "",
 "Component": "",
 "Consumable": "",
