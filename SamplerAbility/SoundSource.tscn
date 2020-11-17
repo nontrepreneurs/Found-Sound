@@ -15,6 +15,7 @@ radius = 137.077
 
 [sub_resource type="Animation" id=3]
 resource_name = "pulse"
+length = 0.5
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:pulse_size")
 tracks/0/interp = 1
@@ -22,7 +23,7 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 1 ),
+"times": PoolRealArray( 0, 0.5 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
 "values": [ 0.0, 1.0 ]
@@ -42,10 +43,10 @@ z_index = 5
 
 [node name="ColorRect" type="ColorRect" parent="Node2D"]
 material = SubResource( 1 )
-margin_left = -512.0
-margin_top = -512.0
-margin_right = 512.0
-margin_bottom = 512.0
+margin_left = -137.0
+margin_top = -137.0
+margin_right = 137.0
+margin_bottom = 137.0
 __meta__ = {
 "_edit_use_anchors_": false
 }

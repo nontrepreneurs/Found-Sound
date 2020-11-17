@@ -1,0 +1,70 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Entities/Cat/ScatterCat.tscn" type="PackedScene" id=1]
+[ext_resource path="res://SoundResponses/SpeakWhenSpokenTo/SpeakWhenSpokenTo.tscn" type="PackedScene" id=2]
+
+[node name="FlockOfScatterCats" type="Node2D"]
+
+[node name="ScatterCat" parent="." instance=ExtResource( 1 )]
+position = Vector2( -77, -78 )
+
+[node name="SpeakWhenSpokenTo" parent="ScatterCat" instance=ExtResource( 2 )]
+position = Vector2( 1, 4 )
+
+[node name="Label" type="Label" parent="ScatterCat/SpeakWhenSpokenTo"]
+margin_left = -32.0
+margin_top = -46.0
+margin_right = 21.0
+margin_bottom = -32.0
+text = "SKERRRT"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ScatterCat2" parent="." instance=ExtResource( 1 )]
+position = Vector2( 1, -132 )
+
+[node name="SpeakWhenSpokenTo" parent="ScatterCat2" instance=ExtResource( 2 )]
+position = Vector2( 1, 4 )
+
+[node name="Label" type="Label" parent="ScatterCat2/SpeakWhenSpokenTo"]
+margin_left = -32.0
+margin_top = -46.0
+margin_right = 21.0
+margin_bottom = -32.0
+text = "ah shit nah"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ScatterCat3" parent="." instance=ExtResource( 1 )]
+position = Vector2( -9, -32 )
+
+[node name="SpeakWhenSpokenTo" parent="ScatterCat3" instance=ExtResource( 2 )]
+position = Vector2( 1, 4 )
+
+[node name="Label" type="Label" parent="ScatterCat3/SpeakWhenSpokenTo"]
+margin_left = -32.0
+margin_top = -46.0
+margin_right = 21.0
+margin_bottom = -32.0
+text = "see ya"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ScatterCat4" parent="." instance=ExtResource( 1 )]
+position = Vector2( 16, -61 )
+
+[node name="SpeakWhenSpokenTo" parent="ScatterCat4" instance=ExtResource( 2 )]
+position = Vector2( 1, 4 )
+
+[node name="Label" type="Label" parent="ScatterCat4/SpeakWhenSpokenTo"]
+margin_left = -84.0
+margin_top = -39.0
+margin_right = 100.0
+margin_bottom = -25.0
+text = "Who let the dogs out amirite"
+__meta__ = {
+"_edit_use_anchors_": false
+}

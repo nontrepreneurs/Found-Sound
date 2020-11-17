@@ -1,9 +1,14 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Entities/Player/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Entities/UI/UI.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Entities/TileSets/TileMapMain.tscn" type="PackedScene" id=3]
-[ext_resource path="res://Entities/Collidable/RockA.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Entities/Cat/FirstCat.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Entities/Dog/Dog.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Entities/Cat/ScatterCat.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Entities/Cat/FlockOfScatterCats.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Entities/Collidable/RockA.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Entities/Cat/Pompuss.tscn" type="PackedScene" id=9]
 
 [node name="World" type="Node2D"]
 
@@ -16,5 +21,20 @@ speed = 200
 [node name="TileMapMain" parent="." instance=ExtResource( 3 )]
 position = Vector2( -4.0278, 26.1714 )
 
-[node name="RockA" parent="TileMapMain" instance=ExtResource( 4 )]
-position = Vector2( 308.759, 97.5 )
+[node name="RockA" parent="TileMapMain" instance=ExtResource( 8 )]
+position = Vector2( -538.929, 1275.81 )
+
+[node name="Dog" parent="." instance=ExtResource( 5 )]
+position = Vector2( 582, -193 )
+
+[node name="FirstCat" parent="." instance=ExtResource( 4 )]
+position = Vector2( 960, 15 )
+
+[node name="FlockOfScatterCats" parent="." instance=ExtResource( 7 )]
+position = Vector2( 1346, -166 )
+
+[node name="ScatterCat" parent="." instance=ExtResource( 6 )]
+position = Vector2( 1330, 143 )
+
+[node name="Pompuss" parent="." instance=ExtResource( 9 )]
+position = Vector2( 1597.58, -40.3174 )

@@ -21,7 +21,7 @@ func _process(delta):
 		play_sound()
 	
 func record_sound():
-	#print("RECORDING SOUND BOI")
+	print("SamplerAbility is trying to record.")
 	listener.listen()
 
 func play_sound():
@@ -31,6 +31,6 @@ func play_sound():
 		print("No sound recorded!")
 
 func on_listener_heard(sound_name: String, sound_stream: AudioStream) -> void:
-	print("Sound recorded:", sound_name, sound_stream)
+	print("SamplerAbility's listener heard:", sound_name, sound_stream)
 	sound_source.set_sound_name(sound_name)
 	sound_source.set_sound_stream(sound_stream)

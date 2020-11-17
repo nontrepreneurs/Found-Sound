@@ -51,7 +51,7 @@ func play_sound() -> void:
 	is_playing = true
 	player.play()
 	pulse()
-	print("Now playing:" + sound_name)
+	#print("SoundSource is now playing: " + sound_name)
 
 func has_sound() -> bool:
 	return sound_stream != null
@@ -63,6 +63,6 @@ func pulse() -> void:
 	anim.play()
 
 func on_player_finished() -> void:
-	# print("Player finished.")
+	#print("SoundSource Player finished.")
 	is_playing = false
 	pulse_size = 0

@@ -1,0 +1,20 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://SamplerAbility/SoundSource.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Entities/Dog/dogBork.wav" type="AudioStream" id=2]
+[ext_resource path="res://Entities/Dog/dog.png" type="Texture" id=3]
+[ext_resource path="res://Entities/Dog/bark_periodically.tres" type="Animation" id=4]
+
+[node name="Dog" type="Node2D"]
+
+[node name="Sprite" type="Sprite" parent="."]
+scale = Vector2( 0.112847, 0.112847 )
+texture = ExtResource( 3 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "bark_periodically"
+anims/bark_periodically = ExtResource( 4 )
+
+[node name="SoundSource" parent="." instance=ExtResource( 1 )]
+sound_name = "BarkedyBark"
+sound_stream = ExtResource( 2 )

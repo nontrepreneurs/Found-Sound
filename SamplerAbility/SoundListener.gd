@@ -5,9 +5,13 @@ class_name SoundListener
 export var any_sound: bool = false
 export var target_sound: String = ""
 export var stop_list_after_heard: bool = true
+export var start_listening: bool = false
 
 signal heard_sound(sound)
-var is_listening: bool = true setget set_is_listening, get_is_listening
+var is_listening: bool = false setget set_is_listening, get_is_listening
+
+func _ready():
+	is_listening = start_listening
 
 func _process(delta: float):
 	if is_listening:
@@ -27,7 +31,8 @@ func listen() -> void:
 		if sound_source.get_is_playing():
 			name_heard = sound_source.get_sound_name()
 			stream_heard = sound_source.get_sound_stream()
-			is_listening = false
-			print("I HEARD: ", name_heard)
+			print("SoundListener heard: ", name_heard)
 			if (any_sound or name_heard == target_sound):
+				if stop_list_after_heard:
+					is_listening = false
 				emit_signal("heard_sound", sound_source.get_sound_name(), sound_source.get_sound_stream())
