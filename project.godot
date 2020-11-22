@@ -12,52 +12,52 @@ _global_script_classes=[ {
 "base": "Resource",
 "class": "Character",
 "language": "GDScript",
-"path": "res://Models/Character/Character.gd"
+"path": "res://death/Models/Character/Character.gd"
 }, {
 "base": "Resource",
 "class": "Component",
 "language": "GDScript",
-"path": "res://Components/Component.gd"
+"path": "res://death/Components/Component.gd"
 }, {
 "base": "Item",
 "class": "Consumable",
 "language": "GDScript",
-"path": "res://Models/Item/Consumable/Consumable.gd"
+"path": "res://death/Models/Item/Consumable/Consumable.gd"
 }, {
 "base": "Component",
 "class": "Identity",
 "language": "GDScript",
-"path": "res://Components/Identity.gd"
+"path": "res://death/Components/Identity.gd"
 }, {
 "base": "Component",
 "class": "Inventory",
 "language": "GDScript",
-"path": "res://Components/Inventory.gd"
+"path": "res://death/Components/Inventory.gd"
 }, {
 "base": "Resource",
 "class": "Item",
 "language": "GDScript",
-"path": "res://Models/Item/Item.gd"
+"path": "res://death/Models/Item/Item.gd"
 }, {
 "base": "Item",
 "class": "Motif",
 "language": "GDScript",
-"path": "res://Models/Item/Motif/Motif.gd"
+"path": "res://death/Models/Item/Motif/Motif.gd"
 }, {
 "base": "KinematicBody2D",
 "class": "Player",
 "language": "GDScript",
-"path": "res://Entities/Player/Player.gd"
+"path": "res://death/Entities/Player/Player.gd"
 }, {
 "base": "Area2D",
 "class": "SoundListener",
 "language": "GDScript",
-"path": "res://SamplerAbility/SoundListener.gd"
+"path": "res://death/SamplerAbility/SoundListener.gd"
 }, {
 "base": "Area2D",
 "class": "SoundSource",
 "language": "GDScript",
-"path": "res://SamplerAbility/SoundSource.gd"
+"path": "res://death/SamplerAbility/SoundSource.gd"
 } ]
 _global_script_class_icons={
 "Character": "",
@@ -150,4 +150,3 @@ play_sound={
 [rendering]
 
 quality/driver/driver_name="GLES2"
-environment/default_environment="res://default_env.tres"

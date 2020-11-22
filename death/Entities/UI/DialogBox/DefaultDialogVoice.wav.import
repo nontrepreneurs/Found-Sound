@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/DefaultDialogVoice.wav-352b522d55a4be77042bc6686504d354.sample"
+
+[deps]
+
+source_file="res://death/Entities/UI/DialogBox/DefaultDialogVoice.wav"
+dest_files=[ "res://.import/DefaultDialogVoice.wav-352b522d55a4be77042bc6686504d354.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

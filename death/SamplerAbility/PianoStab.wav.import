@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/PianoStab.wav-32a5ffd431759dd47744e9ef40973c19.sample"
+
+[deps]
+
+source_file="res://death/SamplerAbility/PianoStab.wav"
+dest_files=[ "res://.import/PianoStab.wav-32a5ffd431759dd47744e9ef40973c19.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0
