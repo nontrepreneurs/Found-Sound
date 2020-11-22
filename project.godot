@@ -49,6 +49,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://death/Entities/Player/Player.gd"
 }, {
+"base": "Resource",
+"class": "Sample",
+"language": "GDScript",
+"path": "res://SampleResource/Sample.gd"
+}, {
 "base": "Area2D",
 "class": "SoundListener",
 "language": "GDScript",
@@ -68,6 +73,7 @@ _global_script_class_icons={
 "Item": "",
 "Motif": "",
 "Player": "",
+"Sample": "",
 "SoundListener": "",
 "SoundSource": ""
 }
