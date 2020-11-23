@@ -20,6 +20,8 @@ func _ready():
 	#if (sound_stream):
 	#	set_sound_stream(sound_stream)
 	player.connect("finished", self, "on_player_finished")
+	if sample:
+		player.stream = sample.stream
 
 	# Duplicates material so that shader params are unique to instance
 	pulse_rect = $Node2D.get_node("ColorRect")
@@ -34,7 +36,8 @@ func get_is_playing() -> bool:
 
 func set_sample(new_sample) -> void:
 	sample = new_sample
-	player.stream = sample.stream
+	if player:
+		player.stream = sample.stream
 
 func get_sample() -> Resource:
 	return sample

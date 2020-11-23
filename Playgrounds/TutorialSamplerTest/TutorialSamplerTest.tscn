@@ -1,0 +1,25 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Playgrounds/TutorialSamplerTest/FirstLock/FirstLock.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Playgrounds/TutorialSamplerTest/FirstKey/FirstKey.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Player/Player.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Playgrounds/TutorialSamplerTest/icon.png" type="Texture" id=4]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="SomeBackground" type="TextureRect" parent="."]
+margin_right = 1380.0
+margin_bottom = 795.0
+texture = ExtResource( 4 )
+stretch_mode = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Player" parent="." instance=ExtResource( 3 )]
+
+[node name="FirstLock" parent="." instance=ExtResource( 1 )]
+position = Vector2( 250.5, 477 )
+
+[node name="FirstKey" parent="." instance=ExtResource( 2 )]
+position = Vector2( 1080, 202.5 )

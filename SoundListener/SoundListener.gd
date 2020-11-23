@@ -31,7 +31,7 @@ func listen() -> void:
 	for sound_source in sound_sources:
 		if sound_source.get_is_playing():
 			sample_heard = sound_source.get_sample()
-			print("SoundListener heard: ", sample_heard.name)
+			#print("SoundListener heard: ", sample_heard.name)
 			if (any_sound or sample_heard.name == target_sample.name):
 				if stop_list_after_heard:
 					is_listening = false
