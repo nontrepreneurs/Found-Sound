@@ -2,12 +2,12 @@
 
 importer="wav"
 type="AudioStreamSample"
-path="res://.import/PianoStab.wav-32a5ffd431759dd47744e9ef40973c19.sample"
+path="res://.import/PianoStab.wav-9592004ec76cdc8ce73936c00c27f6a5.sample"
 
 [deps]
 
-source_file="res://death/SamplerAbility/PianoStab.wav"
-dest_files=[ "res://.import/PianoStab.wav-32a5ffd431759dd47744e9ef40973c19.sample" ]
+source_file="res://Samples/PianoStab/PianoStab.wav"
+dest_files=[ "res://.import/PianoStab.wav-9592004ec76cdc8ce73936c00c27f6a5.sample" ]
 
 [params]
 

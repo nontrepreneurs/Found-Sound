@@ -6,7 +6,8 @@
 [ext_resource path="res://icon.png" type="Texture" id=4]
 [ext_resource path="res://CharacterController/Player.tscn" type="PackedScene" id=5]
 [ext_resource path="res://SamplerAbility/SoundListener.tscn" type="PackedScene" id=6]
-[ext_resource path="res://SamplerAbility/SamplerWorkspace.gd" type="Script" id=7]
+[ext_resource path="res://SamplerAbility/TestWorkspace/SamplerWorkspace.gd" type="Script" id=7]
+
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 3 )

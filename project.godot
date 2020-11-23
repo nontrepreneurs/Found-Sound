@@ -52,17 +52,17 @@ _global_script_classes=[ {
 "base": "Resource",
 "class": "Sample",
 "language": "GDScript",
-"path": "res://SampleResource/Sample.gd"
+"path": "res://Samples/Sample.gd"
 }, {
 "base": "Area2D",
 "class": "SoundListener",
 "language": "GDScript",
-"path": "res://death/SamplerAbility/SoundListener.gd"
+"path": "res://SoundListener/SoundListener.gd"
 }, {
 "base": "Area2D",
 "class": "SoundSource",
 "language": "GDScript",
-"path": "res://death/SamplerAbility/SoundSource.gd"
+"path": "res://SoundSource/SoundSource.gd"
 } ]
 _global_script_class_icons={
 "Character": "",
