@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/colliders.png-47f17ab1191d5ba6d360b10916154e16.stex"
+path="res://.import/foley.png-dcaf8474225563434432c87c8d192cd1.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://death/Entities/Collidable/colliders.png"
-dest_files=[ "res://.import/colliders.png-47f17ab1191d5ba6d360b10916154e16.stex" ]
+source_file="res://Player/Foley/assets/foley.png"
+dest_files=[ "res://.import/foley.png-dcaf8474225563434432c87c8d192cd1.stex" ]
 
 [params]
 

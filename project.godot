@@ -47,7 +47,7 @@ _global_script_classes=[ {
 "base": "KinematicBody2D",
 "class": "Player",
 "language": "GDScript",
-"path": "res://death/Entities/Player/Player.gd"
+"path": "res://Player/Player.gd"
 }, {
 "base": "Area2D",
 "class": "SoundListener",
@@ -76,15 +76,6 @@ _global_script_class_icons={
 
 config/name="go2020"
 config/icon="res://icon.png"
-
-[autoload]
-
-Filesystem="*res://Global/Helpers/Filesystem.gd"
-ItemInterface="*res://Models/Item/Interface.gd"
-ItemState="*res://Global/State/ItemState.gd"
-CharacterState="*res://Global/State/CharacterState.gd"
-GameManager="*res://Global/Managers/GameManager.gd"
-DialogManager="*res://Global/Managers/DialogManager.gd"
 
 [display]
 

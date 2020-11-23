@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/walking.png-16cddc5ddf2d8481409003d203364078.stex"
+path="res://.import/HouseColliders.png-8413793d40ffcab2de3c94c3534a5304.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://death/Models/Character/Resources/Foley/assets/walking.png"
-dest_files=[ "res://.import/walking.png-16cddc5ddf2d8481409003d203364078.stex" ]
+source_file="res://Assets/Collidable/HouseColliders.png"
+dest_files=[ "res://.import/HouseColliders.png-8413793d40ffcab2de3c94c3534a5304.stex" ]
 
 [params]
 
@@ -20,7 +20,7 @@ compress/hdr_mode=0
 compress/bptc_ldr=0
 compress/normal_map=0
 flags/repeat=0
-flags/filter=false
+flags/filter=true
 flags/mipmaps=false
 flags/anisotropic=false
 flags/srgb=2

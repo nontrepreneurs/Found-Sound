@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/idle.png-0541e746d090e4b20de58e9bd3d0b877.stex"
+path="res://.import/idle.png-37a75c3c0792e09efb42c37a2b6485c9.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://death/Models/Character/Resources/Foley/assets/idle.png"
-dest_files=[ "res://.import/idle.png-0541e746d090e4b20de58e9bd3d0b877.stex" ]
+source_file="res://Player/Foley/assets/idle.png"
+dest_files=[ "res://.import/idle.png-37a75c3c0792e09efb42c37a2b6485c9.stex" ]
 
 [params]
 
