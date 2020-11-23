@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/HouseColliders.png-8413793d40ffcab2de3c94c3534a5304.stex"
+path="res://.import/TownAndForestry.png-f9b23e6e17e8077dcf05a1d8de472043.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Collidable/HouseColliders.png"
-dest_files=[ "res://.import/HouseColliders.png-8413793d40ffcab2de3c94c3534a5304.stex" ]
+source_file="res://Assets/Collidable/TownAndForestry.png"
+dest_files=[ "res://.import/TownAndForestry.png-f9b23e6e17e8077dcf05a1d8de472043.stex" ]
 
 [params]
 
