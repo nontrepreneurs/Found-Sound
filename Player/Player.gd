@@ -19,12 +19,6 @@ var heading = Vector2()
 var velocity = Vector2()
 
 
-var inventoryComponent = load("res://Components/Inventory.gd")
-var inventory: Inventory = inventoryComponent.new()
-
-var identityComponent = load("res://Components/Identity.gd")
-var identity: Identity = identityComponent.new()
-onready var character: Character = identity.getComponent()
 onready var canMove = true
 
 
@@ -32,12 +26,9 @@ func _ready():
 	print("PLAYER READY")
 	screen_size = get_viewport_rect().size
 	# character setup
-	$AnimatedSprite.frames = character.frames
-	$CollisionShape2D.shape = character.collision_shape
+#	$AnimatedSprite.frames = character.frames
+#	$CollisionShape2D.shape = character.collision_shape
 
-
-
-	
 func _process(delta):
 	update_heading()
 	update_animations()

@@ -1,0 +1,15 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Player/Foley/assets/Collision.tres" type="Shape2D" id=1]
+[ext_resource path="res://Player/Foley/assets/Frames.tres" type="SpriteFrames" id=2]
+[ext_resource path="res://Player/Player.gd" type="Script" id=3]
+
+[node name="Player" type="KinematicBody2D"]
+script = ExtResource( 3 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+frames = ExtResource( 2 )
+animation = "idle"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = ExtResource( 1 )
