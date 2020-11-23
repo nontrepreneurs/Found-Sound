@@ -21,5 +21,8 @@ __meta__ = {
 [node name="FirstLock" parent="." instance=ExtResource( 1 )]
 position = Vector2( 250.5, 477 )
 
+[node name="Position2D" type="Position2D" parent="FirstLock"]
+position = Vector2( 693, -282 )
+
 [node name="FirstKey" parent="." instance=ExtResource( 2 )]
-position = Vector2( 1080, 202.5 )
+position = Vector2( 207, 31.5 )
