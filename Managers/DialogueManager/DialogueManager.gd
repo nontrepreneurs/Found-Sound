@@ -10,7 +10,7 @@
 extends CanvasLayer
 
 const dialogueBox: PackedScene = preload("res://DialogueBox/DialogueBox.tscn")
-
+var node: DialogueBox
 
 func test():
 	var dialogue = Dialogue.new(
@@ -39,9 +39,18 @@ func loadDialogue(dialogue: Array):
 	if $DialogueBox:
 		print("we've got one already...")
 	else:
-		var node = dialogueBox.instance()
+#		duck audio
+		node = dialogueBox.instance()
 		node.set("dialogue", dialogue)
 		add_child(node)
+		node.connect("dialogue_completed", self, "onDialogueComplete")
+#		connect to node complete signal
+#		unduck audio
+
+func onDialogueComplete():
+	print("manager has completed dialog... time to unduck audio")
+	print("node: ", node)
+
 
 func _ready():
 	print("manager ready")

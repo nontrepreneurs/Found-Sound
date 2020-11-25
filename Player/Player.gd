@@ -63,6 +63,8 @@ func update_heading():
 func update_animations():
 	$AnimatedSprite.play()
 	if heading != Vector2.ZERO:
+		if !$Footsteps.playing:
+			$Footsteps.play()
 		if heading.x != 0:
 
 			$AnimatedSprite.flip_h = heading.x < 0
@@ -90,5 +92,6 @@ func changeAnimation(truth: String):
 func update_velocity():
 	if heading != Vector2.ZERO:
 		velocity = heading.normalized() * speed
+		
 	else:
 		velocity = Vector2.ZERO
