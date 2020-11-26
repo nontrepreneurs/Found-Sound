@@ -2,12 +2,12 @@
 
 importer="wav"
 type="AudioStreamSample"
-path="res://.import/Cute Theme.wav-8286b3546f6808a2216a3ed30f24dfec.sample"
+path="res://.import/Footsteps.wav-045b21590693f62c4a56c2904103b8b4.sample"
 
 [deps]
 
-source_file="res://death/Music/Cute Theme.wav"
-dest_files=[ "res://.import/Cute Theme.wav-8286b3546f6808a2216a3ed30f24dfec.sample" ]
+source_file="res://Player/Foley/assets/Footsteps.wav"
+dest_files=[ "res://.import/Footsteps.wav-045b21590693f62c4a56c2904103b8b4.sample" ]
 
 [params]
 
