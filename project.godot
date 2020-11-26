@@ -24,6 +24,16 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://death/Models/Item/Consumable/Consumable.gd"
 }, {
+"base": "Resource",
+"class": "Dialogue",
+"language": "GDScript",
+"path": "res://Models/Dialogue.gd"
+}, {
+"base": "Panel",
+"class": "DialogueBox",
+"language": "GDScript",
+"path": "res://DialogueBox/DialogueBox.gd"
+}, {
 "base": "Component",
 "class": "Identity",
 "language": "GDScript",
@@ -63,11 +73,18 @@ _global_script_classes=[ {
 "class": "SoundSource",
 "language": "GDScript",
 "path": "res://SoundSource/SoundSource.gd"
+}, {
+"base": "Resource",
+"class": "Voice",
+"language": "GDScript",
+"path": "res://Models/Voice.gd"
 } ]
 _global_script_class_icons={
 "Character": "",
 "Component": "",
 "Consumable": "",
+"Dialogue": "",
+"DialogueBox": "",
 "Identity": "",
 "Inventory": "",
 "Item": "",
@@ -75,13 +92,21 @@ _global_script_class_icons={
 "Player": "",
 "Sample": "",
 "SoundListener": "",
-"SoundSource": ""
+"SoundSource": "",
+"Voice": ""
 }
 
 [application]
 
 config/name="go2020"
 config/icon="res://icon.png"
+
+[autoload]
+
+Constants="*res://Global/Constants.gd"
+StringMan="*res://Helpers/StringMan.gd"
+DialogueManager="*res://Managers/DialogueManager/DialogueManager.gd"
+GameManager="*res://Managers/GameManager.gd"
 
 [display]
 
@@ -139,6 +164,16 @@ record_sound={
  ]
 }
 play_sound={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":88,"unicode":0,"echo":false,"script":null)
+ ]
+}
+confirm={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":90,"unicode":0,"echo":false,"script":null)
+ ]
+}
+cancel={
 "deadzone": 0.5,
 "events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":88,"unicode":0,"echo":false,"script":null)
  ]
