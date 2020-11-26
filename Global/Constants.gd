@@ -1,5 +1,10 @@
 extends Node
 
+enum ResourceTypes {
+	UKNOWNN,
+	CHARACTER,
+	VOICE
+}
 
 enum DialogueTypes {
 	# vocalized dialogues are like your standard rpg fair, meaning a sound plays every step of the timer

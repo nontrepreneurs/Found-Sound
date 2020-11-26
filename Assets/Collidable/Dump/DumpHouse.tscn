@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Assets/Collidable/Dump/trash.png" type="Texture" id=1]
+
+[node name="DumpHouse" type="StaticBody2D"]
+
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 2.05405, -67.7832 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 444.767, 3.19511, 214.222, 228.444 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PoolVector2Array( -81.8935, 34.6031, 89.9875, 33.8748, 90.3516, -58.6205, 101.64, -65.1752, 103.228, -113.734, 101.248, -119.408, 97.2088, -121.309, -87.897, -120.891, -92.4118, -118.933, -95.0256, -114.418, -96.0956, -62.9903, -81.5294, -55.7072 )

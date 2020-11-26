@@ -4,6 +4,8 @@ class_name DialogueBox
 
 export var enterAudio: AudioStreamSample
 export var exitAudio: AudioStreamSample
+
+
 const progressionIndicator: PackedScene = preload("res://DialogueBox/DialogueProgressionIndicator.tscn")
 
 signal dialogue_completed
@@ -15,7 +17,7 @@ signal dialogue_completed
 #	}
 #]
 
-export(Array, Resource) var dialogue = [
+export(Array, Resource) var dialogues = [
 	Dialogue.new("this is the default text... congrats on finding it!"),
 	Dialogue.new("this second sentence is to test the progression animator")
 ]
@@ -50,16 +52,17 @@ func reset():
 		$DialogueProgressionIndicator.confirm()
 	
 func updateCurrentDialogue():
-	currentDialogue = dialogue[page]
+	currentDialogue = dialogues[page]
 	$DialogueTimer.wait_time = currentDialogue.text_speed
 	$DialogueWrapper/Dialogue.bbcode_text = currentDialogue.text
-	$DialogueVoicebox.stream = currentDialogue.voice.sample
+#	print("correct: ", currentDialogue.voice)
+	# $DialogueVoicebox.stream = currentDialogue.voice.sample
 
 func _input(event):
 	var total = $DialogueWrapper/Dialogue.get_total_character_count()
 	if visible and event.is_action_pressed("confirm"):
 		if $DialogueWrapper/Dialogue.visible_characters > total:
-			if page < dialogue.size() - 1:
+			if page < dialogues.size() - 1:
 				page += 1
 				updateCurrentDialogue()
 				reset()

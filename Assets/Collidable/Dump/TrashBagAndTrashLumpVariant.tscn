@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Assets/Collidable/Dump/trash.png" type="Texture" id=1]
+
+[sub_resource type="CapsuleShape2D" id=1]
+radius = 21.7152
+height = 70.5954
+
+[node name="TrashBagAndTrashLumpVariant" type="StaticBody2D"]
+position = Vector2( 215.54, 1647.12 )
+
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 3.31995, -15.6621 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 287.316, 139.492, 146, 105 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( -0.862183, 0.688965 )
+rotation = 1.5708
+shape = SubResource( 1 )

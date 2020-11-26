@@ -1,0 +1,106 @@
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://Location/Areas/FelmarOutskirts.gd" type="Script" id=1]
+[ext_resource path="res://Camera/Camera.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Player/Player.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Assets/Tiles/Transitions/Outskirts.png" type="Texture" id=4]
+[ext_resource path="res://Assets/Tiles/Transitions/OutskirtsBack.png" type="Texture" id=5]
+[ext_resource path="res://Assets/Tiles/Transitions/OutskirtsMid.png" type="Texture" id=6]
+[ext_resource path="res://Location/LocationTransition.gd" type="Script" id=7]
+[ext_resource path="res://Characters/Dad/Dad.tscn" type="PackedScene" id=8]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 66.0782, 124.775 )
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 2291.23, 5.68103 )
+
+[node name="Location" type="Node2D"]
+script = ExtResource( 1 )
+areaName = "FelmarOutskirts"
+
+[node name="Outskirts" type="Sprite" parent="."]
+position = Vector2( -4.91571, 17.2049 )
+texture = ExtResource( 4 )
+centered = false
+
+[node name="Map" type="YSort" parent="."]
+position = Vector2( 5.4433, 9.07214 )
+
+[node name="Player" parent="Map" instance=ExtResource( 3 )]
+position = Vector2( 177.52, 1098.63 )
+speed = 200
+
+[node name="Camera" parent="Map/Player" instance=ExtResource( 2 )]
+current = true
+
+[node name="BottomRight" parent="Map/Player/Camera/Limits" index="0"]
+position = Vector2( 3778.67, 1486.32 )
+
+[node name="TopLeft" parent="Map/Player/Camera/Limits" index="1"]
+position = Vector2( 60.4871, 280.872 )
+
+[node name="Dad" parent="Map" instance=ExtResource( 8 )]
+position = Vector2( 1798.11, 1082.98 )
+scale = Vector2( 0.75, 0.75 )
+
+[node name="LocationTransition" type="Area2D" parent="."]
+position = Vector2( -3.12384, 1133.68 )
+script = ExtResource( 7 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LocationTransition"]
+position = Vector2( -3.05176e-05, 33.209 )
+shape = SubResource( 1 )
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+follow_viewport_enable = true
+scroll_ignore_camera_zoom = true
+
+[node name="ParallaxLayer2" type="ParallaxLayer" parent="ParallaxBackground"]
+z_index = -3
+
+[node name="ColorRect" type="ColorRect" parent="ParallaxBackground/ParallaxLayer2"]
+margin_left = -4459.61
+margin_top = -2210.14
+margin_right = 6714.39
+margin_bottom = 4705.86
+color = Color( 0, 0, 0, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Back" type="ParallaxLayer" parent="ParallaxBackground"]
+z_index = -2
+motion_scale = Vector2( 0.2, 0.1 )
+motion_offset = Vector2( -500, 0 )
+motion_mirroring = Vector2( 3000, 0 )
+
+[node name="OutskirtsBack" type="Sprite" parent="ParallaxBackground/Back"]
+texture = ExtResource( 5 )
+centered = false
+
+[node name="Mid" type="ParallaxLayer" parent="ParallaxBackground"]
+z_index = -1
+motion_scale = Vector2( 0.1, 0.2 )
+motion_offset = Vector2( -500, 0 )
+motion_mirroring = Vector2( 3700, 0 )
+
+[node name="OutskirtsMid" type="Sprite" parent="ParallaxBackground/Mid"]
+texture = ExtResource( 6 )
+centered = false
+
+[node name="Collisions" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Collisions"]
+position = Vector2( 1577.86, 1291.8 )
+shape = SubResource( 2 )
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Collisions"]
+position = Vector2( 1600.74, 1068.47 )
+shape = SubResource( 2 )
+
+[node name="DadBlocker" type="CollisionPolygon2D" parent="Collisions"]
+polygon = PoolVector2Array( 1884.29, 1291.69, 1804.03, 1061.94, 1823.43, 1058.9, 1913.96, 1295.11 )
+[connection signal="body_entered" from="LocationTransition" to="LocationTransition" method="_on_LocationTransition_body_entered"]
+
+[editable path="Map/Player/Camera"]
