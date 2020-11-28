@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=2]
+[gd_scene load_steps=43 format=2]
 
 [ext_resource path="res://Location/Areas/Town/Town.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Tiles/town.png" type="Texture" id=2]
@@ -26,6 +26,13 @@
 [ext_resource path="res://Characters/Townsfolk/BlueFrog/BlueFrog.tscn" type="PackedScene" id=24]
 [ext_resource path="res://Characters/Townsfolk/SillyDog/SillyDog.tscn" type="PackedScene" id=25]
 [ext_resource path="res://Characters/Townsfolk/HattedFrog/HattedFrog.tscn" type="PackedScene" id=26]
+[ext_resource path="res://Characters/Townsfolk/FlourMan/FlourMan.tscn" type="PackedScene" id=27]
+[ext_resource path="res://Characters/Townsfolk/PurpMan/PurpMan.tscn" type="PackedScene" id=28]
+[ext_resource path="res://Characters/Townsfolk/WingGuy/WingGuy.tscn" type="PackedScene" id=29]
+[ext_resource path="res://Characters/Townsfolk/Otterman/Otterman.tscn" type="PackedScene" id=30]
+[ext_resource path="res://Characters/Townsfolk/CONOR/CONOR.tscn" type="PackedScene" id=31]
+[ext_resource path="res://Characters/Townsfolk/DrumMan/DrumMan.tscn" type="PackedScene" id=32]
+[ext_resource path="res://Characters/Townsfolk/DiseasedGiraffe/DiseasedGiraffe.tscn" type="PackedScene" id=33]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 130.104, 64.9192 )
@@ -2614,10 +2621,36 @@ position = Vector2( 429, 1188 )
 position = Vector2( 241.5, 1224 )
 
 [node name="SackOfFlour" parent="Map" instance=ExtResource( 23 )]
-position = Vector2( -94.5001, 513 )
+position = Vector2( -115.5, 610.5 )
+scale = Vector2( 0.0800009, 0.0800009 )
+
+[node name="WingGuy" parent="Map" instance=ExtResource( 29 )]
+position = Vector2( 854.684, 739.277 )
+scale = Vector2( 1.12, 1.12 )
+
+[node name="FlourMan" parent="Map" instance=ExtResource( 27 )]
+position = Vector2( -28.5, 604.501 )
+scale = Vector2( 0.84, 0.84 )
+
+[node name="PurpMan" parent="Map" instance=ExtResource( 28 )]
+position = Vector2( 428.115, -47.5683 )
+scale = Vector2( 2, 2 )
+
+[node name="Otterman" parent="Map" instance=ExtResource( 30 )]
+position = Vector2( 975.15, 751.579 )
+
+[node name="CONOR" parent="Map" instance=ExtResource( 31 )]
+position = Vector2( 615.216, 1246.29 )
+scale = Vector2( 3.8, 3.8 )
+
+[node name="DrumMan" parent="Map" instance=ExtResource( 32 )]
+position = Vector2( 505.809, -53.9107 )
+
+[node name="DiseasedGiraffe" parent="Map" instance=ExtResource( 33 )]
+position = Vector2( 1098.83, 1192.38 )
 
 [node name="SillyDog" parent="Map" instance=ExtResource( 25 )]
-position = Vector2( 903.001, 1099.5 )
+position = Vector2( 271.928, 863.244 )
 
 [node name="Collisions" type="StaticBody2D" parent="."]
 
