@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=2]
+[gd_scene load_steps=28 format=2]
 
 [ext_resource path="res://Location/LocationTransitionTrigger.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Location/Areas/Dumps/Dumps.gd" type="Script" id=2]
@@ -16,6 +16,7 @@
 [ext_resource path="res://Assets/Tiles/PUDDLES.png" type="Texture" id=14]
 [ext_resource path="res://Assets/Collidable/Deciduous Tree Variant.tscn" type="PackedScene" id=15]
 [ext_resource path="res://Assets/Collidable/Coniferous Tree.tscn" type="PackedScene" id=16]
+[ext_resource path="res://Characters/VinnieBasura/VinnieBasura.tscn" type="PackedScene" id=17]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 65.1124, 64.9192 )
@@ -364,6 +365,9 @@ position = Vector2( 729.534, 826.493 )
 texture = ExtResource( 14 )
 region_enabled = true
 region_rect = Rect2( 396, -10, 155, 155 )
+
+[node name="VinnieBasura" parent="Map" instance=ExtResource( 17 )]
+position = Vector2( 603.001, 1447.5 )
 
 [node name="Collisions" type="StaticBody2D" parent="."]
 
