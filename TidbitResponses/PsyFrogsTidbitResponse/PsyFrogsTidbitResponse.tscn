@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://TidbitResponses/PsyFrogsTidbitResponse/PsyFrogsTidbitResponse.gd" type="Script" id=1]
+[ext_resource path="res://Tidbits/FrogSatisfied.tres" type="Resource" id=2]
+
+[node name="PsyFrogsTidbitResponse" type="Node"]
+script = ExtResource( 1 )
+tidbit = ExtResource( 2 )
+compare_on_change = true
