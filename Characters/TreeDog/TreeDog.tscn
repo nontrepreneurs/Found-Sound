@@ -1,6 +1,9 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Characters/TreeDog/treeDog_spriteframes.tres" type="SpriteFrames" id=1]
+[ext_resource path="res://SoundListener/SoundListener.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Samples/BasuraPercussion/BasuraPercussion.tres" type="Resource" id=3]
+[ext_resource path="res://SoundResponses/MoveToPosition/MoveToPosition.tscn" type="PackedScene" id=4]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 12.1484
@@ -11,10 +14,19 @@ height = 40.6287
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = ExtResource( 1 )
 animation = "idle"
-frame = 1
+frame = 5
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( -4.44949, 32.0362 )
 rotation = 1.5708
 shape = SubResource( 1 )
+
+[node name="SoundListener" parent="." instance=ExtResource( 2 )]
+target_sample = ExtResource( 3 )
+start_listening = true
+
+[node name="MoveToPosition" parent="." instance=ExtResource( 4 )]
+
+[node name="Position2D" type="Position2D" parent="MoveToPosition"]
+position = Vector2( -10002.4, 28.4766 )
