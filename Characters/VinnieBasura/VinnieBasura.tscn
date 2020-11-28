@@ -1,8 +1,11 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Characters/VinnieBasura/basura_spriteframes.tres" type="SpriteFrames" id=1]
 [ext_resource path="res://SoundSource/SoundSource.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Samples/BasuraPercussion/BasuraPercussion.tres" type="Resource" id=3]
+[ext_resource path="res://Characters/VinnieBasura/VinnieBasura.gd" type="Script" id=4]
+[ext_resource path="res://Tidbits/HasRecordedVinnie.tres" type="Resource" id=5]
+[ext_resource path="res://TidbitResponses/VinniesTidbitResponse/VinniesTidbitResponse.tscn" type="PackedScene" id=6]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 14.8185
@@ -28,10 +31,13 @@ tracks/0/keys = {
 }
 
 [node name="VinnieBasura" type="KinematicBody2D"]
+script = ExtResource( 4 )
+has_recorded_vinnie = ExtResource( 5 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = ExtResource( 1 )
 animation = "idle"
+frame = 3
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -45,3 +51,7 @@ sample = ExtResource( 3 )
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "PeriodicallyClang"
 anims/PeriodicallyClang = SubResource( 2 )
+
+[node name="VinniesTidbitResponse" parent="." instance=ExtResource( 6 )]
+tidbit = ExtResource( 5 )
+compare_on_change = true
