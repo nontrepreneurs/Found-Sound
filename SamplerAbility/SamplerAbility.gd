@@ -1,4 +1,4 @@
-extends Area2D
+extends Node2D
 
 const RECORD_ACTION = "record_sound"
 const PLAY_SOUND_ACTION = "play_sound"
