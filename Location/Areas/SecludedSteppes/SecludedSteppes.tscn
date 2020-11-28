@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://Location/Areas/SecludedSteppes/SecludedSteppes.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Tiles/secluded_steppes.png" type="Texture" id=2]
@@ -65,15 +65,21 @@ shader_param/color = Vector3( 0.35, 0.48, 0.95 )
 shader_param/OCTAVES = 4
 
 [sub_resource type="RectangleShape2D" id=3]
-extents = Vector2( 68.2524, 1127.6 )
+extents = Vector2( 57.5585, 954.343 )
 
 [sub_resource type="RectangleShape2D" id=4]
-extents = Vector2( 429.332, 24.5028 )
+extents = Vector2( 70.6842, 714.038 )
 
 [sub_resource type="RectangleShape2D" id=5]
-extents = Vector2( 999.28, 56.6716 )
+extents = Vector2( 34.6632, 180.126 )
 
 [sub_resource type="RectangleShape2D" id=6]
+extents = Vector2( 429.332, 24.5028 )
+
+[sub_resource type="RectangleShape2D" id=7]
+extents = Vector2( 999.28, 56.6716 )
+
+[sub_resource type="RectangleShape2D" id=8]
 extents = Vector2( 175.279, 56.6716 )
 
 [node name="Location" type="Node2D"]
@@ -2839,23 +2845,27 @@ position = Vector2( 952.255, -1.16107 )
 shape = SubResource( 3 )
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2( -953.837, 392.42 )
-shape = SubResource( 3 )
+position = Vector2( -945.832, -29.1595 )
+shape = SubResource( 4 )
+
+[node name="CollisionShape2D7" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2( -923.153, 983.432 )
+shape = SubResource( 5 )
 
 [node name="CollisionShape2D3" type="CollisionShape2D" parent="StaticBody2D"]
 position = Vector2( -489.214, 936.433 )
-shape = SubResource( 4 )
+shape = SubResource( 6 )
 
 [node name="CollisionShape2D4" type="CollisionShape2D" parent="StaticBody2D"]
 position = Vector2( 492.846, 936.265 )
-shape = SubResource( 4 )
+shape = SubResource( 6 )
 
 [node name="CollisionShape2D5" type="CollisionShape2D" parent="StaticBody2D"]
 position = Vector2( -112.182, -965.383 )
-shape = SubResource( 5 )
+shape = SubResource( 7 )
 
 [node name="CollisionShape2D6" type="CollisionShape2D" parent="StaticBody2D"]
 position = Vector2( -1061.3, -908.837 )
-shape = SubResource( 6 )
+shape = SubResource( 8 )
 
 [editable path="Map/Player/Camera"]
