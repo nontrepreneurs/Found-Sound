@@ -10,7 +10,7 @@ config_version=4
 
 _global_script_classes=[ {
 "base": "Resource",
-"class": "Character",
+"class": "CharacterOld",
 "language": "GDScript",
 "path": "res://death/Models/Character/Character.gd"
 }, {
@@ -49,6 +49,16 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://death/Models/Item/Item.gd"
 }, {
+"base": "Node2D",
+"class": "Location",
+"language": "GDScript",
+"path": "res://Location/Location.gd"
+}, {
+"base": "Resource",
+"class": "LocationNavigator",
+"language": "GDScript",
+"path": "res://Location/LocationNavigator.gd"
+}, {
 "base": "Item",
 "class": "Motif",
 "language": "GDScript",
@@ -64,6 +74,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Samples/Sample.gd"
 }, {
+"base": "Node",
+"class": "Slice",
+"language": "GDScript",
+"path": "res://db/Slice.gd"
+}, {
 "base": "Area2D",
 "class": "SoundListener",
 "language": "GDScript",
@@ -75,12 +90,27 @@ _global_script_classes=[ {
 "path": "res://SoundSource/SoundSource.gd"
 }, {
 "base": "Resource",
+"class": "StateMutator",
+"language": "GDScript",
+"path": "res://db/Mutator.gd"
+}, {
+"base": "Resource",
 "class": "Voice",
 "language": "GDScript",
+"path": "res://db/Resources/Voice/Voice.gd"
+}, {
+"base": "Resource",
+"class": "VoiceOld",
+"language": "GDScript",
 "path": "res://Models/Voice.gd"
+}, {
+"base": "Node",
+"class": "VoiceSlice",
+"language": "GDScript",
+"path": "res://db/Resources/Voice/VoiceSlice.gd"
 } ]
 _global_script_class_icons={
-"Character": "",
+"CharacterOld": "",
 "Component": "",
 "Consumable": "",
 "Dialogue": "",
@@ -88,12 +118,18 @@ _global_script_class_icons={
 "Identity": "",
 "Inventory": "",
 "Item": "",
+"Location": "",
+"LocationNavigator": "",
 "Motif": "",
 "Player": "",
 "Sample": "",
+"Slice": "",
 "SoundListener": "",
 "SoundSource": "",
-"Voice": ""
+"StateMutator": "",
+"Voice": "",
+"VoiceOld": "",
+"VoiceSlice": ""
 }
 
 [application]
@@ -105,6 +141,9 @@ config/icon="res://icon.png"
 
 Constants="*res://Global/Constants.gd"
 StringMan="*res://Helpers/StringMan.gd"
+FileSystem="*res://Helpers/FileSystem.gd"
+LocationManager="*res://Managers/LocationManager/LocationManager.tscn"
+Database="*res://db/init.gd"
 DialogueManager="*res://Managers/DialogueManager/DialogueManager.gd"
 GameManager="*res://Managers/GameManager.gd"
 

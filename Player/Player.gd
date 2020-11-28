@@ -1,6 +1,7 @@
 extends KinematicBody2D
 class_name Player
 
+signal player_ready
 
 const IDLE = "idle"
 const WALKING = "walking"
@@ -19,12 +20,14 @@ var heading = Vector2()
 var velocity = Vector2()
 
 
+
 onready var canMove = true
 
 
 func _ready():
 	print("PLAYER READY")
 	screen_size = get_viewport_rect().size
+	emit_signal("player_ready")
 	# character setup
 #	$AnimatedSprite.frames = character.frames
 #	$CollisionShape2D.shape = character.collision_shape

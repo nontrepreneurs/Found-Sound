@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Assets/Collidable/CampFire/CampFireFrames.tres" type="SpriteFrames" id=1]
+
+[sub_resource type="CapsuleShape2D" id=1]
+radius = 16.6373
+height = 55.5515
+
+[node name="CampFire" type="StaticBody2D"]
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+position = Vector2( 0.785858, 0 )
+frames = ExtResource( 1 )
+frame = 3
+playing = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( -0.785889, 19.6463 )
+rotation = 1.5708
+shape = SubResource( 1 )

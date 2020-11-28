@@ -1,5 +1,5 @@
 extends Resource
-class_name Character
+class_name CharacterOld
 
 export(String) var name = ""
 export(String) var short_name = ""

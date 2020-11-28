@@ -1,0 +1,426 @@
+[gd_scene load_steps=27 format=2]
+
+[ext_resource path="res://Location/LocationTransitionTrigger.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Location/Areas/Dumps/Dumps.gd" type="Script" id=2]
+[ext_resource path="res://Player/Player.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Camera/Camera.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Assets/Collidable/Dump/TrashBagAndTrashLump.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Assets/Collidable/Dump/TrashBag.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Assets/Collidable/Dump/LeakyTrashBag.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Assets/Collidable/Dump/TrashLump.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Assets/Collidable/Dump/DumpHouse.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Assets/Collidable/Dump/TrashBagAndTrashLumpVariant.tscn" type="PackedScene" id=10]
+[ext_resource path="res://Assets/Collidable/Dump/Dumpster.tscn" type="PackedScene" id=11]
+[ext_resource path="res://Assets/Collidable/Dump/TrashLumpVariant.tscn" type="PackedScene" id=12]
+[ext_resource path="res://Assets/Tiles/dump.png" type="Texture" id=13]
+[ext_resource path="res://Assets/Tiles/PUDDLES.png" type="Texture" id=14]
+[ext_resource path="res://Assets/Collidable/Deciduous Tree Variant.tscn" type="PackedScene" id=15]
+[ext_resource path="res://Assets/Collidable/Coniferous Tree.tscn" type="PackedScene" id=16]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 65.1124, 64.9192 )
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 227.229, 29.8514 )
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 46.7661, 1048.8 )
+
+[sub_resource type="RectangleShape2D" id=4]
+extents = Vector2( 45.0347, 739.333 )
+
+[sub_resource type="RectangleShape2D" id=5]
+extents = Vector2( 56.5936, 219.191 )
+
+[sub_resource type="RectangleShape2D" id=6]
+extents = Vector2( 19.6811, 122.658 )
+
+[sub_resource type="RectangleShape2D" id=7]
+extents = Vector2( 168.997, 47.7548 )
+
+[sub_resource type="RectangleShape2D" id=8]
+extents = Vector2( 12.1333, 385.084 )
+
+[sub_resource type="RectangleShape2D" id=9]
+extents = Vector2( 429.594, 13.2974 )
+
+[sub_resource type="RectangleShape2D" id=10]
+extents = Vector2( 531.913, 42.7893 )
+
+[node name="Location" type="Node2D"]
+script = ExtResource( 2 )
+areaName = "FelmarDumps"
+
+[node name="ColorRect" type="ColorRect" parent="."]
+margin_left = -553.0
+margin_top = -480.0
+margin_right = 1380.0
+margin_bottom = 2159.0
+color = Color( 0, 0, 0, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="dump" type="Sprite" parent="."]
+position = Vector2( 509.068, 941.148 )
+texture = ExtResource( 13 )
+
+[node name="LocationTransition" parent="." instance=ExtResource( 1 )]
+position = Vector2( 406.559, 449.457 )
+location = 3
+coordinates = Vector2( 1830, 250 )
+
+[node name="CollisionShape2D" parent="LocationTransition" index="0"]
+position = Vector2( -466.245, 9.5152 )
+shape = SubResource( 1 )
+
+[node name="LocationTransition2" parent="." instance=ExtResource( 1 )]
+position = Vector2( 406.559, 449.457 )
+location = 6
+coordinates = Vector2( -1830, 250 )
+
+[node name="CollisionShape2D" parent="LocationTransition2" index="0"]
+position = Vector2( 102.859, -507.852 )
+shape = SubResource( 1 )
+
+[node name="Map" type="YSort" parent="."]
+
+[node name="TrashBags" type="YSort" parent="Map"]
+
+[node name="TrashBag" parent="Map/TrashBags" instance=ExtResource( 6 )]
+position = Vector2( 753.604, 1745.57 )
+
+[node name="LeakyTrashBag" parent="Map/TrashBags" instance=ExtResource( 7 )]
+position = Vector2( 162.642, 1438.86 )
+
+[node name="TrashLump" parent="Map/TrashBags" instance=ExtResource( 8 )]
+position = Vector2( 591.413, 1700.44 )
+
+[node name="TrashLumpVariant" parent="Map/TrashBags" instance=ExtResource( 12 )]
+position = Vector2( 664.729, 1644.58 )
+
+[node name="TrashBagAndTrashLump" parent="Map/TrashBags" instance=ExtResource( 5 )]
+position = Vector2( 215.54, 1647.12 )
+
+[node name="TrashBagAndTrashLumpVariant" parent="Map/TrashBags" instance=ExtResource( 10 )]
+position = Vector2( 818.422, 1435.26 )
+
+[node name="TrashBag2" parent="Map/TrashBags" instance=ExtResource( 6 )]
+position = Vector2( 799.975, 1592.78 )
+
+[node name="TrashBag3" parent="Map/TrashBags" instance=ExtResource( 6 )]
+position = Vector2( 790.095, 1566.71 )
+
+[node name="TrashBag4" parent="Map/TrashBags" instance=ExtResource( 6 )]
+position = Vector2( 756.489, 1581.06 )
+
+[node name="TrashBag5" parent="Map/TrashBags" instance=ExtResource( 6 )]
+position = Vector2( 808.29, 1548.42 )
+
+[node name="TrashBag6" parent="Map/TrashBags" instance=ExtResource( 6 )]
+position = Vector2( 689.844, 994.419 )
+
+[node name="TrashBag14" parent="Map/TrashBags" instance=ExtResource( 6 )]
+position = Vector2( 978.587, 1023.03 )
+
+[node name="TrashBag7" parent="Map/TrashBags" instance=ExtResource( 6 )]
+position = Vector2( 639.501, 1000.4 )
+
+[node name="TrashBag8" parent="Map/TrashBags" instance=ExtResource( 6 )]
+position = Vector2( 634.623, 966.999 )
+
+[node name="TrashBag13" parent="Map/TrashBags" instance=ExtResource( 6 )]
+position = Vector2( 37.4028, 1029.54 )
+
+[node name="TrashBag12" parent="Map/TrashBags" instance=ExtResource( 6 )]
+position = Vector2( 338.226, 945.398 )
+
+[node name="TrashBag11" parent="Map/TrashBags" instance=ExtResource( 6 )]
+position = Vector2( 387.366, 1009.22 )
+
+[node name="TrashBag10" parent="Map/TrashBags" instance=ExtResource( 6 )]
+position = Vector2( 383.943, 902.332 )
+
+[node name="TrashBag9" parent="Map/TrashBags" instance=ExtResource( 6 )]
+position = Vector2( 398.778, 869.618 )
+
+[node name="Dumpster" parent="Map" instance=ExtResource( 11 )]
+position = Vector2( 244.931, 1271.06 )
+
+[node name="DumpHouse" parent="Map" instance=ExtResource( 9 )]
+position = Vector2( 727.879, 1329.08 )
+
+[node name="Player" parent="Map" instance=ExtResource( 3 )]
+position = Vector2( 32, 450 )
+speed = 200
+
+[node name="Camera" parent="Map/Player" instance=ExtResource( 4 )]
+current = true
+zoom = Vector2( 0.75, 0.75 )
+
+[node name="BottomRight" parent="Map/Player/Camera/Limits" index="0"]
+position = Vector2( 1133.11, 1910.47 )
+
+[node name="TopLeft" parent="Map/Player/Camera/Limits" index="1"]
+position = Vector2( 1.46883, 6.59921 )
+scale = Vector2( 31121.1, -26.7386 )
+
+[node name="Trees" type="YSort" parent="Map"]
+
+[node name="Deciduous Tree Short Variant" parent="Map/Trees" instance=ExtResource( 16 )]
+position = Vector2( 30.0345, 152.21 )
+
+[node name="Deciduous Tree Short Variant2" parent="Map/Trees" instance=ExtResource( 16 )]
+position = Vector2( 96.8198, 122.733 )
+
+[node name="Deciduous Tree Short Variant8" parent="Map/Trees" instance=ExtResource( 16 )]
+position = Vector2( 885.357, 291.897 )
+
+[node name="Deciduous Tree Short Variant7" parent="Map/Trees" instance=ExtResource( 16 )]
+position = Vector2( 109.35, 37.7031 )
+
+[node name="Deciduous Tree Short Variant6" parent="Map/Trees" instance=ExtResource( 16 )]
+position = Vector2( 173.794, 54.709 )
+
+[node name="Deciduous Tree Short Variant9" parent="Map/Trees" instance=ExtResource( 16 )]
+position = Vector2( 207.806, 158.534 )
+
+[node name="Deciduous Tree Short Variant30" parent="Map/Trees" instance=ExtResource( 16 )]
+position = Vector2( 237.342, 235.509 )
+
+[node name="Deciduous Tree Short Variant31" parent="Map/Trees" instance=ExtResource( 16 )]
+position = Vector2( 159.473, 322.328 )
+
+[node name="Deciduous Tree Short Variant11" parent="Map/Trees" instance=ExtResource( 16 )]
+position = Vector2( 406.506, 18.012 )
+
+[node name="Deciduous Tree Short Variant12" parent="Map/Trees" instance=ExtResource( 16 )]
+position = Vector2( 402.031, 144.214 )
+
+[node name="Deciduous Tree Short Variant34" parent="Map/Trees" instance=ExtResource( 16 )]
+position = Vector2( 421.722, 349.18 )
+
+[node name="Deciduous Tree Short Variant13" parent="Map/Trees" instance=ExtResource( 16 )]
+position = Vector2( 606.102, 20.6972 )
+
+[node name="Deciduous Tree Short Variant14" parent="Map/Trees" instance=ExtResource( 16 )]
+position = Vector2( 645.484, 10.8516 )
+
+[node name="Deciduous Tree Short Variant15" parent="Map/Trees" instance=ExtResource( 16 )]
+position = Vector2( 685.761, 20.6972 )
+
+[node name="Deciduous Tree Short Variant16" parent="Map/Trees" instance=ExtResource( 16 )]
+position = Vector2( 666.965, 75.295 )
+
+[node name="Deciduous Tree Short Variant17" parent="Map/Trees" instance=ExtResource( 16 )]
+position = Vector2( 815.543, 80.6653 )
+
+[node name="Deciduous Tree Short Variant18" parent="Map/Trees" instance=ExtResource( 16 )]
+position = Vector2( 779.741, 123.628 )
+
+[node name="Deciduous Tree Short Variant20" parent="Map/Trees" instance=ExtResource( 16 )]
+position = Vector2( 845.079, 265.94 )
+
+[node name="Deciduous Tree Short Variant21" parent="Map/Trees" instance=ExtResource( 16 )]
+position = Vector2( 917.578, 231.033 )
+
+[node name="Deciduous Tree Short Variant22" parent="Map/Trees" instance=ExtResource( 16 )]
+position = Vector2( 970.386, 378.716 )
+
+[node name="Deciduous Tree Short Variant27" parent="Map/Trees" instance=ExtResource( 16 )]
+position = Vector2( 836.129, 433.314 )
+
+[node name="Deciduous Tree Short Variant28" parent="Map/Trees" instance=ExtResource( 16 )]
+position = Vector2( 942.64, 524.788 )
+
+[node name="Deciduous Tree Short Variant29" parent="Map/Trees" instance=ExtResource( 16 )]
+position = Vector2( 651.749, 599.793 )
+
+[node name="Deciduous Tree Short Variant26" parent="Map/Trees" instance=ExtResource( 16 )]
+position = Vector2( 798.537, 209.552 )
+
+[node name="Deciduous Tree Short Variant23" parent="Map/Trees" instance=ExtResource( 16 )]
+position = Vector2( 299.1, 113.782 )
+
+[node name="Deciduous Tree Short Variant32" parent="Map/Trees" instance=ExtResource( 16 )]
+position = Vector2( 294.625, 767.167 )
+
+[node name="Deciduous Tree Short Variant33" parent="Map/Trees" instance=ExtResource( 16 )]
+position = Vector2( 103.98, 672.292 )
+
+[node name="Deciduous Tree Short Variant24" parent="Map/Trees" instance=ExtResource( 16 )]
+position = Vector2( 1005.29, 278.471 )
+
+[node name="Deciduous Tree Short Variant25" parent="Map/Trees" instance=ExtResource( 16 )]
+position = Vector2( 961.436, 231.033 )
+
+[node name="Deciduous Tree Short Variant19" parent="Map/Trees" instance=ExtResource( 16 )]
+position = Vector2( 903.258, 66.3446 )
+
+[node name="Deciduous Tree Short Variant10" parent="Map/Trees" instance=ExtResource( 16 )]
+position = Vector2( 262.404, 35.913 )
+
+[node name="Deciduous Tree Short Variant5" parent="Map/Trees" instance=ExtResource( 16 )]
+position = Vector2( 39.5367, 64.5545 )
+
+[node name="Deciduous Tree Short Variant3" parent="Map/Trees" instance=ExtResource( 16 )]
+position = Vector2( 31.6149, 265.628 )
+
+[node name="Deciduous Tree Variant" parent="Map/Trees" instance=ExtResource( 15 )]
+position = Vector2( 69.7619, 196.183 )
+
+[node name="Deciduous Tree Variant5" parent="Map/Trees" instance=ExtResource( 15 )]
+position = Vector2( 232.661, 84.3024 )
+
+[node name="Deciduous Tree Variant6" parent="Map/Trees" instance=ExtResource( 15 )]
+position = Vector2( 348.122, 47.6055 )
+
+[node name="Deciduous Tree Variant7" parent="Map/Trees" instance=ExtResource( 15 )]
+position = Vector2( 625.586, 57.451 )
+
+[node name="Deciduous Tree Variant8" parent="Map/Trees" instance=ExtResource( 15 )]
+position = Vector2( 749.103, 36.8649 )
+
+[node name="Deciduous Tree Variant9" parent="Map/Trees" instance=ExtResource( 15 )]
+position = Vector2( 809.966, 31.4946 )
+
+[node name="Deciduous Tree Variant10" parent="Map/Trees" instance=ExtResource( 15 )]
+position = Vector2( 752.683, 86.0925 )
+
+[node name="Deciduous Tree Variant13" parent="Map/Trees" instance=ExtResource( 15 )]
+position = Vector2( 750.893, 163.067 )
+
+[node name="Deciduous Tree Variant14" parent="Map/Trees" instance=ExtResource( 15 )]
+position = Vector2( 839.503, 208.714 )
+
+[node name="Deciduous Tree Variant19" parent="Map/Trees" instance=ExtResource( 15 )]
+position = Vector2( 918.267, 347.446 )
+
+[node name="Deciduous Tree Variant20" parent="Map/Trees" instance=ExtResource( 15 )]
+position = Vector2( 678.394, 227.51 )
+
+[node name="Deciduous Tree Variant26" parent="Map/Trees" instance=ExtResource( 15 )]
+position = Vector2( 345.437, 254.361 )
+
+[node name="Deciduous Tree Variant21" parent="Map/Trees" instance=ExtResource( 15 )]
+position = Vector2( 758.949, 538.091 )
+
+[node name="Deciduous Tree Variant22" parent="Map/Trees" instance=ExtResource( 15 )]
+position = Vector2( 851.138, 709.046 )
+
+[node name="Deciduous Tree Variant23" parent="Map/Trees" instance=ExtResource( 15 )]
+position = Vector2( 740.153, 344.761 )
+
+[node name="Deciduous Tree Variant24" parent="Map/Trees" instance=ExtResource( 15 )]
+position = Vector2( 669.444, 397.569 )
+
+[node name="Deciduous Tree Variant25" parent="Map/Trees" instance=ExtResource( 15 )]
+position = Vector2( 253.247, 597.165 )
+
+[node name="Deciduous Tree Variant27" parent="Map/Trees" instance=ExtResource( 15 )]
+position = Vector2( 833.701, 567.676 )
+
+[node name="Deciduous Tree Variant28" parent="Map/Trees" instance=ExtResource( 15 )]
+position = Vector2( 263.092, 360.872 )
+
+[node name="Deciduous Tree Variant15" parent="Map/Trees" instance=ExtResource( 15 )]
+position = Vector2( 877.99, 152.326 )
+
+[node name="Deciduous Tree Variant16" parent="Map/Trees" instance=ExtResource( 15 )]
+position = Vector2( 946.909, 157.696 )
+
+[node name="Deciduous Tree Variant18" parent="Map/Trees" instance=ExtResource( 15 )]
+position = Vector2( 988.976, 211.399 )
+
+[node name="Deciduous Tree Variant17" parent="Map/Trees" instance=ExtResource( 15 )]
+position = Vector2( 996.136, 110.259 )
+
+[node name="Deciduous Tree Variant11" parent="Map/Trees" instance=ExtResource( 15 )]
+position = Vector2( 696.295, 109.364 )
+
+[node name="Deciduous Tree Variant12" parent="Map/Trees" instance=ExtResource( 15 )]
+position = Vector2( 950.489, 40.4451 )
+
+[node name="Deciduous Tree Variant3" parent="Map/Trees" instance=ExtResource( 15 )]
+position = Vector2( 146.736, 217.664 )
+
+[node name="Deciduous Tree Variant4" parent="Map/Trees" instance=ExtResource( 15 )]
+position = Vector2( 81.3976, 265.997 )
+
+[node name="Deciduous Tree Variant2" parent="Map/Trees" instance=ExtResource( 15 )]
+position = Vector2( 154.791, 117.419 )
+
+[node name="Deciduous Tree Short Variant4" parent="Map/Trees" instance=ExtResource( 16 )]
+position = Vector2( 24.8368, 340.782 )
+
+[node name="Sprite" type="Sprite" parent="Map"]
+position = Vector2( 352.606, 868.185 )
+texture = ExtResource( 14 )
+region_enabled = true
+region_rect = Rect2( 327, 197, 205, 148 )
+
+[node name="Sprite2" type="Sprite" parent="Map"]
+position = Vector2( 729.534, 826.493 )
+texture = ExtResource( 14 )
+region_enabled = true
+region_rect = Rect2( 396, -10, 155, 155 )
+
+[node name="Collisions" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Collisions"]
+position = Vector2( 232.188, -25.4023 )
+shape = SubResource( 2 )
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Collisions"]
+position = Vector2( 784.554, -26.3409 )
+shape = SubResource( 2 )
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="Collisions"]
+position = Vector2( 1058.82, 918.637 )
+shape = SubResource( 3 )
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="Collisions"]
+position = Vector2( -41.6757, 1237.7 )
+shape = SubResource( 4 )
+
+[node name="CollisionShape2D6" type="CollisionShape2D" parent="Collisions"]
+position = Vector2( -52.399, 196.143 )
+shape = SubResource( 5 )
+
+[node name="CollisionShape2D7" type="CollisionShape2D" parent="Collisions"]
+position = Vector2( 433.916, 1006.17 )
+shape = SubResource( 6 )
+
+[node name="CollisionShape2D13" type="CollisionShape2D" parent="Collisions"]
+position = Vector2( 586.871, 1004.74 )
+shape = SubResource( 6 )
+
+[node name="CollisionShape2D8" type="CollisionShape2D" parent="Collisions"]
+position = Vector2( 246.735, 1083.5 )
+shape = SubResource( 7 )
+
+[node name="CollisionShape2D10" type="CollisionShape2D" parent="Collisions"]
+position = Vector2( 774.75, 1080.65 )
+shape = SubResource( 7 )
+
+[node name="CollisionShape2D9" type="CollisionShape2D" parent="Collisions"]
+position = Vector2( 89.3117, 1424.96 )
+shape = SubResource( 8 )
+
+[node name="CollisionShape2D11" type="CollisionShape2D" parent="Collisions"]
+position = Vector2( 930.92, 1418.56 )
+shape = SubResource( 8 )
+
+[node name="CollisionShape2D12" type="CollisionShape2D" parent="Collisions"]
+position = Vector2( 508.337, 1806.99 )
+shape = SubResource( 9 )
+
+[node name="CollisionShape2D5" type="CollisionShape2D" parent="Collisions"]
+position = Vector2( 495.839, 1914.58 )
+shape = SubResource( 10 )
+
+[editable path="LocationTransition"]
+
+[editable path="LocationTransition2"]
+
+[editable path="Map/Player/Camera"]

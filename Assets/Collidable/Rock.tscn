@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Assets/Collidable/TownAndForestry.png" type="Texture" id=1]
+
+[sub_resource type="CapsuleShape2D" id=1]
+radius = 10.8205
+height = 38.3602
+
+[node name="Rock" type="StaticBody2D"]
+position = Vector2( 748.872, 393.732 )
+
+[node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 4.59829, 16.2467, 84.4444, 66.963 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( -3.66025, 9.47839 )
+rotation = 1.5708
+shape = SubResource( 1 )

@@ -11,6 +11,7 @@ export_presets.cfg
 data_*/
 .DS_*
 mono_crash*
+.vscode
 
 MichaelsTestingArea
 

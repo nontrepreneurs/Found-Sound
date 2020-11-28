@@ -13,6 +13,8 @@ const dialogueBox: PackedScene = preload("res://DialogueBox/DialogueBox.tscn")
 var node: DialogueBox
 
 func test():
+	# var vox = Voice.new(Constants.DialogueTypes.VOCALIZED, load("res://Assets/SFX/Ringtone.wav"))
+	
 	var dialogue = Dialogue.new(
 		"Remember son...",
 		0.05
@@ -35,13 +37,13 @@ func test():
 	
 	DialogueManager.loadDialogue([dialogue, dialogue2, dialogue3, dialogue4])
 
-func loadDialogue(dialogue: Array):
+func loadDialogue(dialogues: Array):
 	if $DialogueBox:
 		print("we've got one already...")
 	else:
 #		duck audio
 		node = dialogueBox.instance()
-		node.set("dialogue", dialogue)
+		node.set("dialogues", dialogues)
 		add_child(node)
 		node.connect("dialogue_completed", self, "onDialogueComplete")
 #		connect to node complete signal
