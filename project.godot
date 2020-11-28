@@ -54,6 +54,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Location/Location.gd"
 }, {
+"base": "Resource",
+"class": "LocationNavigator",
+"language": "GDScript",
+"path": "res://Location/LocationNavigator.gd"
+}, {
 "base": "Item",
 "class": "Motif",
 "language": "GDScript",
@@ -89,6 +94,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://db/Resources/Voice/Voice.gd"
 }, {
+"base": "Resource",
+"class": "VoiceOld",
+"language": "GDScript",
+"path": "res://Models/Voice.gd"
+}, {
 "base": "Node",
 "class": "VoiceSlice",
 "language": "GDScript",
@@ -104,6 +114,7 @@ _global_script_class_icons={
 "Inventory": "",
 "Item": "",
 "Location": "",
+"LocationNavigator": "",
 "Motif": "",
 "Player": "",
 "Slice": "",
@@ -111,6 +122,7 @@ _global_script_class_icons={
 "SoundSource": "",
 "StateMutator": "",
 "Voice": "",
+"VoiceOld": "",
 "VoiceSlice": ""
 }
 
@@ -124,9 +136,9 @@ config/icon="res://icon.png"
 Constants="*res://Global/Constants.gd"
 StringMan="*res://Helpers/StringMan.gd"
 FileSystem="*res://Helpers/FileSystem.gd"
+LocationManager="*res://Managers/LocationManager/LocationManager.tscn"
 Database="*res://db/init.gd"
 DialogueManager="*res://Managers/DialogueManager/DialogueManager.gd"
-LocationManager="*res://Managers/LocationManager/LocationManager.tscn"
 GameManager="*res://Managers/GameManager.gd"
 
 [display]

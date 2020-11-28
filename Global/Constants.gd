@@ -6,6 +6,18 @@ enum ResourceTypes {
 	VOICE
 }
 
+enum NavigatorLocations{
+	HOMESTEAD,
+	OUTSKIRTS,
+	TOWN,
+	TRAIL,
+	FOREST,
+	DUMP	,
+	WETLANDS,
+	SECLUDED_STEPPES,
+	SECRET_PATH
+}
+
 enum DialogueTypes {
 	# vocalized dialogues are like your standard rpg fair, meaning a sound plays every step of the timer
 	VOCALIZED,

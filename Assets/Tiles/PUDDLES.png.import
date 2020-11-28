@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/OutskirtsBack.png-eeffa4d1e4dd56b973e29bded5b26257.stex"
+path="res://.import/PUDDLES.png-0d86a6d0f220e0bd1bbbc9cc801d1b7b.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Tiles/Transitions/OutskirtsBack.png"
-dest_files=[ "res://.import/OutskirtsBack.png-eeffa4d1e4dd56b973e29bded5b26257.stex" ]
+source_file="res://Assets/Tiles/PUDDLES.png"
+dest_files=[ "res://.import/PUDDLES.png-0d86a6d0f220e0bd1bbbc9cc801d1b7b.stex" ]
 
 [params]
 
@@ -20,7 +20,7 @@ compress/hdr_mode=0
 compress/bptc_ldr=0
 compress/normal_map=0
 flags/repeat=0
-flags/filter=false
+flags/filter=true
 flags/mipmaps=false
 flags/anisotropic=false
 flags/srgb=2

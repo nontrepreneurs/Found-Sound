@@ -1,0 +1,15 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Assets/Collidable/TownAndForestry.png" type="Texture" id=1]
+
+[node name="House" type="StaticBody2D"]
+
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 0.0445251, -36.205 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 391, 1, 285, 237 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+position = Vector2( 0, 44.7432 )
+polygon = PoolVector2Array( -122.707, 36.7343, -124.07, -59.0267, -133.439, -65.3018, -132.567, -111.81, -130.257, -114.941, -126.728, -116.123, 126.542, -120.35, 131.031, -118.69, 133.476, -115.386, 133.224, -69.9319, 126.749, -63.7978, 126.749, 7.7674, 18.3787, 9.81213, 16.6747, 35.0303, -23.8788, 36.3935, -80.4494, 38.4382 )

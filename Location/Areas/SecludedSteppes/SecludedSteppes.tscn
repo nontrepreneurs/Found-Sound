@@ -1,0 +1,2861 @@
+[gd_scene load_steps=15 format=2]
+
+[ext_resource path="res://Location/Areas/SecludedSteppes/SecludedSteppes.gd" type="Script" id=1]
+[ext_resource path="res://Assets/Tiles/secluded_steppes.png" type="Texture" id=2]
+[ext_resource path="res://Player/Player.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Camera/Camera.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Assets/Collidable/Town/HousePink.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Location/LocationTransitionTrigger.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Assets/Collidable/Coniferous Tree.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Assets/Collidable/Deciduous Tree.tscn" type="PackedScene" id=8]
+
+[sub_resource type="Shader" id=1]
+code = "shader_type canvas_item;
+
+// Gonkee's fog shader for Godot 3 - full tutorial https://youtu.be/QEaTsz_0o44
+// If you use this shader, I would prefer it if you gave credit to me and my channel
+
+uniform vec3 color = vec3(0.35, 0.48, 0.95);
+uniform int OCTAVES = 4;
+
+float rand(vec2 coord){
+	return fract(sin(dot(coord, vec2(56, 78)) * 1000.0) * 1000.0);
+}
+
+float noise(vec2 coord){
+	vec2 i = floor(coord);
+	vec2 f = fract(coord);
+
+	// 4 corners of a rectangle surrounding our point
+	float a = rand(i);
+	float b = rand(i + vec2(1.0, 0.0));
+	float c = rand(i + vec2(0.0, 1.0));
+	float d = rand(i + vec2(1.0, 1.0));
+
+	vec2 cubic = f * f * (3.0 - 2.0 * f);
+
+	return mix(a, b, cubic.x) + (c - a) * cubic.y * (1.0 - cubic.x) + (d - b) * cubic.x * cubic.y;
+}
+
+float fbm(vec2 coord){
+	float value = 0.0;
+	float scale = 0.5;
+
+	for(int i = 0; i < OCTAVES; i++){
+		value += noise(coord) * scale;
+		coord *= 2.0;
+		scale *= 0.5;
+	}
+	return value;
+}
+
+void fragment() {
+	vec2 coord = UV * 20.0;
+
+	vec2 motion = vec2( fbm(coord + vec2(TIME * -0.5, TIME * 0.5)) );
+
+	float final = fbm(coord + motion);
+
+	COLOR = vec4(color, final * 0.5);
+}"
+
+[sub_resource type="ShaderMaterial" id=2]
+shader = SubResource( 1 )
+shader_param/color = Vector3( 0.35, 0.48, 0.95 )
+shader_param/OCTAVES = 4
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 68.2524, 1127.6 )
+
+[sub_resource type="RectangleShape2D" id=4]
+extents = Vector2( 429.332, 24.5028 )
+
+[sub_resource type="RectangleShape2D" id=5]
+extents = Vector2( 999.28, 56.6716 )
+
+[sub_resource type="RectangleShape2D" id=6]
+extents = Vector2( 175.279, 56.6716 )
+
+[node name="Location" type="Node2D"]
+script = ExtResource( 1 )
+
+[node name="ColorRect2" type="ColorRect" parent="."]
+margin_left = -1923.46
+margin_top = -1751.43
+margin_right = 2329.54
+margin_bottom = 1566.57
+color = Color( 0, 0, 0, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 2 )
+
+[node name="LocationTransition" parent="Sprite" instance=ExtResource( 6 )]
+position = Vector2( -946.376, -786.844 )
+delay = 0.0
+coordinates = Vector2( 620, -260 )
+
+[node name="LocationTransition2" parent="Sprite" instance=ExtResource( 6 )]
+position = Vector2( -950.013, 741.298 )
+location = 4
+delay = 0.0
+coordinates = Vector2( 480, -775 )
+
+[node name="LocationTransition3" parent="Sprite" instance=ExtResource( 6 )]
+position = Vector2( 2.78848, 974.675 )
+location = 6
+delay = 0.0
+coordinates = Vector2( 1870, 235 )
+
+[node name="Map" type="YSort" parent="."]
+
+[node name="Player" parent="Map" instance=ExtResource( 3 )]
+position = Vector2( 1, 870 )
+speed = 200
+
+[node name="Camera" parent="Map/Player" instance=ExtResource( 4 )]
+current = true
+zoom = Vector2( 0.5, 0.5 )
+
+[node name="BottomRight" parent="Map/Player/Camera/Limits" index="0"]
+position = Vector2( 885.167, 902.652 )
+
+[node name="TopLeft" parent="Map/Player/Camera/Limits" index="1"]
+position = Vector2( -893.384, -920.838 )
+
+[node name="HousePink" parent="Map" instance=ExtResource( 5 )]
+position = Vector2( 403.792, -93.6494 )
+
+[node name="Trees" type="YSort" parent="Map"]
+
+[node name="Deciduous Tree Short Variant" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( -845.792, -697.718 )
+
+[node name="Deciduous Tree Short Variant2" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( -869.653, -641.529 )
+
+[node name="Deciduous Tree Short Variant3" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( -816.543, -623.826 )
+
+[node name="Deciduous Tree Short Variant4" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( -756.505, -603.813 )
+
+[node name="Deciduous Tree Short Variant5" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( -854.258, -509.909 )
+
+[node name="Deciduous Tree Short Variant6" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( -778.057, -516.066 )
+
+[node name="Deciduous Tree Short Variant7" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( -851.949, -446.023 )
+
+[node name="Deciduous Tree" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( -826.958, -655.505 )
+
+[node name="Deciduous Tree2" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( -856.207, -585.461 )
+
+[node name="Deciduous Tree3" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( -807.715, -571.606 )
+
+[node name="Deciduous Tree8" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( -764.611, -459.998 )
+
+[node name="Deciduous Tree6" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( -812.333, -496.945 )
+
+[node name="Deciduous Tree7" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( -736.902, -541.588 )
+
+[node name="Deciduous Tree4" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( -840.043, -540.048 )
+
+[node name="Deciduous Tree5" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( -840.043, -540.048 )
+
+[node name="Deciduous Tree Short Variant8" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( -866.988, -404.392 )
+
+[node name="Deciduous Tree Short Variant9" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( -813.878, -386.688 )
+
+[node name="Deciduous Tree Short Variant10" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( -753.841, -366.676 )
+
+[node name="Deciduous Tree Short Variant11" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( -851.594, -272.771 )
+
+[node name="Deciduous Tree Short Variant12" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( -775.393, -278.929 )
+
+[node name="Deciduous Tree Short Variant13" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( -849.285, -208.885 )
+
+[node name="Deciduous Tree9" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( -824.293, -418.368 )
+
+[node name="Deciduous Tree10" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( -853.542, -348.324 )
+
+[node name="Deciduous Tree11" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( -805.051, -334.469 )
+
+[node name="Deciduous Tree12" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( -761.947, -222.861 )
+
+[node name="Deciduous Tree13" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( -809.669, -259.807 )
+
+[node name="Deciduous Tree14" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( -734.237, -304.451 )
+
+[node name="Deciduous Tree15" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( -837.379, -302.911 )
+
+[node name="Deciduous Tree16" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( -837.379, -302.911 )
+
+[node name="Deciduous Tree Short Variant14" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( -874.094, -167.255 )
+
+[node name="Deciduous Tree Short Variant15" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( -820.984, -149.551 )
+
+[node name="Deciduous Tree Short Variant16" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( -760.946, -129.539 )
+
+[node name="Deciduous Tree Short Variant17" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( -858.699, -35.6341 )
+
+[node name="Deciduous Tree Short Variant18" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( -782.498, -41.7917 )
+
+[node name="Deciduous Tree Short Variant19" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( -856.39, 28.2519 )
+
+[node name="Deciduous Tree17" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( -831.399, -181.23 )
+
+[node name="Deciduous Tree18" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( -860.648, -111.187 )
+
+[node name="Deciduous Tree19" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( -812.156, -97.332 )
+
+[node name="Deciduous Tree20" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( -769.052, 14.2761 )
+
+[node name="Deciduous Tree21" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( -816.774, -22.6701 )
+
+[node name="Deciduous Tree22" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( -741.343, -67.3133 )
+
+[node name="Deciduous Tree23" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( -844.484, -65.7737 )
+
+[node name="Deciduous Tree24" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( -844.484, -65.7737 )
+
+[node name="Deciduous Tree Short Variant20" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( -864.324, 73.4353 )
+
+[node name="Deciduous Tree Short Variant21" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( -811.214, 91.1386 )
+
+[node name="Deciduous Tree Short Variant22" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( -751.176, 111.151 )
+
+[node name="Deciduous Tree Short Variant23" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( -848.929, 205.056 )
+
+[node name="Deciduous Tree Short Variant24" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( -772.728, 198.898 )
+
+[node name="Deciduous Tree Short Variant25" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( -846.62, 268.942 )
+
+[node name="Deciduous Tree25" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( -821.629, 59.4594 )
+
+[node name="Deciduous Tree26" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( -850.878, 129.503 )
+
+[node name="Deciduous Tree27" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( -802.386, 143.358 )
+
+[node name="Deciduous Tree28" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( -759.282, 254.966 )
+
+[node name="Deciduous Tree29" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( -807.004, 218.02 )
+
+[node name="Deciduous Tree30" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( -731.573, 173.377 )
+
+[node name="Deciduous Tree31" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( -834.714, 174.916 )
+
+[node name="Deciduous Tree32" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( -834.714, 174.916 )
+
+[node name="Deciduous Tree Short Variant26" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( -876.758, 273.27 )
+
+[node name="Deciduous Tree Short Variant27" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( -823.648, 290.973 )
+
+[node name="Deciduous Tree Short Variant28" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( -763.61, 310.986 )
+
+[node name="Deciduous Tree Short Variant29" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( -861.364, 404.89 )
+
+[node name="Deciduous Tree Short Variant30" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( -785.162, 398.733 )
+
+[node name="Deciduous Tree Short Variant31" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( -859.055, 468.776 )
+
+[node name="Deciduous Tree33" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( -834.063, 259.294 )
+
+[node name="Deciduous Tree34" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( -863.312, 329.338 )
+
+[node name="Deciduous Tree35" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( -814.82, 343.193 )
+
+[node name="Deciduous Tree36" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( -771.717, 454.801 )
+
+[node name="Deciduous Tree37" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( -819.439, 417.854 )
+
+[node name="Deciduous Tree38" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( -744.007, 373.211 )
+
+[node name="Deciduous Tree39" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( -847.148, 374.751 )
+
+[node name="Deciduous Tree40" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( -847.148, 374.751 )
+
+[node name="Deciduous Tree Short Variant32" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( -875.87, 458.006 )
+
+[node name="Deciduous Tree Short Variant33" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( -822.76, 475.71 )
+
+[node name="Deciduous Tree Short Variant34" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( -762.722, 495.722 )
+
+[node name="Deciduous Tree Short Variant35" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( -860.475, 589.627 )
+
+[node name="Deciduous Tree Short Variant36" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( -784.274, 583.469 )
+
+[node name="Deciduous Tree Short Variant37" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( -858.166, 653.513 )
+
+[node name="Deciduous Tree41" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( -833.175, 444.03 )
+
+[node name="Deciduous Tree42" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( -862.424, 514.074 )
+
+[node name="Deciduous Tree43" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( -813.932, 527.929 )
+
+[node name="Deciduous Tree44" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( -770.828, 639.537 )
+
+[node name="Deciduous Tree45" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( -818.55, 602.591 )
+
+[node name="Deciduous Tree46" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( -743.119, 557.947 )
+
+[node name="Deciduous Tree47" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( -846.26, 559.487 )
+
+[node name="Deciduous Tree48" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( -360.679, 511.621 )
+
+[node name="Deciduous Tree Short Variant38" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( -728.436, 294.586 )
+
+[node name="Deciduous Tree Short Variant39" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( -675.326, 312.289 )
+
+[node name="Deciduous Tree Short Variant40" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( -615.289, 332.302 )
+
+[node name="Deciduous Tree Short Variant41" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( -713.042, 426.206 )
+
+[node name="Deciduous Tree Short Variant42" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( -636.841, 420.049 )
+
+[node name="Deciduous Tree Short Variant43" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( -710.733, 490.092 )
+
+[node name="Deciduous Tree49" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( -685.741, 280.61 )
+
+[node name="Deciduous Tree50" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( -714.99, 350.654 )
+
+[node name="Deciduous Tree51" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( -666.499, 364.508 )
+
+[node name="Deciduous Tree52" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( -623.395, 476.116 )
+
+[node name="Deciduous Tree Short Variant44" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( -695.634, 546.046 )
+
+[node name="Deciduous Tree57" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( -608.296, 532.07 )
+
+[node name="Deciduous Tree Short Variant45" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( -712.449, 535.276 )
+
+[node name="Deciduous Tree Short Variant46" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( -659.339, 552.979 )
+
+[node name="Deciduous Tree Short Variant47" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( -599.302, 572.991 )
+
+[node name="Deciduous Tree58" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( -669.755, 521.3 )
+
+[node name="Deciduous Tree59" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( -699.004, 591.343 )
+
+[node name="Deciduous Tree60" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( -650.512, 605.198 )
+
+[node name="Deciduous Tree Short Variant48" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( -547.312, 567.362 )
+
+[node name="Deciduous Tree Short Variant179" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( -861.629, 856.062 )
+
+[node name="Deciduous Tree Short Variant180" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( -785.428, 849.904 )
+
+[node name="Deciduous Tree201" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( -771.982, 905.972 )
+
+[node name="Deciduous Tree202" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( -819.704, 869.026 )
+
+[node name="Deciduous Tree203" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( -744.272, 824.383 )
+
+[node name="Deciduous Tree204" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( -847.414, 825.922 )
+
+[node name="Deciduous Tree Short Variant181" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( -696.788, 812.481 )
+
+[node name="Deciduous Tree205" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( -609.45, 798.505 )
+
+[node name="Deciduous Tree Short Variant182" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( -713.603, 801.711 )
+
+[node name="Deciduous Tree Short Variant183" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( -660.493, 819.414 )
+
+[node name="Deciduous Tree Short Variant184" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( -600.455, 839.427 )
+
+[node name="Deciduous Tree206" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( -700.157, 857.779 )
+
+[node name="Deciduous Tree207" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( -651.665, 871.634 )
+
+[node name="Deciduous Tree Short Variant185" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( -548.466, 833.797 )
+
+[node name="Deciduous Tree Short Variant186" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( -491.964, 857.215 )
+
+[node name="Deciduous Tree Short Variant187" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( -415.763, 851.058 )
+
+[node name="Deciduous Tree208" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( -402.317, 907.126 )
+
+[node name="Deciduous Tree209" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( -450.039, 870.18 )
+
+[node name="Deciduous Tree210" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( -374.607, 825.536 )
+
+[node name="Deciduous Tree211" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( -477.749, 827.076 )
+
+[node name="Deciduous Tree Short Variant188" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( -327.123, 813.635 )
+
+[node name="Deciduous Tree212" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( -239.785, 799.659 )
+
+[node name="Deciduous Tree Short Variant189" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( -343.938, 802.864 )
+
+[node name="Deciduous Tree Short Variant190" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( -290.828, 820.568 )
+
+[node name="Deciduous Tree Short Variant191" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( -230.791, 840.58 )
+
+[node name="Deciduous Tree213" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( -330.492, 858.932 )
+
+[node name="Deciduous Tree214" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( -282, 872.787 )
+
+[node name="Deciduous Tree Short Variant192" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( -178.801, 834.951 )
+
+[node name="Deciduous Tree61" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( -459.974, 553.386 )
+
+[node name="Deciduous Tree Short Variant49" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( -466.079, 371.38 )
+
+[node name="Deciduous Tree Short Variant50" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( -487.631, 459.127 )
+
+[node name="Deciduous Tree62" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( -565.78, 389.732 )
+
+[node name="Deciduous Tree63" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( -517.289, 403.587 )
+
+[node name="Deciduous Tree64" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( -446.475, 433.606 )
+
+[node name="Deciduous Tree65" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( -549.617, 435.145 )
+
+[node name="Deciduous Tree66" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( -549.617, 435.145 )
+
+[node name="Deciduous Tree Short Variant51" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( -414.089, 365.751 )
+
+[node name="Deciduous Tree Short Variant52" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( -398.991, 421.704 )
+
+[node name="Deciduous Tree67" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( -311.653, 407.728 )
+
+[node name="Deciduous Tree Short Variant53" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( -415.806, 410.934 )
+
+[node name="Deciduous Tree Short Variant54" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( -362.696, 428.637 )
+
+[node name="Deciduous Tree Short Variant55" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( -302.658, 448.65 )
+
+[node name="Deciduous Tree68" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( -373.111, 396.958 )
+
+[node name="Deciduous Tree Short Variant56" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( -250.669, 443.02 )
+
+[node name="Deciduous Tree69" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( -163.331, 429.044 )
+
+[node name="Deciduous Tree215" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( -180.072, 886.638 )
+
+[node name="Deciduous Tree Short Variant57" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( -609.072, 136.019 )
+
+[node name="Deciduous Tree Short Variant58" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( -630.624, 223.766 )
+
+[node name="Deciduous Tree70" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( -708.773, 154.371 )
+
+[node name="Deciduous Tree71" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( -660.282, 168.226 )
+
+[node name="Deciduous Tree72" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( -589.468, 198.245 )
+
+[node name="Deciduous Tree73" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( -692.609, 199.784 )
+
+[node name="Deciduous Tree74" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( -446.141, 344.317 )
+
+[node name="Deciduous Tree Short Variant59" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( -557.082, 130.39 )
+
+[node name="Deciduous Tree Short Variant60" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( -541.984, 186.343 )
+
+[node name="Deciduous Tree75" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( -454.646, 172.367 )
+
+[node name="Deciduous Tree Short Variant61" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( -677.126, 26.2573 )
+
+[node name="Deciduous Tree Short Variant62" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( -505.689, 193.276 )
+
+[node name="Deciduous Tree Short Variant63" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( -445.651, 213.289 )
+
+[node name="Deciduous Tree76" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( -516.104, 161.597 )
+
+[node name="Deciduous Tree Short Variant64" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( -393.662, 207.659 )
+
+[node name="Deciduous Tree77" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( -306.324, 193.683 )
+
+[node name="Deciduous Tree Short Variant65" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( -646.552, -78.7363 )
+
+[node name="Deciduous Tree Short Variant66" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( -502.591, 44.1893 )
+
+[node name="Deciduous Tree78" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( -746.253, -60.3843 )
+
+[node name="Deciduous Tree79" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( -414.797, 72.4555 )
+
+[node name="Deciduous Tree80" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( -626.948, -16.5109 )
+
+[node name="Deciduous Tree81" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( -730.089, -14.9713 )
+
+[node name="Deciduous Tree82" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( -730.089, -14.9713 )
+
+[node name="Deciduous Tree Short Variant67" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( -468.578, -135.36 )
+
+[node name="Deciduous Tree Short Variant68" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( -579.464, -28.4125 )
+
+[node name="Deciduous Tree83" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( -492.126, -42.3883 )
+
+[node name="Deciduous Tree Short Variant69" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( -596.279, -39.1828 )
+
+[node name="Deciduous Tree Short Variant70" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( -543.169, -21.4794 )
+
+[node name="Deciduous Tree Short Variant71" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( -483.131, -1.46695 )
+
+[node name="Deciduous Tree84" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( -553.584, -53.1586 )
+
+[node name="Deciduous Tree Short Variant72" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( -560.126, -151.079 )
+
+[node name="Deciduous Tree85" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( -204.821, 44.9192 )
+
+[node name="Deciduous Tree Short Variant73" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( -636.782, -296.334 )
+
+[node name="Deciduous Tree Short Variant74" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( -658.334, -208.587 )
+
+[node name="Deciduous Tree86" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( -736.484, -277.982 )
+
+[node name="Deciduous Tree87" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( -687.992, -264.127 )
+
+[node name="Deciduous Tree88" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( -617.178, -234.109 )
+
+[node name="Deciduous Tree89" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( -720.32, -232.569 )
+
+[node name="Deciduous Tree90" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( -720.32, -232.569 )
+
+[node name="Deciduous Tree Short Variant75" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( -584.792, -301.964 )
+
+[node name="Deciduous Tree Short Variant76" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( -569.694, -246.01 )
+
+[node name="Deciduous Tree91" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( -482.356, -259.986 )
+
+[node name="Deciduous Tree Short Variant77" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( -586.509, -256.781 )
+
+[node name="Deciduous Tree Short Variant78" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( -533.399, -239.077 )
+
+[node name="Deciduous Tree Short Variant79" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( -473.361, -219.065 )
+
+[node name="Deciduous Tree92" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( -543.814, -270.756 )
+
+[node name="Deciduous Tree Short Variant81" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( -700.608, -619.151 )
+
+[node name="Deciduous Tree Short Variant82" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( -624.406, -625.309 )
+
+[node name="Deciduous Tree Short Variant83" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( -698.299, -555.266 )
+
+[node name="Deciduous Tree94" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( -610.961, -569.241 )
+
+[node name="Deciduous Tree95" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( -658.683, -606.188 )
+
+[node name="Deciduous Tree Short Variant84" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( -713.338, -513.635 )
+
+[node name="Deciduous Tree Short Variant85" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( -660.228, -495.931 )
+
+[node name="Deciduous Tree Short Variant86" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( -600.19, -475.919 )
+
+[node name="Deciduous Tree Short Variant87" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( -353.405, -307.695 )
+
+[node name="Deciduous Tree Short Variant88" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( -621.742, -388.172 )
+
+[node name="Deciduous Tree96" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( -670.643, -527.611 )
+
+[node name="Deciduous Tree97" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( -699.892, -457.567 )
+
+[node name="Deciduous Tree98" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( -651.4, -443.712 )
+
+[node name="Deciduous Tree99" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( -580.586, -413.693 )
+
+[node name="Deciduous Tree100" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( -683.728, -412.154 )
+
+[node name="Deciduous Tree101" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( -416.177, -446.074 )
+
+[node name="Deciduous Tree Short Variant89" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( -483.131, -405.577 )
+
+[node name="Deciduous Tree102" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( -582.833, -387.225 )
+
+[node name="Deciduous Tree Short Variant111" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( -544.292, -625.369 )
+
+[node name="Deciduous Tree Short Variant112" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( -468.091, -631.526 )
+
+[node name="Deciduous Tree Short Variant113" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( -541.983, -561.483 )
+
+[node name="Deciduous Tree127" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( -546.241, -700.921 )
+
+[node name="Deciduous Tree128" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( -497.749, -687.066 )
+
+[node name="Deciduous Tree129" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( -454.646, -575.458 )
+
+[node name="Deciduous Tree130" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( -502.367, -612.405 )
+
+[node name="Deciduous Tree131" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( -426.936, -657.048 )
+
+[node name="Deciduous Tree132" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( -530.077, -655.508 )
+
+[node name="Deciduous Tree133" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( -530.077, -655.508 )
+
+[node name="Deciduous Tree Short Variant114" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( -557.022, -519.852 )
+
+[node name="Deciduous Tree Short Variant115" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( -503.912, -502.148 )
+
+[node name="Deciduous Tree134" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( -514.327, -533.828 )
+
+[node name="Deciduous Tree Short Variant116" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( -388.333, -670.726 )
+
+[node name="Deciduous Tree135" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( -300.995, -684.701 )
+
+[node name="Deciduous Tree Short Variant117" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( -403.372, -629.095 )
+
+[node name="Deciduous Tree Short Variant118" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( -350.262, -611.391 )
+
+[node name="Deciduous Tree Short Variant119" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( -290.224, -591.379 )
+
+[node name="Deciduous Tree Short Variant120" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( -311.776, -503.632 )
+
+[node name="Deciduous Tree136" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( -360.677, -643.071 )
+
+[node name="Deciduous Tree137" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( -389.926, -573.027 )
+
+[node name="Deciduous Tree138" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( -341.434, -559.172 )
+
+[node name="Deciduous Tree139" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( -270.621, -529.154 )
+
+[node name="Deciduous Tree140" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( -373.762, -527.614 )
+
+[node name="Deciduous Tree141" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( -373.762, -527.614 )
+
+[node name="Deciduous Tree142" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( -272.867, -502.685 )
+
+[node name="Deciduous Tree Short Variant121" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( -544.292, -625.369 )
+
+[node name="Deciduous Tree Short Variant122" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( -468.091, -631.526 )
+
+[node name="Deciduous Tree Short Variant123" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( -541.983, -561.483 )
+
+[node name="Deciduous Tree143" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( -546.241, -700.921 )
+
+[node name="Deciduous Tree144" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( -497.749, -687.066 )
+
+[node name="Deciduous Tree145" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( -454.646, -575.458 )
+
+[node name="Deciduous Tree146" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( -502.367, -612.405 )
+
+[node name="Deciduous Tree147" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( -426.936, -657.048 )
+
+[node name="Deciduous Tree148" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( -530.077, -655.508 )
+
+[node name="Deciduous Tree149" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( -530.077, -655.508 )
+
+[node name="Deciduous Tree Short Variant124" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( -557.022, -519.852 )
+
+[node name="Deciduous Tree Short Variant125" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( -503.912, -502.148 )
+
+[node name="Deciduous Tree150" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( -514.327, -533.828 )
+
+[node name="Deciduous Tree Short Variant126" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( -388.333, -670.726 )
+
+[node name="Deciduous Tree151" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( -300.995, -684.701 )
+
+[node name="Deciduous Tree Short Variant127" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( -403.372, -629.095 )
+
+[node name="Deciduous Tree Short Variant128" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( -350.262, -611.391 )
+
+[node name="Deciduous Tree Short Variant129" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( -290.224, -591.379 )
+
+[node name="Deciduous Tree Short Variant130" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( -311.776, -503.632 )
+
+[node name="Deciduous Tree152" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( -360.677, -643.071 )
+
+[node name="Deciduous Tree482" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( -877.093, -918.091 )
+
+[node name="Deciduous Tree483" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( -828.601, -904.237 )
+
+[node name="Deciduous Tree484" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( -757.787, -874.218 )
+
+[node name="Deciduous Tree485" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( -860.929, -872.679 )
+
+[node name="Deciduous Tree486" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( -860.929, -872.679 )
+
+[node name="Deciduous Tree Short Variant409" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( -719.184, -887.896 )
+
+[node name="Deciduous Tree487" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( -691.528, -860.241 )
+
+[node name="Deciduous Tree488" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( -877.093, -918.091 )
+
+[node name="Deciduous Tree489" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( -828.601, -904.237 )
+
+[node name="Deciduous Tree490" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( -757.787, -874.218 )
+
+[node name="Deciduous Tree491" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( -860.929, -872.679 )
+
+[node name="Deciduous Tree492" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( -860.929, -872.679 )
+
+[node name="Deciduous Tree Short Variant410" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( -719.184, -887.896 )
+
+[node name="Deciduous Tree493" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( -691.528, -860.241 )
+
+[node name="Deciduous Tree494" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( -635.618, -915.739 )
+
+[node name="Deciduous Tree495" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( -587.126, -901.885 )
+
+[node name="Deciduous Tree496" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( -516.313, -871.866 )
+
+[node name="Deciduous Tree497" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( -619.454, -870.326 )
+
+[node name="Deciduous Tree498" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( -619.454, -870.326 )
+
+[node name="Deciduous Tree Short Variant411" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( -477.71, -885.544 )
+
+[node name="Deciduous Tree499" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( -450.054, -857.889 )
+
+[node name="Deciduous Tree500" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( -635.618, -915.739 )
+
+[node name="Deciduous Tree501" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( -587.126, -901.885 )
+
+[node name="Deciduous Tree502" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( -516.313, -871.866 )
+
+[node name="Deciduous Tree503" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( -619.454, -870.326 )
+
+[node name="Deciduous Tree504" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( -619.454, -870.326 )
+
+[node name="Deciduous Tree Short Variant412" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( -477.71, -885.544 )
+
+[node name="Deciduous Tree505" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( -450.054, -857.889 )
+
+[node name="Deciduous Tree506" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( -394.389, -875.921 )
+
+[node name="Deciduous Tree507" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( -344.213, -890.817 )
+
+[node name="Deciduous Tree153" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( -389.926, -573.027 )
+
+[node name="Deciduous Tree154" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( -341.434, -559.172 )
+
+[node name="Deciduous Tree155" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( -270.621, -529.154 )
+
+[node name="Deciduous Tree156" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( -373.762, -527.614 )
+
+[node name="Deciduous Tree157" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( -373.762, -527.614 )
+
+[node name="Deciduous Tree158" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( -327.53, -414.937 )
+
+[node name="Deciduous Tree Short Variant131" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( -161.049, -682.842 )
+
+[node name="Deciduous Tree Short Variant132" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( -107.939, -665.138 )
+
+[node name="Deciduous Tree Short Variant133" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( -47.9017, -645.126 )
+
+[node name="Deciduous Tree Short Variant134" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( -145.655, -551.221 )
+
+[node name="Deciduous Tree Short Variant135" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( -69.4535, -557.379 )
+
+[node name="Deciduous Tree159" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( -118.354, -696.817 )
+
+[node name="Deciduous Tree160" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( -147.603, -626.774 )
+
+[node name="Deciduous Tree161" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( -99.1115, -612.919 )
+
+[node name="Deciduous Tree162" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( -103.73, -538.257 )
+
+[node name="Deciduous Tree163" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( -28.298, -582.9 )
+
+[node name="Deciduous Tree164" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( -131.439, -581.361 )
+
+[node name="Deciduous Tree165" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( -131.439, -581.361 )
+
+[node name="Deciduous Tree Short Variant136" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( 7.99597, -660.464 )
+
+[node name="Deciduous Tree Short Variant137" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( 84.1971, -666.622 )
+
+[node name="Deciduous Tree Short Variant138" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( 10.3051, -596.578 )
+
+[node name="Deciduous Tree166" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 97.6429, -610.554 )
+
+[node name="Deciduous Tree167" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 49.921, -647.5 )
+
+[node name="Deciduous Tree Short Variant139" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( -4.73401, -554.948 )
+
+[node name="Deciduous Tree Short Variant140" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( 48.3761, -537.244 )
+
+[node name="Deciduous Tree168" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 37.9611, -568.923 )
+
+[node name="Deciduous Tree Short Variant141" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( 164.311, -666.681 )
+
+[node name="Deciduous Tree Short Variant143" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( 166.62, -602.795 )
+
+[node name="Deciduous Tree172" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 178.526, -696.821 )
+
+[node name="Deciduous Tree173" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 10.9418, -288.288 )
+
+[node name="Deciduous Tree Short Variant144" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( 151.581, -561.165 )
+
+[node name="Deciduous Tree Short Variant150" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( 88.0709, -281.164 )
+
+[node name="Deciduous Tree Short Variant152" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( 33.5594, -184.193 )
+
+[node name="Deciduous Tree185" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 155.511, -342.232 )
+
+[node name="Deciduous Tree186" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 144.722, -424.945 )
+
+[node name="Deciduous Tree Short Variant153" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( 145.108, -254.046 )
+
+[node name="Deciduous Tree Short Variant142" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( -291.309, -182.448 )
+
+[node name="Deciduous Tree Short Variant145" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( -205.832, -474.74 )
+
+[node name="Deciduous Tree Short Variant146" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( -145.795, -454.728 )
+
+[node name="Deciduous Tree Short Variant147" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( -243.548, -360.823 )
+
+[node name="Deciduous Tree Short Variant148" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( -167.347, -366.981 )
+
+[node name="Deciduous Tree169" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( -216.247, -506.42 )
+
+[node name="Deciduous Tree170" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( -285.774, -360.136 )
+
+[node name="Deciduous Tree171" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( -197.005, -422.521 )
+
+[node name="Deciduous Tree174" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( -201.623, -347.859 )
+
+[node name="Deciduous Tree175" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( -126.191, -392.503 )
+
+[node name="Deciduous Tree176" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( -229.333, -390.963 )
+
+[node name="Deciduous Tree177" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( -229.333, -390.963 )
+
+[node name="Deciduous Tree Short Variant149" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( -89.8973, -470.066 )
+
+[node name="Deciduous Tree Short Variant151" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( -13.6962, -476.224 )
+
+[node name="Deciduous Tree Short Variant154" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( -87.5883, -406.18 )
+
+[node name="Deciduous Tree178" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( -0.250366, -420.156 )
+
+[node name="Deciduous Tree179" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( -47.9723, -457.102 )
+
+[node name="Deciduous Tree Short Variant155" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( -102.627, -364.55 )
+
+[node name="Deciduous Tree Short Variant156" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( -49.5172, -346.846 )
+
+[node name="Deciduous Tree180" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( -59.9323, -378.526 )
+
+[node name="Deciduous Tree Short Variant157" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( 66.4178, -476.283 )
+
+[node name="Deciduous Tree Short Variant158" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( 68.7269, -412.397 )
+
+[node name="Deciduous Tree181" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 80.6332, -506.423 )
+
+[node name="Deciduous Tree182" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 80.6332, -506.423 )
+
+[node name="Deciduous Tree Short Variant159" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( 53.6879, -370.767 )
+
+[node name="Deciduous Tree Short Variant160" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( 66.4178, -476.283 )
+
+[node name="Deciduous Tree Short Variant161" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( 68.7269, -412.397 )
+
+[node name="Deciduous Tree187" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 80.6332, -506.423 )
+
+[node name="Deciduous Tree188" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 80.6332, -506.423 )
+
+[node name="Deciduous Tree Short Variant162" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( 53.6879, -370.767 )
+
+[node name="Deciduous Tree Short Variant163" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( 69.2106, 178.779 )
+
+[node name="Deciduous Tree Short Variant164" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( 122.321, 196.482 )
+
+[node name="Deciduous Tree Short Variant165" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( 182.358, 216.494 )
+
+[node name="Deciduous Tree Short Variant166" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( 88.1564, 310.399 )
+
+[node name="Deciduous Tree Short Variant167" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( 160.806, 304.241 )
+
+[node name="Deciduous Tree183" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 111.906, 164.803 )
+
+[node name="Deciduous Tree184" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 82.6566, 234.846 )
+
+[node name="Deciduous Tree189" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 131.148, 248.701 )
+
+[node name="Deciduous Tree190" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 126.53, 323.363 )
+
+[node name="Deciduous Tree191" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 201.962, 278.72 )
+
+[node name="Deciduous Tree192" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 61.7291, 279.47 )
+
+[node name="Deciduous Tree193" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 484.728, 291.308 )
+
+[node name="Deciduous Tree Short Variant168" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( 238.256, 201.156 )
+
+[node name="Deciduous Tree Short Variant169" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( 314.457, 194.998 )
+
+[node name="Deciduous Tree Short Variant170" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( 240.565, 265.042 )
+
+[node name="Deciduous Tree194" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 334.216, 252.645 )
+
+[node name="Deciduous Tree195" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 280.181, 214.12 )
+
+[node name="Deciduous Tree Short Variant171" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( 225.526, 306.673 )
+
+[node name="Deciduous Tree Short Variant172" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( 278.636, 324.376 )
+
+[node name="Deciduous Tree196" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 268.221, 292.697 )
+
+[node name="Deciduous Tree Short Variant173" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( 403.646, 189.415 )
+
+[node name="Deciduous Tree Short Variant174" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( 522.754, 248.566 )
+
+[node name="Deciduous Tree197" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 437.197, 154.935 )
+
+[node name="Deciduous Tree198" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 535.844, 23.5366 )
+
+[node name="Deciduous Tree Short Variant175" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( 382.63, 291.38 )
+
+[node name="Deciduous Tree Short Variant176" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( 556.352, 85.2433 )
+
+[node name="Deciduous Tree Short Variant177" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( 578.391, 184.642 )
+
+[node name="Deciduous Tree199" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 482.969, 170.324 )
+
+[node name="Deciduous Tree200" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 524.401, 134.811 )
+
+[node name="Deciduous Tree Short Variant178" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( 443.397, 256.656 )
+
+[node name="Deciduous Tree103" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( -534.341, -373.37 )
+
+[node name="Deciduous Tree Short Variant90" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( -280.819, -9.86655 )
+
+[node name="Deciduous Tree104" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( -390.163, -379.999 )
+
+[node name="Deciduous Tree Short Variant91" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( -146.399, -246.127 )
+
+[node name="Deciduous Tree Short Variant92" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( -70.1981, -252.284 )
+
+[node name="Deciduous Tree Short Variant93" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( -144.09, -182.241 )
+
+[node name="Deciduous Tree105" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( -56.7523, -196.216 )
+
+[node name="Deciduous Tree106" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( -104.474, -233.163 )
+
+[node name="Deciduous Tree Short Variant94" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( -159.129, -140.61 )
+
+[node name="Deciduous Tree Short Variant95" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( -106.019, -122.907 )
+
+[node name="Deciduous Tree Short Variant96" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( -45.9818, -102.894 )
+
+[node name="Deciduous Tree Short Variant97" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( -143.735, -8.98944 )
+
+[node name="Deciduous Tree Short Variant98" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( -67.5336, -15.1472 )
+
+[node name="Deciduous Tree107" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( -116.434, -154.586 )
+
+[node name="Deciduous Tree108" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( -145.683, -84.5421 )
+
+[node name="Deciduous Tree109" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( -97.1915, -70.6873 )
+
+[node name="Deciduous Tree110" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( -26.3781, -40.6686 )
+
+[node name="Deciduous Tree111" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( -129.519, -39.1291 )
+
+[node name="Deciduous Tree112" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( -129.519, -39.1291 )
+
+[node name="Deciduous Tree Short Variant99" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( 71.0773, -32.5523 )
+
+[node name="Deciduous Tree113" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( -28.6244, -14.2003 )
+
+[node name="Deciduous Tree114" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 19.8673, -0.34552 )
+
+[node name="Deciduous Tree Short Variant100" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( 123.067, -38.1819 )
+
+[node name="Deciduous Tree115" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 164.045, -6.97455 )
+
+[node name="Deciduous Tree Short Variant101" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( 334.98, -423.225 )
+
+[node name="Deciduous Tree Short Variant102" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( 411.182, -429.382 )
+
+[node name="Deciduous Tree Short Variant103" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( 337.289, -359.339 )
+
+[node name="Deciduous Tree116" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 424.627, -373.315 )
+
+[node name="Deciduous Tree117" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 376.905, -410.261 )
+
+[node name="Deciduous Tree Short Variant104" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( 322.25, -317.708 )
+
+[node name="Deciduous Tree Short Variant105" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( 375.36, -300.005 )
+
+[node name="Deciduous Tree Short Variant106" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( 435.398, -279.992 )
+
+[node name="Deciduous Tree Short Variant107" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( 337.645, -186.087 )
+
+[node name="Deciduous Tree Short Variant108" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( 413.846, -192.245 )
+
+[node name="Deciduous Tree118" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 364.945, -331.684 )
+
+[node name="Deciduous Tree119" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 335.696, -261.64 )
+
+[node name="Deciduous Tree120" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 384.188, -247.785 )
+
+[node name="Deciduous Tree121" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 455.002, -217.767 )
+
+[node name="Deciduous Tree122" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 351.86, -216.227 )
+
+[node name="Deciduous Tree123" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 351.86, -216.227 )
+
+[node name="Deciduous Tree Short Variant109" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( 552.457, -209.65 )
+
+[node name="Deciduous Tree124" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 452.755, -191.298 )
+
+[node name="Deciduous Tree125" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 501.247, -177.444 )
+
+[node name="Deciduous Tree Short Variant110" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( 604.446, -215.28 )
+
+[node name="Deciduous Tree126" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 645.425, -184.073 )
+
+[node name="Deciduous Tree Short Variant80" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( -421.372, -224.695 )
+
+[node name="Deciduous Tree93" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( -402.026, -139.683 )
+
+[node name="Deciduous Tree53" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( -671.117, 439.17 )
+
+[node name="Deciduous Tree54" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( -595.685, 394.527 )
+
+[node name="Deciduous Tree55" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( -698.827, 396.067 )
+
+[node name="Deciduous Tree56" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( -543.694, 343.587 )
+
+[node name="Deciduous Tree Short Variant193" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( 687.129, -59.7187 )
+
+[node name="Deciduous Tree Short Variant194" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( 747.166, -39.7062 )
+
+[node name="Deciduous Tree Short Variant195" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( 649.413, 54.1984 )
+
+[node name="Deciduous Tree Short Variant196" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( 725.614, 48.0408 )
+
+[node name="Deciduous Tree Short Variant197" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( 651.722, 118.084 )
+
+[node name="Deciduous Tree216" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 647.464, -21.3542 )
+
+[node name="Deciduous Tree217" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 695.956, -7.49944 )
+
+[node name="Deciduous Tree218" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 739.06, 104.109 )
+
+[node name="Deciduous Tree219" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 691.338, 67.1624 )
+
+[node name="Deciduous Tree220" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 766.77, 22.5192 )
+
+[node name="Deciduous Tree221" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 663.628, 24.0588 )
+
+[node name="Deciduous Tree222" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 663.628, 24.0588 )
+
+[node name="Deciduous Tree Short Variant198" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( 621.584, 122.413 )
+
+[node name="Deciduous Tree Short Variant199" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( 674.694, 140.116 )
+
+[node name="Deciduous Tree Short Variant200" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( 734.732, 160.128 )
+
+[node name="Deciduous Tree Short Variant201" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( 636.979, 254.033 )
+
+[node name="Deciduous Tree Short Variant202" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( 713.18, 247.875 )
+
+[node name="Deciduous Tree Short Variant203" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( 639.288, 317.919 )
+
+[node name="Deciduous Tree223" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 664.279, 108.437 )
+
+[node name="Deciduous Tree224" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 635.03, 178.481 )
+
+[node name="Deciduous Tree225" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 683.522, 192.335 )
+
+[node name="Deciduous Tree226" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 726.626, 303.943 )
+
+[node name="Deciduous Tree227" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 678.904, 266.997 )
+
+[node name="Deciduous Tree228" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 754.335, 222.354 )
+
+[node name="Deciduous Tree229" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 651.194, 223.893 )
+
+[node name="Deciduous Tree230" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 651.194, 223.893 )
+
+[node name="Deciduous Tree Short Variant204" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( 622.473, 307.149 )
+
+[node name="Deciduous Tree Short Variant205" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( 675.583, 324.852 )
+
+[node name="Deciduous Tree Short Variant206" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( 735.62, 344.865 )
+
+[node name="Deciduous Tree Short Variant207" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( 637.867, 438.769 )
+
+[node name="Deciduous Tree Short Variant208" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( 714.068, 432.612 )
+
+[node name="Deciduous Tree231" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 665.167, 293.173 )
+
+[node name="Deciduous Tree232" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 635.918, 363.217 )
+
+[node name="Deciduous Tree233" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 684.41, 377.071 )
+
+[node name="Deciduous Tree234" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 679.792, 451.733 )
+
+[node name="Deciduous Tree235" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 755.224, 407.09 )
+
+[node name="Deciduous Tree236" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 652.082, 408.63 )
+
+[node name="Deciduous Tree Short Variant209" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( 769.906, 143.729 )
+
+[node name="Deciduous Tree Short Variant210" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( 823.016, 161.432 )
+
+[node name="Deciduous Tree Short Variant211" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( 883.054, 181.444 )
+
+[node name="Deciduous Tree Short Variant212" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( 785.301, 275.349 )
+
+[node name="Deciduous Tree Short Variant213" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( 861.502, 269.191 )
+
+[node name="Deciduous Tree Short Variant214" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( 787.61, 339.235 )
+
+[node name="Deciduous Tree237" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 812.601, 129.753 )
+
+[node name="Deciduous Tree238" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 783.352, 199.796 )
+
+[node name="Deciduous Tree239" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 831.844, 213.651 )
+
+[node name="Deciduous Tree240" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 874.948, 325.259 )
+
+[node name="Deciduous Tree Short Variant215" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( 802.708, 395.188 )
+
+[node name="Deciduous Tree Short Variant216" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( 785.893, 384.418 )
+
+[node name="Deciduous Tree Short Variant217" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( 839.003, 402.122 )
+
+[node name="Deciduous Tree241" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 828.588, 370.442 )
+
+[node name="Deciduous Tree242" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 799.339, 440.486 )
+
+[node name="Deciduous Tree Short Variant218" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( 867.719, 72.9091 )
+
+[node name="Deciduous Tree243" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 789.569, 3.51414 )
+
+[node name="Deciduous Tree244" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 838.061, 17.3689 )
+
+[node name="Deciduous Tree245" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 805.733, 48.9271 )
+
+[node name="Deciduous Tree246" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 827.226, 288.313 )
+
+[node name="Deciduous Tree247" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 799.516, 245.209 )
+
+[node name="Deciduous Tree Short Variant219" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( 374.625, 330.911 )
+
+[node name="Deciduous Tree Short Variant220" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( 434.663, 350.923 )
+
+[node name="Deciduous Tree Short Variant221" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( 336.91, 444.828 )
+
+[node name="Deciduous Tree Short Variant222" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( 413.111, 438.67 )
+
+[node name="Deciduous Tree Short Variant223" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( 339.219, 508.714 )
+
+[node name="Deciduous Tree248" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 334.961, 369.275 )
+
+[node name="Deciduous Tree249" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 383.453, 383.13 )
+
+[node name="Deciduous Tree250" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 426.557, 494.738 )
+
+[node name="Deciduous Tree251" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 378.835, 457.792 )
+
+[node name="Deciduous Tree252" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 454.266, 413.148 )
+
+[node name="Deciduous Tree253" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 351.125, 414.688 )
+
+[node name="Deciduous Tree254" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 351.125, 414.688 )
+
+[node name="Deciduous Tree Short Variant224" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( 309.081, 513.042 )
+
+[node name="Deciduous Tree Short Variant225" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( 362.191, 530.745 )
+
+[node name="Deciduous Tree Short Variant226" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( 422.229, 550.758 )
+
+[node name="Deciduous Tree Short Variant227" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( 324.475, 644.662 )
+
+[node name="Deciduous Tree Short Variant228" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( 400.677, 638.505 )
+
+[node name="Deciduous Tree Short Variant229" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( 326.785, 708.548 )
+
+[node name="Deciduous Tree255" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 351.776, 499.066 )
+
+[node name="Deciduous Tree256" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 322.527, 569.11 )
+
+[node name="Deciduous Tree257" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 371.019, 582.965 )
+
+[node name="Deciduous Tree258" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 414.122, 694.573 )
+
+[node name="Deciduous Tree259" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 366.401, 657.626 )
+
+[node name="Deciduous Tree260" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 441.832, 612.983 )
+
+[node name="Deciduous Tree261" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 338.691, 614.523 )
+
+[node name="Deciduous Tree262" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 338.691, 614.523 )
+
+[node name="Deciduous Tree Short Variant230" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( 309.969, 697.778 )
+
+[node name="Deciduous Tree Short Variant231" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( 363.079, 715.482 )
+
+[node name="Deciduous Tree Short Variant232" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( 423.117, 735.494 )
+
+[node name="Deciduous Tree Short Variant233" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( 325.364, 829.399 )
+
+[node name="Deciduous Tree Short Variant234" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( 401.565, 823.241 )
+
+[node name="Deciduous Tree263" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 352.664, 683.802 )
+
+[node name="Deciduous Tree264" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 323.415, 753.846 )
+
+[node name="Deciduous Tree265" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 371.907, 767.701 )
+
+[node name="Deciduous Tree266" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 367.289, 842.363 )
+
+[node name="Deciduous Tree267" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 442.72, 797.719 )
+
+[node name="Deciduous Tree268" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 339.579, 799.259 )
+
+[node name="Deciduous Tree Short Variant235" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( 457.403, 534.358 )
+
+[node name="Deciduous Tree Short Variant236" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( 510.513, 552.061 )
+
+[node name="Deciduous Tree Short Variant237" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( 570.55, 572.074 )
+
+[node name="Deciduous Tree Short Variant238" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( 472.797, 665.978 )
+
+[node name="Deciduous Tree Short Variant239" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( 548.998, 659.821 )
+
+[node name="Deciduous Tree Short Variant240" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( 475.106, 729.864 )
+
+[node name="Deciduous Tree269" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 500.098, 520.382 )
+
+[node name="Deciduous Tree270" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 470.849, 590.426 )
+
+[node name="Deciduous Tree271" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 519.34, 604.28 )
+
+[node name="Deciduous Tree272" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 562.444, 715.888 )
+
+[node name="Deciduous Tree Short Variant241" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( 490.205, 785.818 )
+
+[node name="Deciduous Tree Short Variant242" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( 473.39, 775.047 )
+
+[node name="Deciduous Tree Short Variant243" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( 526.5, 792.751 )
+
+[node name="Deciduous Tree273" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 516.085, 761.072 )
+
+[node name="Deciduous Tree274" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 486.836, 831.115 )
+
+[node name="Deciduous Tree Short Variant244" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( 555.215, 463.538 )
+
+[node name="Deciduous Tree275" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 477.066, 394.143 )
+
+[node name="Deciduous Tree276" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 525.557, 407.998 )
+
+[node name="Deciduous Tree277" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 493.23, 439.556 )
+
+[node name="Deciduous Tree278" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 514.722, 678.942 )
+
+[node name="Deciduous Tree279" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 487.013, 635.839 )
+
+[node name="Deciduous Tree Short Variant245" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( 674.294, 495.719 )
+
+[node name="Deciduous Tree Short Variant246" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( 734.331, 515.731 )
+
+[node name="Deciduous Tree Short Variant247" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( 636.578, 609.636 )
+
+[node name="Deciduous Tree Short Variant248" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( 712.779, 603.478 )
+
+[node name="Deciduous Tree Short Variant249" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( 638.887, 673.522 )
+
+[node name="Deciduous Tree280" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 634.63, 534.083 )
+
+[node name="Deciduous Tree281" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 683.121, 547.938 )
+
+[node name="Deciduous Tree282" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 726.225, 659.546 )
+
+[node name="Deciduous Tree283" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 678.503, 622.6 )
+
+[node name="Deciduous Tree284" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 753.935, 577.957 )
+
+[node name="Deciduous Tree285" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 650.793, 579.496 )
+
+[node name="Deciduous Tree286" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 650.793, 579.496 )
+
+[node name="Deciduous Tree Short Variant250" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( 608.75, 677.85 )
+
+[node name="Deciduous Tree Short Variant251" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( 661.859, 695.554 )
+
+[node name="Deciduous Tree Short Variant252" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( 721.897, 715.566 )
+
+[node name="Deciduous Tree Short Variant253" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( 624.144, 809.471 )
+
+[node name="Deciduous Tree Short Variant254" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( 700.345, 803.313 )
+
+[node name="Deciduous Tree Short Variant255" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( 626.453, 873.357 )
+
+[node name="Deciduous Tree287" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 651.444, 663.874 )
+
+[node name="Deciduous Tree288" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 622.195, 733.918 )
+
+[node name="Deciduous Tree289" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 670.687, 747.773 )
+
+[node name="Deciduous Tree290" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 713.791, 859.381 )
+
+[node name="Deciduous Tree291" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 666.069, 822.435 )
+
+[node name="Deciduous Tree292" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 741.501, 777.792 )
+
+[node name="Deciduous Tree293" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 638.359, 779.331 )
+
+[node name="Deciduous Tree294" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 638.359, 779.331 )
+
+[node name="Deciduous Tree Short Variant256" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( 609.638, 862.586 )
+
+[node name="Deciduous Tree Short Variant257" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( 662.748, 880.29 )
+
+[node name="Deciduous Tree Short Variant258" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( 722.785, 900.302 )
+
+[node name="Deciduous Tree295" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 652.333, 848.611 )
+
+[node name="Deciduous Tree296" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 623.084, 918.654 )
+
+[node name="Deciduous Tree297" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 671.575, 932.509 )
+
+[node name="Deciduous Tree299" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 742.389, 962.528 )
+
+[node name="Deciduous Tree300" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 639.247, 964.067 )
+
+[node name="Deciduous Tree Short Variant261" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( 757.071, 699.166 )
+
+[node name="Deciduous Tree Short Variant262" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( 810.181, 716.869 )
+
+[node name="Deciduous Tree Short Variant263" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( 870.219, 736.882 )
+
+[node name="Deciduous Tree Short Variant264" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( 772.466, 830.787 )
+
+[node name="Deciduous Tree Short Variant265" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( 848.667, 824.629 )
+
+[node name="Deciduous Tree Short Variant266" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( 774.775, 894.673 )
+
+[node name="Deciduous Tree301" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 799.766, 685.19 )
+
+[node name="Deciduous Tree302" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 770.517, 755.234 )
+
+[node name="Deciduous Tree303" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 819.009, 769.089 )
+
+[node name="Deciduous Tree304" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 862.113, 880.697 )
+
+[node name="Deciduous Tree Short Variant267" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( 789.873, 950.626 )
+
+[node name="Deciduous Tree Short Variant268" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( 773.058, 939.856 )
+
+[node name="Deciduous Tree Short Variant269" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( 826.168, 957.559 )
+
+[node name="Deciduous Tree305" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 815.753, 925.88 )
+
+[node name="Deciduous Tree Short Variant270" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( 854.884, 628.347 )
+
+[node name="Deciduous Tree307" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 776.734, 558.952 )
+
+[node name="Deciduous Tree308" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 825.226, 572.807 )
+
+[node name="Deciduous Tree309" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 792.898, 604.365 )
+
+[node name="Deciduous Tree344" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 538.145, -601.527 )
+
+[node name="Deciduous Tree345" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 490.423, -638.474 )
+
+[node name="Deciduous Tree Short Variant297" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( 487.102, -580.618 )
+
+[node name="Deciduous Tree Short Variant298" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( 547.139, -560.606 )
+
+[node name="Deciduous Tree Short Variant299" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( 525.587, -472.859 )
+
+[node name="Deciduous Tree346" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 476.687, -612.298 )
+
+[node name="Deciduous Tree347" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 495.929, -528.399 )
+
+[node name="Deciduous Tree348" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 491.311, -453.737 )
+
+[node name="Deciduous Tree349" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 566.743, -498.381 )
+
+[node name="Deciduous Tree350" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 463.601, -496.841 )
+
+[node name="Deciduous Tree Short Variant300" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( 596.82, -630.122 )
+
+[node name="Deciduous Tree Short Variant301" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( 673.021, -636.279 )
+
+[node name="Deciduous Tree Short Variant302" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( 599.129, -566.236 )
+
+[node name="Deciduous Tree351" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 686.467, -580.212 )
+
+[node name="Deciduous Tree Short Variant303" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( 614.227, -510.282 )
+
+[node name="Deciduous Tree Short Variant304" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( 597.412, -521.053 )
+
+[node name="Deciduous Tree Short Variant305" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( 650.522, -503.349 )
+
+[node name="Deciduous Tree352" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 640.107, -535.028 )
+
+[node name="Deciduous Tree353" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 610.858, -464.985 )
+
+[node name="Deciduous Tree354" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 638.745, -617.158 )
+
+[node name="Deciduous Tree Short Variant306" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( 485.813, -409.752 )
+
+[node name="Deciduous Tree Short Variant307" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( 545.85, -389.739 )
+
+[node name="Deciduous Tree Short Variant308" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( 524.298, -301.992 )
+
+[node name="Deciduous Tree355" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 494.641, -357.533 )
+
+[node name="Deciduous Tree356" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 490.022, -282.871 )
+
+[node name="Deciduous Tree357" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 565.454, -327.514 )
+
+[node name="Deciduous Tree358" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 588.253, -346.519 )
+
+[node name="Deciduous Tree359" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 636.745, -332.664 )
+
+[node name="Deciduous Tree360" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 604.417, -301.106 )
+
+[node name="Deciduous Tree361" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 538.145, -601.527 )
+
+[node name="Deciduous Tree362" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 490.423, -638.474 )
+
+[node name="Deciduous Tree Short Variant309" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( 487.102, -580.618 )
+
+[node name="Deciduous Tree Short Variant310" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( 547.139, -560.606 )
+
+[node name="Deciduous Tree Short Variant311" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( 525.587, -472.859 )
+
+[node name="Deciduous Tree363" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 476.687, -612.298 )
+
+[node name="Deciduous Tree364" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 495.929, -528.399 )
+
+[node name="Deciduous Tree365" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 491.311, -453.737 )
+
+[node name="Deciduous Tree366" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 566.743, -498.381 )
+
+[node name="Deciduous Tree367" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 463.601, -496.841 )
+
+[node name="Deciduous Tree Short Variant312" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( 596.82, -630.122 )
+
+[node name="Deciduous Tree Short Variant313" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( 673.021, -636.279 )
+
+[node name="Deciduous Tree Short Variant314" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( 599.129, -566.236 )
+
+[node name="Deciduous Tree368" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 686.467, -580.212 )
+
+[node name="Deciduous Tree Short Variant315" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( 614.227, -510.282 )
+
+[node name="Deciduous Tree Short Variant316" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( 597.412, -521.053 )
+
+[node name="Deciduous Tree Short Variant317" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( 650.522, -503.349 )
+
+[node name="Deciduous Tree369" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 640.107, -535.028 )
+
+[node name="Deciduous Tree370" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 610.858, -464.985 )
+
+[node name="Deciduous Tree371" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 638.745, -617.158 )
+
+[node name="Deciduous Tree Short Variant318" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( 485.813, -409.752 )
+
+[node name="Deciduous Tree378" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 744.339, -422.774 )
+
+[node name="Deciduous Tree379" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 696.617, -459.72 )
+
+[node name="Deciduous Tree Short Variant321" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( 693.296, -401.865 )
+
+[node name="Deciduous Tree Short Variant322" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( 753.333, -381.852 )
+
+[node name="Deciduous Tree Short Variant323" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( 731.781, -294.105 )
+
+[node name="Deciduous Tree380" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 682.881, -433.544 )
+
+[node name="Deciduous Tree381" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 702.123, -349.645 )
+
+[node name="Deciduous Tree382" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 697.505, -274.983 )
+
+[node name="Deciduous Tree383" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 772.937, -319.627 )
+
+[node name="Deciduous Tree384" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 669.796, -318.087 )
+
+[node name="Deciduous Tree Short Variant324" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( 803.014, -451.368 )
+
+[node name="Deciduous Tree Short Variant325" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( 879.215, -457.526 )
+
+[node name="Deciduous Tree Short Variant326" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( 805.323, -387.482 )
+
+[node name="Deciduous Tree385" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 892.661, -401.458 )
+
+[node name="Deciduous Tree Short Variant327" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( 820.422, -331.528 )
+
+[node name="Deciduous Tree Short Variant328" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( 803.606, -342.299 )
+
+[node name="Deciduous Tree Short Variant329" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( 856.716, -324.595 )
+
+[node name="Deciduous Tree386" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 846.301, -356.274 )
+
+[node name="Deciduous Tree387" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 817.052, -286.231 )
+
+[node name="Deciduous Tree388" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 844.939, -438.404 )
+
+[node name="Deciduous Tree Short Variant330" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( 692.007, -230.998 )
+
+[node name="Deciduous Tree389" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 744.339, -422.774 )
+
+[node name="Deciduous Tree390" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 696.617, -459.72 )
+
+[node name="Deciduous Tree Short Variant331" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( 693.296, -401.865 )
+
+[node name="Deciduous Tree Short Variant332" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( 753.333, -381.852 )
+
+[node name="Deciduous Tree Short Variant333" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( 731.781, -294.105 )
+
+[node name="Deciduous Tree391" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 682.881, -433.544 )
+
+[node name="Deciduous Tree392" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 702.123, -349.645 )
+
+[node name="Deciduous Tree393" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 697.505, -274.983 )
+
+[node name="Deciduous Tree394" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 772.937, -319.627 )
+
+[node name="Deciduous Tree395" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 669.796, -318.087 )
+
+[node name="Deciduous Tree Short Variant334" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( 803.014, -451.368 )
+
+[node name="Deciduous Tree Short Variant335" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( 879.215, -457.526 )
+
+[node name="Deciduous Tree Short Variant336" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( 805.323, -387.482 )
+
+[node name="Deciduous Tree396" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 892.661, -401.458 )
+
+[node name="Deciduous Tree Short Variant337" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( 820.422, -331.528 )
+
+[node name="Deciduous Tree Short Variant338" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( 803.606, -342.299 )
+
+[node name="Deciduous Tree Short Variant339" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( 856.716, -324.595 )
+
+[node name="Deciduous Tree397" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 846.301, -356.274 )
+
+[node name="Deciduous Tree398" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 817.052, -286.231 )
+
+[node name="Deciduous Tree399" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 844.939, -438.404 )
+
+[node name="Deciduous Tree Short Variant340" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( 692.007, -230.998 )
+
+[node name="Deciduous Tree400" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 788.244, -716.777 )
+
+[node name="Deciduous Tree401" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 740.522, -753.723 )
+
+[node name="Deciduous Tree Short Variant341" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( 737.2, -695.868 )
+
+[node name="Deciduous Tree Short Variant342" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( 797.238, -675.855 )
+
+[node name="Deciduous Tree Short Variant343" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( 775.686, -588.108 )
+
+[node name="Deciduous Tree402" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 726.785, -727.547 )
+
+[node name="Deciduous Tree403" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 746.028, -643.648 )
+
+[node name="Deciduous Tree404" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 741.41, -568.987 )
+
+[node name="Deciduous Tree405" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 816.841, -613.63 )
+
+[node name="Deciduous Tree406" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 713.7, -612.09 )
+
+[node name="Deciduous Tree Short Variant344" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( 846.918, -745.371 )
+
+[node name="Deciduous Tree Short Variant345" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( 923.12, -751.529 )
+
+[node name="Deciduous Tree Short Variant346" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( 849.227, -681.485 )
+
+[node name="Deciduous Tree407" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 936.565, -695.461 )
+
+[node name="Deciduous Tree Short Variant347" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( 864.326, -625.531 )
+
+[node name="Deciduous Tree Short Variant348" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( 847.511, -636.302 )
+
+[node name="Deciduous Tree Short Variant349" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( 900.621, -618.598 )
+
+[node name="Deciduous Tree408" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 890.206, -650.278 )
+
+[node name="Deciduous Tree409" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 860.957, -580.234 )
+
+[node name="Deciduous Tree410" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 888.843, -732.407 )
+
+[node name="Deciduous Tree Short Variant350" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( 735.911, -525.001 )
+
+[node name="Deciduous Tree411" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 788.244, -716.777 )
+
+[node name="Deciduous Tree412" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 740.522, -753.723 )
+
+[node name="Deciduous Tree Short Variant351" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( 737.2, -695.868 )
+
+[node name="Deciduous Tree Short Variant352" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( 797.238, -675.855 )
+
+[node name="Deciduous Tree Short Variant353" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( 775.686, -588.108 )
+
+[node name="Deciduous Tree413" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 726.785, -727.547 )
+
+[node name="Deciduous Tree414" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 746.028, -643.648 )
+
+[node name="Deciduous Tree415" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 741.41, -568.987 )
+
+[node name="Deciduous Tree416" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 816.841, -613.63 )
+
+[node name="Deciduous Tree417" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 713.7, -612.09 )
+
+[node name="Deciduous Tree Short Variant354" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( 846.918, -745.371 )
+
+[node name="Deciduous Tree Short Variant355" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( 923.12, -751.529 )
+
+[node name="Deciduous Tree Short Variant356" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( 849.227, -681.485 )
+
+[node name="Deciduous Tree418" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 936.565, -695.461 )
+
+[node name="Deciduous Tree Short Variant357" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( 864.326, -625.531 )
+
+[node name="Deciduous Tree Short Variant358" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( 847.511, -636.302 )
+
+[node name="Deciduous Tree Short Variant359" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( 900.621, -618.598 )
+
+[node name="Deciduous Tree419" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 890.206, -650.278 )
+
+[node name="Deciduous Tree420" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 860.957, -580.234 )
+
+[node name="Deciduous Tree421" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 888.843, -732.407 )
+
+[node name="Deciduous Tree Short Variant360" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( 735.911, -525.001 )
+
+[node name="Deciduous Tree422" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 602.433, -889.259 )
+
+[node name="Deciduous Tree423" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 554.712, -926.205 )
+
+[node name="Deciduous Tree Short Variant361" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( 551.39, -868.35 )
+
+[node name="Deciduous Tree Short Variant362" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( 611.428, -848.337 )
+
+[node name="Deciduous Tree Short Variant363" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( 589.876, -760.59 )
+
+[node name="Deciduous Tree424" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 540.975, -900.029 )
+
+[node name="Deciduous Tree425" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 560.218, -816.13 )
+
+[node name="Deciduous Tree426" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 555.6, -741.468 )
+
+[node name="Deciduous Tree427" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 631.031, -786.112 )
+
+[node name="Deciduous Tree428" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 527.89, -784.572 )
+
+[node name="Deciduous Tree Short Variant364" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( 661.108, -917.853 )
+
+[node name="Deciduous Tree Short Variant365" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( 737.309, -924.01 )
+
+[node name="Deciduous Tree Short Variant366" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( 663.417, -853.967 )
+
+[node name="Deciduous Tree429" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 750.755, -867.943 )
+
+[node name="Deciduous Tree Short Variant367" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( 678.516, -798.013 )
+
+[node name="Deciduous Tree Short Variant368" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( 661.701, -808.784 )
+
+[node name="Deciduous Tree Short Variant369" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( 714.811, -791.08 )
+
+[node name="Deciduous Tree430" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 704.396, -822.759 )
+
+[node name="Deciduous Tree431" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 675.147, -752.716 )
+
+[node name="Deciduous Tree432" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 703.033, -904.889 )
+
+[node name="Deciduous Tree Short Variant370" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( 550.101, -697.483 )
+
+[node name="Deciduous Tree433" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 602.433, -889.259 )
+
+[node name="Deciduous Tree434" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 554.712, -926.205 )
+
+[node name="Deciduous Tree Short Variant371" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( 551.39, -868.35 )
+
+[node name="Deciduous Tree Short Variant372" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( 611.428, -848.337 )
+
+[node name="Deciduous Tree Short Variant373" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( 589.876, -760.59 )
+
+[node name="Deciduous Tree435" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 540.975, -900.029 )
+
+[node name="Deciduous Tree436" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 560.218, -816.13 )
+
+[node name="Deciduous Tree437" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 555.6, -741.468 )
+
+[node name="Deciduous Tree438" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 631.031, -786.112 )
+
+[node name="Deciduous Tree439" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 527.89, -784.572 )
+
+[node name="Deciduous Tree Short Variant374" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( 661.108, -917.853 )
+
+[node name="Deciduous Tree Short Variant375" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( 737.309, -924.01 )
+
+[node name="Deciduous Tree Short Variant376" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( 663.417, -853.967 )
+
+[node name="Deciduous Tree440" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 750.755, -867.943 )
+
+[node name="Deciduous Tree Short Variant377" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( 678.516, -798.013 )
+
+[node name="Deciduous Tree Short Variant378" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( 661.701, -808.784 )
+
+[node name="Deciduous Tree Short Variant379" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( 714.811, -791.08 )
+
+[node name="Deciduous Tree441" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 704.396, -822.759 )
+
+[node name="Deciduous Tree442" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 675.147, -752.716 )
+
+[node name="Deciduous Tree443" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 703.033, -904.889 )
+
+[node name="Deciduous Tree Short Variant380" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( 550.101, -697.483 )
+
+[node name="Deciduous Tree444" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 121.052, -875.146 )
+
+[node name="Deciduous Tree445" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 73.3304, -912.093 )
+
+[node name="Deciduous Tree Short Variant381" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( 320.892, -948.318 )
+
+[node name="Deciduous Tree Short Variant382" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( 380.929, -928.306 )
+
+[node name="Deciduous Tree Short Variant383" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( 359.377, -840.559 )
+
+[node name="Deciduous Tree446" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 59.5941, -885.917 )
+
+[node name="Deciduous Tree447" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 329.719, -896.099 )
+
+[node name="Deciduous Tree448" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 325.101, -821.437 )
+
+[node name="Deciduous Tree449" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 400.533, -866.081 )
+
+[node name="Deciduous Tree450" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 297.392, -864.541 )
+
+[node name="Deciduous Tree Short Variant384" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( 179.727, -903.74 )
+
+[node name="Deciduous Tree Short Variant385" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( 255.928, -909.898 )
+
+[node name="Deciduous Tree Short Variant386" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( 432.919, -933.936 )
+
+[node name="Deciduous Tree451" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 520.257, -947.911 )
+
+[node name="Deciduous Tree Short Variant387" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( 448.018, -877.982 )
+
+[node name="Deciduous Tree Short Variant388" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( 431.202, -888.752 )
+
+[node name="Deciduous Tree Short Variant389" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( 484.312, -871.049 )
+
+[node name="Deciduous Tree452" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 473.897, -902.728 )
+
+[node name="Deciduous Tree453" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 444.648, -832.685 )
+
+[node name="Deciduous Tree454" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 221.652, -890.777 )
+
+[node name="Deciduous Tree Short Variant390" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( 319.603, -777.452 )
+
+[node name="Deciduous Tree455" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 121.052, -875.146 )
+
+[node name="Deciduous Tree456" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 73.3304, -912.093 )
+
+[node name="Deciduous Tree Short Variant391" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( 320.892, -948.318 )
+
+[node name="Deciduous Tree Short Variant392" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( 380.929, -928.306 )
+
+[node name="Deciduous Tree Short Variant393" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( 359.377, -840.559 )
+
+[node name="Deciduous Tree457" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 59.5941, -885.917 )
+
+[node name="Deciduous Tree458" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 329.719, -896.099 )
+
+[node name="Deciduous Tree459" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 325.101, -821.437 )
+
+[node name="Deciduous Tree460" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 400.533, -866.081 )
+
+[node name="Deciduous Tree461" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 297.392, -864.541 )
+
+[node name="Deciduous Tree Short Variant394" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( 179.727, -903.74 )
+
+[node name="Deciduous Tree Short Variant395" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( 255.928, -909.898 )
+
+[node name="Deciduous Tree Short Variant396" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( 432.919, -933.936 )
+
+[node name="Deciduous Tree462" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 520.257, -947.911 )
+
+[node name="Deciduous Tree Short Variant397" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( 448.018, -877.982 )
+
+[node name="Deciduous Tree Short Variant398" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( 431.202, -888.752 )
+
+[node name="Deciduous Tree Short Variant399" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( 484.312, -871.049 )
+
+[node name="Deciduous Tree463" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 473.897, -902.728 )
+
+[node name="Deciduous Tree464" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 444.648, -832.685 )
+
+[node name="Deciduous Tree465" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 221.652, -890.777 )
+
+[node name="Deciduous Tree466" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( -124.342, -865.738 )
+
+[node name="Deciduous Tree467" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( -172.064, -902.684 )
+
+[node name="Deciduous Tree468" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( -185.801, -876.508 )
+
+[node name="Deciduous Tree Short Variant401" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( -65.6674, -894.332 )
+
+[node name="Deciduous Tree Short Variant402" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( 10.5337, -900.49 )
+
+[node name="Deciduous Tree469" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( -23.7424, -881.369 )
+
+[node name="Deciduous Tree470" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( -124.342, -865.738 )
+
+[node name="Deciduous Tree471" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( -172.064, -902.684 )
+
+[node name="Deciduous Tree472" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( -185.801, -876.508 )
+
+[node name="Deciduous Tree Short Variant403" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( -65.6674, -894.332 )
+
+[node name="Deciduous Tree Short Variant404" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( 10.5337, -900.49 )
+
+[node name="Deciduous Tree473" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( -23.7424, -881.369 )
+
+[node name="Deciduous Tree474" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( -231.751, -865.738 )
+
+[node name="Deciduous Tree475" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( -279.473, -902.684 )
+
+[node name="Deciduous Tree476" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( -293.21, -876.508 )
+
+[node name="Deciduous Tree Short Variant405" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( -173.077, -894.332 )
+
+[node name="Deciduous Tree Short Variant406" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( -96.8755, -900.49 )
+
+[node name="Deciduous Tree477" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( -131.152, -881.369 )
+
+[node name="Deciduous Tree478" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( -231.751, -865.738 )
+
+[node name="Deciduous Tree479" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( -279.473, -902.684 )
+
+[node name="Deciduous Tree480" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( -293.21, -876.508 )
+
+[node name="Deciduous Tree Short Variant407" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( -173.077, -894.332 )
+
+[node name="Deciduous Tree Short Variant408" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( -96.8755, -900.49 )
+
+[node name="Deciduous Tree481" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( -131.152, -881.369 )
+
+[node name="Deciduous Tree Short Variant400" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( 319.603, -777.452 )
+
+[node name="Deciduous Tree Short Variant319" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( 545.85, -389.739 )
+
+[node name="Deciduous Tree Short Variant320" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( 524.298, -301.992 )
+
+[node name="Deciduous Tree372" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 494.641, -357.533 )
+
+[node name="Deciduous Tree373" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 490.022, -282.871 )
+
+[node name="Deciduous Tree374" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 565.454, -327.514 )
+
+[node name="Deciduous Tree375" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 588.253, -346.519 )
+
+[node name="Deciduous Tree376" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 636.745, -332.664 )
+
+[node name="Deciduous Tree377" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 604.417, -301.106 )
+
+[node name="Deciduous Tree310" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 814.391, 843.751 )
+
+[node name="Deciduous Tree311" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 786.681, 800.647 )
+
+[node name="Deciduous Tree Short Variant277" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( 112.619, 405.024 )
+
+[node name="Deciduous Tree Short Variant278" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( 172.656, 425.036 )
+
+[node name="Deciduous Tree Short Variant279" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( 74.903, 518.941 )
+
+[node name="Deciduous Tree Short Variant280" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( 151.104, 512.783 )
+
+[node name="Deciduous Tree Short Variant281" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( 77.212, 582.827 )
+
+[node name="Deciduous Tree320" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 72.9545, 443.388 )
+
+[node name="Deciduous Tree321" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 121.446, 457.243 )
+
+[node name="Deciduous Tree322" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 164.55, 568.851 )
+
+[node name="Deciduous Tree323" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 116.828, 531.905 )
+
+[node name="Deciduous Tree324" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 192.26, 487.262 )
+
+[node name="Deciduous Tree325" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 89.1183, 488.801 )
+
+[node name="Deciduous Tree326" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 89.1183, 488.801 )
+
+[node name="Deciduous Tree Short Variant282" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( 60.3969, 572.057 )
+
+[node name="Deciduous Tree Short Variant283" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( 113.507, 589.76 )
+
+[node name="Deciduous Tree Short Variant284" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( 173.544, 609.772 )
+
+[node name="Deciduous Tree Short Variant285" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( 75.7911, 703.677 )
+
+[node name="Deciduous Tree Short Variant286" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( 151.992, 697.519 )
+
+[node name="Deciduous Tree327" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 103.092, 558.081 )
+
+[node name="Deciduous Tree328" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 73.8427, 628.125 )
+
+[node name="Deciduous Tree329" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 122.334, 641.979 )
+
+[node name="Deciduous Tree330" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 117.716, 716.641 )
+
+[node name="Deciduous Tree331" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 193.148, 671.998 )
+
+[node name="Deciduous Tree332" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 90.0065, 673.537 )
+
+[node name="Deciduous Tree Short Variant287" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( 207.83, 408.636 )
+
+[node name="Deciduous Tree Short Variant288" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( 260.94, 426.34 )
+
+[node name="Deciduous Tree Short Variant289" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( 320.978, 446.352 )
+
+[node name="Deciduous Tree Short Variant290" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( 223.225, 540.257 )
+
+[node name="Deciduous Tree Short Variant291" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( 299.426, 534.099 )
+
+[node name="Deciduous Tree Short Variant292" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( 225.534, 604.143 )
+
+[node name="Deciduous Tree333" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 250.525, 394.66 )
+
+[node name="Deciduous Tree334" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 221.276, 464.704 )
+
+[node name="Deciduous Tree335" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 269.768, 478.559 )
+
+[node name="Deciduous Tree336" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 312.872, 590.167 )
+
+[node name="Deciduous Tree Short Variant293" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( 240.632, 660.096 )
+
+[node name="Deciduous Tree Short Variant294" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( 223.817, 649.326 )
+
+[node name="Deciduous Tree Short Variant295" parent="Map/Trees" instance=ExtResource( 7 )]
+position = Vector2( 276.927, 667.029 )
+
+[node name="Deciduous Tree337" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 266.512, 635.35 )
+
+[node name="Deciduous Tree338" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 237.263, 705.394 )
+
+[node name="Deciduous Tree342" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 265.15, 553.221 )
+
+[node name="Deciduous Tree343" parent="Map/Trees" instance=ExtResource( 8 )]
+position = Vector2( 237.44, 510.117 )
+
+[node name="ColorRect" type="ColorRect" parent="."]
+material = SubResource( 2 )
+margin_left = -1991.29
+margin_top = -1825.84
+margin_right = 2261.71
+margin_bottom = 1492.16
+color = Color( 0, 0, 0, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2( 952.255, -1.16107 )
+shape = SubResource( 3 )
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2( -953.837, 392.42 )
+shape = SubResource( 3 )
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2( -489.214, 936.433 )
+shape = SubResource( 4 )
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2( 492.846, 936.265 )
+shape = SubResource( 4 )
+
+[node name="CollisionShape2D5" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2( -112.182, -965.383 )
+shape = SubResource( 5 )
+
+[node name="CollisionShape2D6" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2( -1061.3, -908.837 )
+shape = SubResource( 6 )
+
+[editable path="Map/Player/Camera"]

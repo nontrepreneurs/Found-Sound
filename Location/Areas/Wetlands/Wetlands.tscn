@@ -1,0 +1,144 @@
+[gd_scene load_steps=14 format=2]
+
+[ext_resource path="res://Location/Areas/Wetlands/Wetlands.gd" type="Script" id=1]
+[ext_resource path="res://Assets/Tiles/Wetlands/Back.png" type="Texture" id=2]
+[ext_resource path="res://Camera/Camera.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Player/Player.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Location/LocationTransitionTrigger.tscn" type="PackedScene" id=7]
+
+[sub_resource type="StreamTexture" id=8]
+load_path = "res://.import/Wetlands.png-acb9cc51846435472eb0870c567fc825.stex"
+
+[sub_resource type="StreamTexture" id=1]
+flags = 4
+load_path = "res://.import/Mid.png-983e18b75e558f695c5436c4c0c9419a.stex"
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 155.997, 64.9192 )
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 801.057, 16.9888 )
+
+[sub_resource type="RectangleShape2D" id=4]
+extents = Vector2( 38.2642, 82.8613 )
+
+[sub_resource type="CapsuleShape2D" id=5]
+radius = 71.1503
+height = 525.41
+
+[sub_resource type="RectangleShape2D" id=6]
+extents = Vector2( 56.0872, 1966.77 )
+
+[sub_resource type="RectangleShape2D" id=7]
+extents = Vector2( 63.1867, 44.178 )
+
+[node name="Location" type="Node2D"]
+script = ExtResource( 1 )
+
+[node name="Sprite" type="Sprite" parent="."]
+texture = SubResource( 8 )
+
+[node name="Map" type="YSort" parent="."]
+
+[node name="Player" parent="Map" instance=ExtResource( 5 )]
+position = Vector2( 1870, 235 )
+speed = 200
+
+[node name="Camera" parent="Map/Player" instance=ExtResource( 3 )]
+current = true
+
+[node name="BottomRight" parent="Map/Player/Camera/Limits" index="0"]
+position = Vector2( 1872.94, 800.069 )
+
+[node name="TopLeft" parent="Map/Player/Camera/Limits" index="1"]
+position = Vector2( -1859.1, -486.264 )
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+
+[node name="ColorBackground" type="ParallaxLayer" parent="ParallaxBackground"]
+z_index = -3
+
+[node name="ColorRect" type="ColorRect" parent="ParallaxBackground/ColorBackground"]
+margin_left = -3738.66
+margin_top = -1688.92
+margin_right = 4920.34
+margin_bottom = 2478.08
+color = Color( 0, 0, 0, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Back" type="ParallaxLayer" parent="ParallaxBackground"]
+z_index = -2
+motion_scale = Vector2( 0.2, 0.75 )
+
+[node name="Back" type="Sprite" parent="ParallaxBackground/Back"]
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 2 )
+
+[node name="Mid" type="ParallaxLayer" parent="ParallaxBackground"]
+z_index = -1
+motion_scale = Vector2( 0.5, 0.8 )
+
+[node name="Mid" type="Sprite" parent="ParallaxBackground/Mid"]
+texture = SubResource( 1 )
+
+[node name="LocationTransition" parent="." instance=ExtResource( 7 )]
+position = Vector2( -1934.95, 252.553 )
+rotation = 1.5708
+location = 5
+delay = 0.0
+coordinates = Vector2( 512, 13 )
+
+[node name="CollisionShape2D" parent="LocationTransition" index="0"]
+shape = SubResource( 2 )
+
+[node name="LocationTransition2" parent="." instance=ExtResource( 7 )]
+position = Vector2( -1934.95, 252.553 )
+rotation = 1.5708
+location = 7
+delay = 0.0
+coordinates = Vector2( 1, 870 )
+
+[node name="CollisionShape2D" parent="LocationTransition2" index="0"]
+position = Vector2( -125.573, -3894.66 )
+shape = SubResource( 2 )
+
+[node name="Collisions" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Collisions"]
+position = Vector2( -1101.45, 171.206 )
+shape = SubResource( 3 )
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Collisions"]
+position = Vector2( 1134.5, 169.351 )
+shape = SubResource( 3 )
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="Collisions"]
+position = Vector2( 374.647, 68.2226 )
+shape = SubResource( 4 )
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="Collisions"]
+position = Vector2( -356.445, 68.2226 )
+shape = SubResource( 4 )
+
+[node name="CollisionShape2D5" type="CollisionShape2D" parent="Collisions"]
+position = Vector2( 10.5046, 68.1744 )
+rotation = 1.5708
+shape = SubResource( 5 )
+
+[node name="CollisionShape2D6" type="CollisionShape2D" parent="Collisions"]
+position = Vector2( 0.36792, 464.426 )
+rotation = 1.5708
+shape = SubResource( 6 )
+
+[node name="CollisionShape2D7" type="CollisionShape2D" parent="Collisions"]
+position = Vector2( 1886.26, 345.38 )
+rotation = 1.5708
+shape = SubResource( 7 )
+
+[editable path="Map/Player/Camera"]
+
+[editable path="LocationTransition"]
+
+[editable path="LocationTransition2"]

@@ -5,5 +5,6 @@ export var areaName: String = ""
 onready var player = $Map/Player
 
 func _ready():
-	player.position = LocationManager.currentPosition
-	print(player.position)
+	player.position = LocationManager.currentLocation.coordinates
+
+

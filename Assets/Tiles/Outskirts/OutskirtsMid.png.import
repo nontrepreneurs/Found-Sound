@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/OutskirtsMid.png-a6e94bd6b17cb7d74e170d753bea0279.stex"
+path="res://.import/OutskirtsMid.png-af89c0f8e4e26f8c3153a0004cef67f5.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Tiles/Transitions/OutskirtsMid.png"
-dest_files=[ "res://.import/OutskirtsMid.png-a6e94bd6b17cb7d74e170d753bea0279.stex" ]
+source_file="res://Assets/Tiles/Outskirts/OutskirtsMid.png"
+dest_files=[ "res://.import/OutskirtsMid.png-af89c0f8e4e26f8c3153a0004cef67f5.stex" ]
 
 [params]
 
