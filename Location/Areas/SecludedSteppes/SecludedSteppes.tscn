@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://Location/Areas/SecludedSteppes/SecludedSteppes.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Tiles/secluded_steppes.png" type="Texture" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://Location/LocationTransitionTrigger.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Assets/Collidable/Coniferous Tree.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Assets/Collidable/Deciduous Tree.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Characters/CatLady/CatLady.tscn" type="PackedScene" id=9]
 
 [sub_resource type="Shader" id=1]
 code = "shader_type canvas_item;
@@ -2826,6 +2827,9 @@ position = Vector2( 265.15, 553.221 )
 
 [node name="Deciduous Tree343" parent="Map/Trees" instance=ExtResource( 8 )]
 position = Vector2( 237.44, 510.117 )
+
+[node name="CatLady" parent="Map" instance=ExtResource( 9 )]
+position = Vector2( 463.189, 13.7933 )
 
 [node name="ColorRect" type="ColorRect" parent="."]
 material = SubResource( 2 )
