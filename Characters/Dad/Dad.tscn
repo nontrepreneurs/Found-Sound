@@ -60,4 +60,3 @@ position = Vector2( 2.01947, 61.7962 )
 shape = SubResource( 9 )
 [connection signal="body_entered" from="TalkRadius" to="." method="_on_TalkRadius_body_entered"]
 [connection signal="body_exited" from="TalkRadius" to="." method="_on_TalkRadius_body_exited"]
-[connection signal="input_event" from="TalkRadius" to="." method="_on_TalkRadius_input_event"]

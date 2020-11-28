@@ -18,6 +18,14 @@ enum NavigatorLocations{
 	SECRET_PATH
 }
 
+enum Soundtrack {
+	TITLE,
+	CUTE,
+	DOWN_IN_THE_DUMPS,
+	AMBIENT,
+	PAWS_FOR_EFFECT
+}
+
 enum DialogueTypes {
 	# vocalized dialogues are like your standard rpg fair, meaning a sound plays every step of the timer
 	VOCALIZED,
