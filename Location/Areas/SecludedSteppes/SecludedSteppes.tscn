@@ -135,6 +135,9 @@ position = Vector2( -893.384, -920.838 )
 [node name="HousePink" parent="Map" instance=ExtResource( 5 )]
 position = Vector2( 403.792, -93.6494 )
 
+[node name="CatLady" parent="Map" instance=ExtResource( 9 )]
+position = Vector2( 463.189, 13.7933 )
+
 [node name="Trees" type="YSort" parent="Map"]
 
 [node name="Deciduous Tree Short Variant" parent="Map/Trees" instance=ExtResource( 7 )]
@@ -2827,9 +2830,6 @@ position = Vector2( 265.15, 553.221 )
 
 [node name="Deciduous Tree343" parent="Map/Trees" instance=ExtResource( 8 )]
 position = Vector2( 237.44, 510.117 )
-
-[node name="CatLady" parent="Map" instance=ExtResource( 9 )]
-position = Vector2( 463.189, 13.7933 )
 
 [node name="ColorRect" type="ColorRect" parent="."]
 material = SubResource( 2 )
