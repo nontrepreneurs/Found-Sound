@@ -5,9 +5,10 @@
 [ext_resource path="res://SoundListener/SoundListener.tscn" type="PackedScene" id=3]
 [ext_resource path="res://SoundSource/SoundSource.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Samples/Cowbell/Cowbell.tres" type="Resource" id=5]
-[ext_resource path="res://Managers/TidbitManager/Tidbits/CowIsDancing.tres" type="Resource" id=6]
+[ext_resource path="res://Tidbits/CowIsDancing.tres" type="Resource" id=6]
 [ext_resource path="res://Characters/BipedalCow/BipedalCow.gd" type="Script" id=7]
 [ext_resource path="res://SoundResponses/SetTidbit/SetTidbit.tscn" type="PackedScene" id=8]
+
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 20.8941

@@ -97,7 +97,12 @@ _global_script_classes=[ {
 "base": "Resource",
 "class": "Tidbit",
 "language": "GDScript",
-"path": "res://Managers/TidbitManager/Tidbit.gd"
+"path": "res://Tidbits/Tidbit.gd"
+}, {
+"base": "Node",
+"class": "TidbitResponse",
+"language": "GDScript",
+"path": "res://TidbitResponses/TidbitResponse.gd"
 }, {
 "base": "Resource",
 "class": "Voice",
@@ -133,6 +138,7 @@ _global_script_class_icons={
 "SoundSource": "",
 "StateMutator": "",
 "Tidbit": "",
+"TidbitResponse": "",
 "Voice": "",
 "VoiceOld": "",
 "VoiceSlice": ""
