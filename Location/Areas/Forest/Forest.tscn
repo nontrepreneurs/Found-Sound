@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://Location/Location.gd" type="Script" id=1]
 [ext_resource path="res://Camera/Camera.tscn" type="PackedScene" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://Assets/Collidable/Deciduous Tree.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Assets/Collidable/Coniferous Tree.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Assets/Collidable/Coniferous Tree Variant.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Characters/BipedalCow/BipedalCow.tscn" type="PackedScene" id=10]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 57.9453, 1008.19 )
@@ -1229,6 +1230,9 @@ position = Vector2( 213.198, 28.3128 )
 
 [node name="Deciduous Tree63" parent="Map/Trees" instance=ExtResource( 7 )]
 position = Vector2( 213.198, 28.3128 )
+
+[node name="BipedalCow" parent="Map" instance=ExtResource( 10 )]
+position = Vector2( 63.0001, -612.001 )
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 
