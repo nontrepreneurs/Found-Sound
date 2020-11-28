@@ -6,6 +6,8 @@
 [ext_resource path="res://Tidbits/DogHasBeenScaredAway.tres" type="Resource" id=4]
 [ext_resource path="res://TidbitResponses/StartAnimation/StartAnimation.tscn" type="PackedScene" id=5]
 
+
+
 [sub_resource type="CapsuleShape2D" id=1]
 height = 35.1367
 

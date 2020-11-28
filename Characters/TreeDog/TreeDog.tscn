@@ -8,6 +8,8 @@
 [ext_resource path="res://Tidbits/DogHasBeenScaredAway.tres" type="Resource" id=6]
 [ext_resource path="res://SoundResponses/SetTidbit/SetTidbit.tscn" type="PackedScene" id=7]
 
+
+
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 12.1484
 height = 40.6287

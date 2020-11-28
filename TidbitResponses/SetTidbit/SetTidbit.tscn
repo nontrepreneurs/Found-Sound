@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://TidbitResponses/SetTidbit/SetTidbit.gd" type="Script" id=1]
+
+[node name="SetTidbit" type="Node"]
+script = ExtResource( 1 )

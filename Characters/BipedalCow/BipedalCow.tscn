@@ -10,6 +10,8 @@
 [ext_resource path="res://SoundResponses/SetTidbit/SetTidbit.tscn" type="PackedScene" id=8]
 
 
+
+
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 20.8941
 

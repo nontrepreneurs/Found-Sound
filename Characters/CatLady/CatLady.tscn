@@ -1,6 +1,10 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Characters/CatLady/catLady_spriteframes.tres" type="SpriteFrames" id=1]
+[ext_resource path="res://Tidbits/CatLadyIsSatisfied.tres" type="Resource" id=2]
+[ext_resource path="res://SoundResponses/SetTidbit/SetTidbit.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Samples/CatMeow/CatMeow.tres" type="Resource" id=4]
+[ext_resource path="res://SoundListener/SoundListener.tscn" type="PackedScene" id=5]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 17.7795
@@ -11,9 +15,16 @@ height = 28.2435
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = ExtResource( 1 )
 animation = "idle"
-frame = 9
+frame = 11
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0, 4.44946 )
 shape = SubResource( 1 )
+
+[node name="SetTidbit" parent="." instance=ExtResource( 3 )]
+tidbit = ExtResource( 2 )
+
+[node name="SoundListener" parent="." instance=ExtResource( 5 )]
+target_sample = ExtResource( 4 )
+start_listening = true
