@@ -1,0 +1,15 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Samples/BasuraPercussion/BasuraPercussion.tres" type="Resource" id=1]
+[ext_resource path="res://SoundSource/SoundSource.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Characters/TreeDog/TreeDog.tscn" type="PackedScene" id=3]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="TreeDog" parent="." instance=ExtResource( 3 )]
+position = Vector2( 284.728, 189.505 )
+
+[node name="SoundSource" parent="." instance=ExtResource( 2 )]
+position = Vector2( 516.294, 185.912 )
+is_playing = true
+sample = ExtResource( 1 )

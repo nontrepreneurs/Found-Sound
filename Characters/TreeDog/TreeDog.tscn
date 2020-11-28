@@ -14,7 +14,7 @@ height = 40.6287
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = ExtResource( 1 )
 animation = "idle"
-frame = 5
+frame = 2
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -27,6 +27,7 @@ target_sample = ExtResource( 3 )
 start_listening = true
 
 [node name="MoveToPosition" parent="." instance=ExtResource( 4 )]
+speed = 300.0
 
 [node name="Position2D" type="Position2D" parent="MoveToPosition"]
 position = Vector2( -10002.4, 28.4766 )
