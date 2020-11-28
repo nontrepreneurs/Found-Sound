@@ -19,10 +19,7 @@ var screen_size
 var heading = Vector2()
 var velocity = Vector2()
 
-
-
 onready var canMove = true
-
 
 func _ready():
 	print("PLAYER READY")
@@ -41,10 +38,10 @@ func _physics_process(delta):
 	move_and_slide(velocity) # don't multiply by delta for move_and_slide
 
 func update_heading():
-	# calculate X heading
 	if !canMove:
 		return
 	
+	# calculate X heading
 	if Input.is_action_just_pressed(UI_RIGHT):
 		heading.x = 1
 	elif Input.is_action_just_released(UI_RIGHT):

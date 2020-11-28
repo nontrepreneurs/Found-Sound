@@ -146,6 +146,7 @@ LocationManager="*res://Managers/LocationManager/LocationManager.tscn"
 Database="*res://db/init.gd"
 DialogueManager="*res://Managers/DialogueManager/DialogueManager.gd"
 GameManager="*res://Managers/GameManager.gd"
+SamplerManager="*res://Managers/SamplerManager/SamplerManager.tscn"
 
 [display]
 
