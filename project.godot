@@ -95,6 +95,11 @@ _global_script_classes=[ {
 "path": "res://db/Mutator.gd"
 }, {
 "base": "Resource",
+"class": "Tidbit",
+"language": "GDScript",
+"path": "res://Managers/TidbitManager/Tidbit.gd"
+}, {
+"base": "Resource",
 "class": "Voice",
 "language": "GDScript",
 "path": "res://db/Resources/Voice/Voice.gd"
@@ -127,6 +132,7 @@ _global_script_class_icons={
 "SoundListener": "",
 "SoundSource": "",
 "StateMutator": "",
+"Tidbit": "",
 "Voice": "",
 "VoiceOld": "",
 "VoiceSlice": ""
@@ -147,6 +153,7 @@ Database="*res://db/init.gd"
 DialogueManager="*res://Managers/DialogueManager/DialogueManager.gd"
 GameManager="*res://Managers/GameManager.gd"
 SamplerManager="*res://Managers/SamplerManager/SamplerManager.tscn"
+TidbitManager="*res://Managers/TidbitManager/TidbitManager.tscn"
 
 [display]
 

@@ -1,11 +1,13 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Characters/BipedalCow/bipedalCow_spriteframes.tres" type="SpriteFrames" id=1]
 [ext_resource path="res://Samples/BasuraPercussion/BasuraPercussion.tres" type="Resource" id=2]
 [ext_resource path="res://SoundListener/SoundListener.tscn" type="PackedScene" id=3]
 [ext_resource path="res://SoundSource/SoundSource.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Samples/Cowbell/Cowbell.tres" type="Resource" id=5]
-[ext_resource path="res://SoundResponses/StartAnimation/StartAnimation.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Managers/TidbitManager/Tidbits/CowIsDancing.tres" type="Resource" id=6]
+[ext_resource path="res://Characters/BipedalCow/BipedalCow.gd" type="Script" id=7]
+[ext_resource path="res://SoundResponses/SetTidbit/SetTidbit.tscn" type="PackedScene" id=8]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 20.8941
@@ -36,11 +38,13 @@ tracks/0/keys = {
 }
 
 [node name="BipedalCow" type="KinematicBody2D"]
+script = ExtResource( 7 )
+play_cowbell = ExtResource( 6 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = ExtResource( 1 )
 animation = "idle"
-frame = 6
+frame = 5
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -57,5 +61,5 @@ sample = ExtResource( 5 )
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/PlayCowbell = SubResource( 2 )
 
-[node name="StartAnimation" parent="." instance=ExtResource( 6 )]
-animation_name = "PlayCowbell"
+[node name="SetTidbit" parent="." instance=ExtResource( 8 )]
+tidbit = ExtResource( 6 )
