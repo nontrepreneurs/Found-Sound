@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=2]
+[gd_scene load_steps=31 format=2]
 
 [ext_resource path="res://Location/Areas/Town/Town.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Tiles/town.png" type="Texture" id=2]
@@ -19,6 +19,8 @@
 [ext_resource path="res://Assets/Collidable/Rock.tscn" type="PackedScene" id=17]
 [ext_resource path="res://Assets/Collidable/RockVariant.tscn" type="PackedScene" id=18]
 [ext_resource path="res://Location/LocationTransitionTrigger.tscn" type="PackedScene" id=19]
+[ext_resource path="res://Characters/TreeDog/TreeDog.tscn" type="PackedScene" id=20]
+[ext_resource path="res://Characters/TreeCat/TreeCat.tscn" type="PackedScene" id=21]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 130.104, 64.9192 )
@@ -2476,6 +2478,9 @@ position = Vector2( -13.7709, -215.453 )
 [node name="BigTree" parent="Map" instance=ExtResource( 12 )]
 position = Vector2( 700.963, 437.026 )
 
+[node name="TreeCat" parent="Map/BigTree" instance=ExtResource( 21 )]
+position = Vector2( -43.9624, -171.526 )
+
 [node name="Shrubbery" type="YSort" parent="Map"]
 
 [node name="SubShrub" type="YSort" parent="Map/Shrubbery"]
@@ -2590,6 +2595,9 @@ position = Vector2( -29.9899, 7.32413 )
 
 [node name="Rock" parent="Map" instance=ExtResource( 17 )]
 position = Vector2( 861.28, 296.854 )
+
+[node name="TreeDog" parent="Map" instance=ExtResource( 20 )]
+position = Vector2( 613.501, 471 )
 
 [node name="Collisions" type="StaticBody2D" parent="."]
 
