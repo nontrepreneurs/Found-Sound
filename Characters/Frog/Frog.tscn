@@ -5,12 +5,12 @@
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 14.2195
 
-[node name="KinematicBody2D" type="KinematicBody2D"]
+[node name="PsyFrog" type="KinematicBody2D"]
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = ExtResource( 1 )
 animation = "idle"
-frame = 3
+frame = 6
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
