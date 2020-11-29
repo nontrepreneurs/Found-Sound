@@ -166,6 +166,7 @@ DialogueManager="*res://Managers/DialogueManager/DialogueManager.gd"
 GameManager="*res://Managers/GameManager.gd"
 SamplerManager="*res://Managers/SamplerManager/SamplerManager.tscn"
 TidbitManager="*res://Managers/TidbitManager/TidbitManager.tscn"
+SoundtrackManager="*res://Managers/SoundtrackManager/SoundtrackManager.tscn"
 
 [display]
 

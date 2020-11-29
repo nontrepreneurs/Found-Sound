@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/downinthedumps_87bpm _Dmaj.wav-6f615c1cedf774d217444eebf0d2094a.sample"
+
+[deps]
+
+source_file="res://Assets/Music/downinthedumps_87bpm _Dmaj.wav"
+dest_files=[ "res://.import/downinthedumps_87bpm _Dmaj.wav-6f615c1cedf774d217444eebf0d2094a.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

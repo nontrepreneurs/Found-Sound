@@ -34,12 +34,6 @@
 [ext_resource path="res://Characters/Townsfolk/DrumMan/DrumMan.tscn" type="PackedScene" id=32]
 [ext_resource path="res://Characters/Townsfolk/DiseasedGiraffe/DiseasedGiraffe.tscn" type="PackedScene" id=33]
 
-[sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 130.104, 64.9192 )
-
-[sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 43.165, 128.864 )
-
 [sub_resource type="RectangleShape2D" id=3]
 extents = Vector2( 461.535, 62.4028 )
 
@@ -78,25 +72,17 @@ __meta__ = {
 position = Vector2( 742.187, 398.26 )
 texture = ExtResource( 2 )
 
-[node name="LocationTransition" parent="." instance=ExtResource( 19 )]
+[node name="ToOutskirts" parent="." instance=ExtResource( 19 )]
 position = Vector2( 656.12, -671.474 )
 location = 1
 delay = 0.0
 coordinates = Vector2( 3680, 1110 )
 
-[node name="CollisionShape2D" parent="LocationTransition" index="0"]
-position = Vector2( 12.5742, -1.56659 )
-shape = SubResource( 1 )
-
-[node name="LocationTransition2" parent="." instance=ExtResource( 19 )]
+[node name="ToTrail" parent="." instance=ExtResource( 19 )]
 position = Vector2( 656.12, -671.474 )
 location = 3
 delay = 0.0
 coordinates = Vector2( -1830, 250 )
-
-[node name="CollisionShape2D" parent="LocationTransition2" index="0"]
-position = Vector2( 1232.18, 1178.56 )
-shape = SubResource( 2 )
 
 [node name="Map" type="YSort" parent="."]
 
@@ -2686,9 +2672,5 @@ position = Vector2( -3.78503, 24.6033 )
 shape = SubResource( 9 )
 [connection signal="body_entered" from="ZoomArea" to="." method="_on_ZoomArea_body_entered"]
 [connection signal="body_exited" from="ZoomArea" to="." method="_on_ZoomArea_body_exited"]
-
-[editable path="LocationTransition"]
-
-[editable path="LocationTransition2"]
 
 [editable path="Map/Player/Camera"]
