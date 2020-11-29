@@ -1,16 +1,17 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://Characters/BipedalCow/bipedalCow_spriteframes.tres" type="SpriteFrames" id=1]
 [ext_resource path="res://Samples/BasuraPercussion/BasuraPercussion.tres" type="Resource" id=2]
 [ext_resource path="res://SoundListener/SoundListener.tscn" type="PackedScene" id=3]
 [ext_resource path="res://SoundSource/SoundSource.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Samples/Cowbell/Cowbell.tres" type="Resource" id=5]
-[ext_resource path="res://Tidbits/CowIsDancing.tres" type="Resource" id=6]
+[ext_resource path="res://Tidbits/CowSatisfied.tres" type="Resource" id=6]
 [ext_resource path="res://Characters/BipedalCow/BipedalCow.gd" type="Script" id=7]
 [ext_resource path="res://SoundResponses/SetTidbit/SetTidbit.tscn" type="PackedScene" id=8]
-
-
-
+[ext_resource path="res://TalkRadius/TalkRadius.tscn" type="PackedScene" id=9]
+[ext_resource path="res://TalkComponents/ConditionalDialogue/ConditionalDialogue.tscn" type="PackedScene" id=10]
+[ext_resource path="res://TidbitResponses/DestroyParent/DestroyParent.tscn" type="PackedScene" id=11]
+[ext_resource path="res://SoundResponses/SayDialogue/SayDialogue.tscn" type="PackedScene" id=12]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 20.8941
@@ -40,6 +41,9 @@ tracks/0/keys = {
 } ]
 }
 
+[sub_resource type="CircleShape2D" id=3]
+radius = 155.799
+
 [node name="BipedalCow" type="KinematicBody2D"]
 script = ExtResource( 7 )
 play_cowbell = ExtResource( 6 )
@@ -47,7 +51,7 @@ play_cowbell = ExtResource( 6 )
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = ExtResource( 1 )
 animation = "idle"
-frame = 5
+frame = 6
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -58,6 +62,11 @@ shape = SubResource( 1 )
 target_sample = ExtResource( 2 )
 start_listening = true
 
+[node name="DestroyParent" parent="SoundListener" instance=ExtResource( 11 )]
+tidbit = ExtResource( 6 )
+compare_on_change = true
+compare_on_ready = true
+
 [node name="SoundSource" parent="." instance=ExtResource( 4 )]
 sample = ExtResource( 5 )
 
@@ -66,3 +75,31 @@ anims/PlayCowbell = SubResource( 2 )
 
 [node name="SetTidbit" parent="." instance=ExtResource( 8 )]
 tidbit = ExtResource( 6 )
+
+[node name="TalkRadius" parent="." instance=ExtResource( 9 )]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TalkRadius"]
+shape = SubResource( 3 )
+
+[node name="SayDialogue" parent="." instance=ExtResource( 12 )]
+dialogues = [ PoolStringArray( "ah ya, thats the shit" ) ]
+
+[node name="WrongSampleParent" type="Node2D" parent="."]
+
+[node name="SoundListener" parent="WrongSampleParent" instance=ExtResource( 3 )]
+any_sound_but_target = true
+target_sample = ExtResource( 2 )
+start_listening = true
+
+[node name="SayDialogue" parent="WrongSampleParent" instance=ExtResource( 12 )]
+dialogues = [ PoolStringArray( "no that is the wrong sound", "dump on my face or whatever" ) ]
+
+[node name="DestroyParent" parent="WrongSampleParent" instance=ExtResource( 11 )]
+tidbit = ExtResource( 6 )
+compare_on_change = true
+compare_on_ready = true
+
+[node name="ConditionalDialogue" parent="." instance=ExtResource( 10 )]
+condition = ExtResource( 6 )
+false_dialogues = [ PoolStringArray( "bruh you still gotta satisfy me" ) ]
+true_dialogues = [ PoolStringArray( "i have been satisfied" ) ]
