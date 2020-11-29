@@ -1,7 +1,9 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://Assets/Collidable/TireSwing/BigTree_TireSwing_upscaled.png" type="Texture" id=1]
 [ext_resource path="res://Assets/Collidable/TireSwing/TireSwing.gd" type="Script" id=2]
+[ext_resource path="res://SoundSource/SoundSource.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Samples/TireSwingSqueak/TireSwingSqueak.tres" type="Resource" id=4]
 
 [sub_resource type="AtlasTexture" id=1]
 flags = 4
@@ -71,9 +73,31 @@ animations = [ {
 "speed": 5.0
 } ]
 
-[sub_resource type="AnimatedTexture" id=16]
+[sub_resource type="AnimatedTexture" id=14]
 flags = 4
 frame_0/texture = ExtResource( 1 )
+
+[sub_resource type="Animation" id=16]
+resource_name = "TireSwingSqueak"
+length = 6.0
+loop = true
+tracks/0/type = "method"
+tracks/0/path = NodePath("SoundSource")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 4.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"values": [ {
+"args": [  ],
+"method": "play_sound"
+}, {
+"args": [  ],
+"method": "play_sound"
+} ]
+}
 
 [sub_resource type="Animation" id=15]
 resource_name = "swinging_collider"
@@ -115,15 +139,22 @@ frame = 2
 
 [node name="FlatSprite" type="Sprite" parent="."]
 position = Vector2( -1.5439, -80.0899 )
-texture = SubResource( 16 )
+texture = SubResource( 14 )
 hframes = 12
-frame = 11
 
 [node name="TireCollision" type="CollisionPolygon2D" parent="."]
-position = Vector2( 137.943, 73.3383 )
+position = Vector2( 139.961, 73.3997 )
 rotation = 3.14159
 polygon = PoolVector2Array( 76.9538, 92.4947, 82.7592, 88.4526, 84.3787, 79.8154, 83.8389, 69.019, 78.058, 62.1121, 75.127, 60.9699, 75.3188, 49.2671, 71.4819, 44.2789, 66.3019, 52.5285, 65.5345, 62.3129, 61.8482, 63.6317, 56.4879, 75.6768, 57.5675, 86.1133, 65.0591, 93.2621, 70.8396, 94.5318 )
 one_way_collision_margin = 0.0
+
+[node name="SoundSource" parent="TireCollision" instance=ExtResource( 3 )]
+position = Vector2( 72.4596, 77.8053 )
+sample = ExtResource( 4 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="TireCollision"]
+autoplay = "TireSwingSqueak"
+anims/TireSwingSqueak = SubResource( 16 )
 
 [node name="Animator" type="AnimationPlayer" parent="."]
 anims/swinging_collider = SubResource( 15 )

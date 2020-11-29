@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://Assets/Tiles/Outskirts/OutskirtsMid.png" type="Texture" id=1]
 [ext_resource path="res://Location/Areas/Outskirts/Outskirts.gd" type="Script" id=2]
@@ -8,6 +8,12 @@
 [ext_resource path="res://Player/Player.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Assets/Tiles/Outskirts/Outskirts.png" type="Texture" id=7]
 [ext_resource path="res://Camera/Camera.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Samples/TireSwingSqueak/TireSwingSqueak.tres" type="Resource" id=9]
+[ext_resource path="res://SoundListener/SoundListener.tscn" type="PackedScene" id=10]
+[ext_resource path="res://Tidbits/DadSatisfied.tres" type="Resource" id=11]
+[ext_resource path="res://SoundResponses/SetTidbit/SetTidbit.tscn" type="PackedScene" id=12]
+[ext_resource path="res://TidbitResponses/DestroyParent/DestroyParent.tscn" type="PackedScene" id=13]
+[ext_resource path="res://TidbitResponses/DadsTidbitResponse/DadsTidbitResponse.tscn" type="PackedScene" id=14]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 66.0782, 124.775 )
@@ -41,9 +47,22 @@ position = Vector2( 3778.67, 1486.32 )
 position = Vector2( 60.4871, 280.872 )
 
 [node name="Dad" parent="Map" instance=ExtResource( 3 )]
-visible = false
 position = Vector2( 1798.11, 1082.98 )
 scale = Vector2( 0.75, 0.75 )
+
+[node name="SoundListener" parent="Map/Dad" instance=ExtResource( 10 )]
+target_sample = ExtResource( 9 )
+start_listening = true
+
+[node name="SetTidbit" parent="Map/Dad" instance=ExtResource( 12 )]
+tidbit = ExtResource( 11 )
+
+[node name="DadsTidbitResponse" parent="Map/Dad" instance=ExtResource( 14 )]
+tidbit = ExtResource( 11 )
+compare_on_change = true
+
+[node name="DestroyParent" parent="Map/Dad" instance=ExtResource( 13 )]
+tidbit = ExtResource( 11 )
 
 [node name="LocationTransitionTrigger" type="Area2D" parent="."]
 position = Vector2( -3.12384, 1133.68 )
@@ -115,7 +134,10 @@ shape = SubResource( 2 )
 
 [node name="DadBlocker" type="CollisionPolygon2D" parent="Collisions"]
 polygon = PoolVector2Array( 1884.29, 1291.69, 1804.03, 1061.94, 1823.43, 1058.9, 1913.96, 1295.11 )
-disabled = true
+
+[node name="DestroyParent" parent="Collisions/DadBlocker" instance=ExtResource( 13 )]
+tidbit = ExtResource( 11 )
+compare_on_change = true
 [connection signal="body_entered" from="LocationTransitionTrigger" to="LocationTransitionTrigger" method="_on_LocationTransition_body_entered"]
 [connection signal="body_entered" from="LocationTransitionTrigger2" to="LocationTransitionTrigger2" method="_on_LocationTransition_body_entered"]
 
