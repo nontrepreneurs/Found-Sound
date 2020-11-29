@@ -20,6 +20,7 @@ var heading = Vector2()
 var velocity = Vector2()
 
 onready var canMove = true
+var sampler = null
 
 func _ready():
 	print("PLAYER READY")
@@ -28,18 +29,21 @@ func _ready():
 	# character setup
 #	$AnimatedSprite.frames = character.frames
 #	$CollisionShape2D.shape = character.collision_shape
+	sampler = $Sampler
+	assert(sampler, "ERROR: Player requires child Sampler.")
 
 func _process(delta):
-	update_heading()
-	update_animations()
-	update_velocity()
+	if (canMove and !sampler.is_recording):
+		update_heading()
+		update_animations()
+		update_velocity()
 
 func _physics_process(delta):
 	move_and_slide(velocity) # don't multiply by delta for move_and_slide
 
 func update_heading():
-	if !canMove:
-		return
+	#if !canMove:
+	#	return
 	
 	# calculate X heading
 	if Input.is_action_just_pressed(UI_RIGHT):
@@ -84,7 +88,6 @@ func update_animations():
 	else:
 		changeAnimation(IDLE)
 
-
 func changeAnimation(truth: String):
 	if $AnimatedSprite.animation != truth:
 		$AnimatedSprite.animation = truth
@@ -92,6 +95,5 @@ func changeAnimation(truth: String):
 func update_velocity():
 	if heading != Vector2.ZERO:
 		velocity = heading.normalized() * speed
-		
 	else:
 		velocity = Vector2.ZERO
