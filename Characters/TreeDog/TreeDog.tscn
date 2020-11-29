@@ -8,8 +8,6 @@
 [ext_resource path="res://Tidbits/DogHasBeenScaredAway.tres" type="Resource" id=6]
 [ext_resource path="res://SoundResponses/SetTidbit/SetTidbit.tscn" type="PackedScene" id=7]
 
-
-
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 12.1484
 height = 40.6287
@@ -19,7 +17,6 @@ height = 40.6287
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = ExtResource( 1 )
 animation = "idle"
-frame = 8
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -39,6 +36,7 @@ position = Vector2( -10002.4, 28.4766 )
 
 [node name="DestroyParent" parent="." instance=ExtResource( 5 )]
 tidbit = ExtResource( 6 )
+compare_on_ready = true
 
 [node name="SetTidbit" parent="." instance=ExtResource( 7 )]
 tidbit = ExtResource( 6 )
