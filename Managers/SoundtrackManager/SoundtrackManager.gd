@@ -17,12 +17,13 @@ onready var tracks: Dictionary = {
 
 
 onready var duration = 1.0
-onready var currentTrack = tracks[Constants.Soundtrack.CUTE]
-onready var targetTrack = null
+
+onready var currentTrack = Constants.Soundtrack.CUTE
+onready var prevTrack = null
 
 func _ready():
-	$DeckA.stream = currentTrack.stream
-	$DeckA.play(currentTrack.position)
+	$DeckA.stream = tracks[currentTrack].stream
+	$DeckA.play(tracks[currentTrack].position)
 	print_debug(" -> SoundtrackManager Ready")
 
 func fadeOut(deck: AudioStreamPlayer):
@@ -34,12 +35,24 @@ func fadeIn(deck: AudioStreamPlayer):
 	inFade.interpolate_property(deck, "volume_db", -80, 0, duration, 1, Tween.EASE_IN, 0)
 	inFade.start()
 
-func _on_Button_pressed():
+
+func transitionSong(track: int):
+	prevTrack = currentTrack
+	currentTrack = track
 	fadeOut($DeckA)
+	pass
+
+onready var flip = true
+func _on_Button_pressed():
+	if flip:
+		transitionSong(Constants.Soundtrack.DOWN_IN_THE_DUMPS)
+	else:
+		transitionSong(Constants.Soundtrack.CUTE)
+	flip = !flip
 
 func _on_fadeOut_tween_completed(object, key):
+	tracks[prevTrack].position = object.get_playback_position()
 	object.stop()
-	object.stream = tracks[Constants.Soundtrack.DOWN_IN_THE_DUMPS].stream
-	object.play()
+	object.stream = tracks[currentTrack].stream
+	object.play(tracks[currentTrack].position)
 	fadeIn(object)
-	pass # Replace with function body.
