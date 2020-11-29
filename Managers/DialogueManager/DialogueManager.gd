@@ -11,6 +11,7 @@ extends CanvasLayer
 
 const dialogueBox: PackedScene = preload("res://DialogueBox/DialogueBox.tscn")
 var node: DialogueBox
+var someone_is_talking: Resource = load("res://Tidbits/SomeoneIsTalking.tres")
 
 func test():
 	# var vox = Voice.new(Constants.DialogueTypes.VOCALIZED, load("res://Assets/SFX/Ringtone.wav"))
@@ -48,13 +49,17 @@ func loadDialogue(dialogues: Array):
 		node.connect("dialogue_completed", self, "onDialogueComplete")
 #		connect to node complete signal
 #		unduck audio
+		someone_is_talking.value = true
 
 func onDialogueComplete():
 	print("manager has completed dialog... time to unduck audio")
 	print("node: ", node)
+	someone_is_talking.value = false
 
 
 func _ready():
 	print("manager ready")
+	
+	assert(someone_is_talking, "ERROR: DialogueManager requires someone_is_talking tidbit.")
 
 #	$DialogueBox/Dialogue.bbcode_text = wavy("fuck this...") + tornado("i'm a bad bitch") + shake("don't fuck w/ me") + fade("we all die someday...")

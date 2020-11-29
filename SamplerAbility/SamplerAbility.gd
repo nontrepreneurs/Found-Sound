@@ -41,7 +41,7 @@ func _ready():
 	particles = $CPUParticles2D
 
 func _process(delta):
-	if (!is_recording && parent.canMove):
+	if (parent.can_move()):
 		if Input.is_action_just_pressed(RECORD_ACTION):
 			record_sound()
 		if Input.is_action_just_pressed(PLAY_SOUND_ACTION):

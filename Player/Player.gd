@@ -19,7 +19,8 @@ var screen_size
 var heading = Vector2()
 var velocity = Vector2()
 
-onready var canMove = true
+export var someone_is_talking: Resource = null
+
 var sampler = null
 
 func _ready():
@@ -31,9 +32,11 @@ func _ready():
 #	$CollisionShape2D.shape = character.collision_shape
 	sampler = $Sampler
 	assert(sampler, "ERROR: Player requires child Sampler.")
+	
+	assert(someone_is_talking, "ERROR: Player requires can_move tidbit.")
 
 func _process(delta):
-	if (canMove and !sampler.is_recording):
+	if can_move():
 		update_heading()
 		update_animations()
 		update_velocity()
@@ -41,10 +44,10 @@ func _process(delta):
 func _physics_process(delta):
 	move_and_slide(velocity) # don't multiply by delta for move_and_slide
 
+func can_move() -> bool:
+	return (!someone_is_talking.value and !sampler.is_recording)
+
 func update_heading():
-	#if !canMove:
-	#	return
-	
 	# calculate X heading
 	if Input.is_action_just_pressed(UI_RIGHT):
 		heading.x = 1
