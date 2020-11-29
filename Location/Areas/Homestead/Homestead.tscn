@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://Location/Areas/Homestead/Homestead.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Collidable/Deciduous Tree Variant.tscn" type="PackedScene" id=2]
@@ -14,6 +14,7 @@
 [ext_resource path="res://Assets/Collidable/TownAndForestry.png" type="Texture" id=12]
 [ext_resource path="res://Location/LocationTransitionTrigger.tscn" type="PackedScene" id=13]
 [ext_resource path="res://Assets/Collidable/Metal fence.png" type="Texture" id=14]
+[ext_resource path="res://SoundtrackArea/SoundtrackArea.tscn" type="PackedScene" id=15]
 
 [sub_resource type="Gradient" id=1]
 offsets = PoolRealArray( 0, 0.992353, 0.998301, 1 )
@@ -36,6 +37,9 @@ extents = Vector2( 187.186, 64.5036 )
 
 [sub_resource type="RectangleShape2D" id=7]
 extents = Vector2( 189.38, 35.6769 )
+
+[sub_resource type="RectangleShape2D" id=8]
+extents = Vector2( 63.2202, 67.6627 )
 
 [node name="Location" type="Node2D"]
 script = ExtResource( 1 )
@@ -353,8 +357,17 @@ shape = SubResource( 7 )
 position = Vector2( 362.749, 934.55 )
 shape = SubResource( 7 )
 
+[node name="SoundtrackArea" parent="." instance=ExtResource( 15 )]
+position = Vector2( 667.134, 86.6192 )
+
+[node name="CollisionShape2D" parent="SoundtrackArea" index="0"]
+position = Vector2( -42.0769, 393.015 )
+shape = SubResource( 8 )
+
 [editable path="Map/Player/Camera"]
 
 [editable path="LocationTransitionTrigger"]
 
 [editable path="LocationTransitionTrigger2"]
+
+[editable path="SoundtrackArea"]

@@ -22,8 +22,8 @@ onready var currentTrack = Constants.Soundtrack.CUTE
 onready var prevTrack = null
 
 func _ready():
-	$DeckA.stream = tracks[currentTrack].stream
-	$DeckA.play(tracks[currentTrack].position)
+#	$DeckA.stream = tracks[currentTrack].stream
+#	$DeckA.play(tracks[currentTrack].position)
 	print_debug(" -> SoundtrackManager Ready")
 
 func fadeOut(deck: AudioStreamPlayer):
