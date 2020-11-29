@@ -94,6 +94,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://db/Mutator.gd"
 }, {
+"base": "Area2D",
+"class": "TalkRadius",
+"language": "GDScript",
+"path": "res://TalkRadius/TalkRadius.gd"
+}, {
 "base": "Resource",
 "class": "Tidbit",
 "language": "GDScript",
@@ -137,6 +142,7 @@ _global_script_class_icons={
 "SoundListener": "",
 "SoundSource": "",
 "StateMutator": "",
+"TalkRadius": "",
 "Tidbit": "",
 "TidbitResponse": "",
 "Voice": "",
