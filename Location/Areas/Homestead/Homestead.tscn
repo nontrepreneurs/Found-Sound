@@ -363,7 +363,6 @@ position = Vector2( 667.134, 86.6192 )
 [node name="CollisionShape2D" parent="SoundtrackArea" index="0"]
 position = Vector2( -42.0769, 393.015 )
 shape = SubResource( 8 )
-disabled = true
 
 [editable path="Map/Player/Camera"]
 
