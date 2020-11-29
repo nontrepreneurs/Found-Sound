@@ -16,7 +16,7 @@ onready var tracks: Dictionary = {
 }
 
 
-onready var duration = 1.0
+onready var duration = 0.5
 
 onready var currentTrack = Constants.Soundtrack.CUTE
 onready var prevTrack = null
