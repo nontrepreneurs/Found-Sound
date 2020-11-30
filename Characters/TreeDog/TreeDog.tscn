@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://Characters/TreeDog/treeDog_spriteframes.tres" type="SpriteFrames" id=1]
 [ext_resource path="res://SoundListener/SoundListener.tscn" type="PackedScene" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://SoundResponses/SetTidbit/SetTidbit.tscn" type="PackedScene" id=7]
 [ext_resource path="res://TalkComponents/SimpleTalkCycle/SimpleTalkCycle.tscn" type="PackedScene" id=8]
 [ext_resource path="res://TalkRadius/TalkRadius.tscn" type="PackedScene" id=9]
+[ext_resource path="res://SoundResponses/SayDialogue/SayDialogue.tscn" type="PackedScene" id=10]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 12.1484
@@ -56,3 +57,6 @@ shape = SubResource( 2 )
 
 [node name="SimpleTalkCycle" parent="TalkRadiusPrefab" instance=ExtResource( 8 )]
 dialogues = [ PoolStringArray( "I am a brown dog, drip droppin" ) ]
+
+[node name="SayDialogue" parent="." instance=ExtResource( 10 )]
+dialogues = [ PoolStringArray( "arf arf imma bounce" ) ]

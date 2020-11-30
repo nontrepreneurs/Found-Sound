@@ -40,6 +40,9 @@ func _process(delta):
 		update_heading()
 		update_animations()
 		update_velocity()
+	else:
+		velocity = Vector2.ZERO
+		heading = Vector2.ZERO
 
 func _physics_process(delta):
 	move_and_slide(velocity) # don't multiply by delta for move_and_slide
