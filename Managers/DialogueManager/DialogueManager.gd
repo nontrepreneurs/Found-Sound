@@ -59,7 +59,4 @@ func onDialogueComplete():
 
 func _ready():
 	print("manager ready")
-	
 	assert(someone_is_talking, "ERROR: DialogueManager requires someone_is_talking tidbit.")
-
-#	$DialogueBox/Dialogue.bbcode_text = wavy("fuck this...") + tornado("i'm a bad bitch") + shake("don't fuck w/ me") + fade("we all die someday...")

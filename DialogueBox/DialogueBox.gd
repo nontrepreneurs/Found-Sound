@@ -77,8 +77,6 @@ func _input(event):
 
 
 func _ready():
-#	if $Control/Sprite:
-#		$DialogueWrapper/Dialogue.margin_left += $Control.rect_size[0]
 	reset()
 	updateCurrentDialogue()
 	summonDialogueBox()

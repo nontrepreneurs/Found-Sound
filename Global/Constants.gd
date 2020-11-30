@@ -23,7 +23,8 @@ enum Soundtrack {
 	CUTE,
 	DOWN_IN_THE_DUMPS,
 	AMBIENT,
-	PAWS_FOR_EFFECT
+	PAWS_FOR_EFFECT,
+	VICTORY
 }
 
 enum DialogueTypes {

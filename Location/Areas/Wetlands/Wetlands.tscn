@@ -1,10 +1,11 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://Location/Areas/Wetlands/Wetlands.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Tiles/Wetlands/Back.png" type="Texture" id=2]
 [ext_resource path="res://Camera/Camera.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Characters/Frog/Frog.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Player/Player.tscn" type="PackedScene" id=5]
+[ext_resource path="res://SoundtrackArea/SoundtrackArea.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Location/LocationTransitionTrigger.tscn" type="PackedScene" id=7]
 
 [sub_resource type="StreamTexture" id=1]
@@ -31,6 +32,9 @@ extents = Vector2( 56.0872, 1966.77 )
 
 [sub_resource type="RectangleShape2D" id=8]
 extents = Vector2( 63.1867, 44.178 )
+
+[sub_resource type="RectangleShape2D" id=9]
+extents = Vector2( 95.2094, 117.729 )
 
 [node name="Location" type="Node2D"]
 script = ExtResource( 1 )
@@ -62,10 +66,10 @@ position = Vector2( 15.1281, 39.1552 )
 z_index = -3
 
 [node name="ColorRect" type="ColorRect" parent="ParallaxBackground/ColorBackground"]
-margin_left = -3738.66
-margin_top = -1688.92
-margin_right = 4920.34
-margin_bottom = 2478.08
+margin_left = -2901.45
+margin_top = -1616.77
+margin_right = 5757.54
+margin_bottom = 2550.23
 color = Color( 0, 0, 0, 1 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -140,8 +144,17 @@ position = Vector2( 1886.26, 345.38 )
 rotation = 1.5708
 shape = SubResource( 8 )
 
+[node name="SoundtrackArea" parent="." instance=ExtResource( 6 )]
+position = Vector2( 719.966, 299.109 )
+song = 4
+
+[node name="CollisionShape2D" parent="SoundtrackArea" index="0"]
+shape = SubResource( 9 )
+
 [editable path="Map/Player/Camera"]
 
 [editable path="LocationTransition"]
 
 [editable path="LocationTransition2"]
+
+[editable path="SoundtrackArea"]

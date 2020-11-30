@@ -10,6 +10,7 @@ script = ExtResource( 1 )
 [node name="fadeOut" type="Tween" parent="."]
 
 [node name="DeckA" type="AudioStreamPlayer" parent="."]
+volume_db = -10.0
 
 [node name="DeckB" type="AudioStreamPlayer" parent="."]
 

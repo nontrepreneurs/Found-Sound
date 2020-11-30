@@ -2,7 +2,7 @@ extends KinematicBody2D
 
 var talkable = false;
 
-var dia = [Dialogue.new("fuck man you can't get past me lol"), Dialogue.new(StringMan.shake("f u c k you ahahah"))]
+var dia = [Dialogue.new("man you can't get past me lol"), Dialogue.new(StringMan.shake("lol you ahahah"))]
 
 func _input(event):
 	if talkable and event.is_action_pressed("confirm"):

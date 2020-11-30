@@ -2,8 +2,6 @@
 
 [ext_resource path="res://Tidbits/Tidbit.gd" type="Script" id=1]
 
-
-
 [resource]
 script = ExtResource( 1 )
 starting_value = false
