@@ -2,21 +2,12 @@
 
 importer="wav"
 type="AudioStreamSample"
-<<<<<<< HEAD:Assets/Music/Cute Theme.wav.import
-path="res://.import/Cute Theme.wav-b6a04dd749069b782449ba10b49226c4.sample"
-
-[deps]
-
-source_file="res://Assets/Music/Cute Theme.wav"
-dest_files=[ "res://.import/Cute Theme.wav-b6a04dd749069b782449ba10b49226c4.sample" ]
-=======
 path="res://.import/purr.wav-cdea5fe5a319eb2da1926862d74a52e1.sample"
 
 [deps]
 
 source_file="res://Samples/CatMeow/purr.wav"
 dest_files=[ "res://.import/purr.wav-cdea5fe5a319eb2da1926862d74a52e1.sample" ]
->>>>>>> 091b54463b34376d032c5a1e9583ca3296e6abdd:Samples/CatMeow/purr.wav.import
 
 [params]
 
