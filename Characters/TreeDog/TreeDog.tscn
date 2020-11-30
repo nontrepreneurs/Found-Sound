@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://Characters/TreeDog/treeDog_spriteframes.tres" type="SpriteFrames" id=1]
 [ext_resource path="res://SoundListener/SoundListener.tscn" type="PackedScene" id=2]
@@ -7,16 +7,22 @@
 [ext_resource path="res://TidbitResponses/DestroyParent/DestroyParent.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Tidbits/DogHasBeenScaredAway.tres" type="Resource" id=6]
 [ext_resource path="res://SoundResponses/SetTidbit/SetTidbit.tscn" type="PackedScene" id=7]
+[ext_resource path="res://TalkComponents/SimpleTalkCycle/SimpleTalkCycle.tscn" type="PackedScene" id=8]
+[ext_resource path="res://TalkRadius/TalkRadius.tscn" type="PackedScene" id=9]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 12.1484
 height = 40.6287
+
+[sub_resource type="CircleShape2D" id=2]
+radius = 133.243
 
 [node name="TreeDog" type="KinematicBody2D"]
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = ExtResource( 1 )
 animation = "idle"
+frame = 3
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -40,3 +46,13 @@ compare_on_ready = true
 
 [node name="SetTidbit" parent="." instance=ExtResource( 7 )]
 tidbit = ExtResource( 6 )
+
+[node name="TalkRadiusPrefab" type="Node2D" parent="."]
+
+[node name="TalkRadius" parent="TalkRadiusPrefab" instance=ExtResource( 9 )]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TalkRadiusPrefab/TalkRadius"]
+shape = SubResource( 2 )
+
+[node name="SimpleTalkCycle" parent="TalkRadiusPrefab" instance=ExtResource( 8 )]
+dialogues = [ PoolStringArray( "I am a brown dog, drip droppin" ) ]

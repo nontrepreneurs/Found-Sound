@@ -1,10 +1,15 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Characters/Townsfolk/DiseasedGiraffe/diseasedGiraffe_spriteframes.tres" type="SpriteFrames" id=1]
+[ext_resource path="res://TalkRadius/TalkRadius.tscn" type="PackedScene" id=2]
+[ext_resource path="res://TalkComponents/SimpleTalkCycle/SimpleTalkCycle.tscn" type="PackedScene" id=3]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 15.8366
 height = 40.2843
+
+[sub_resource type="CircleShape2D" id=2]
+radius = 164.579
 
 [node name="DiseasedGiraffe" type="KinematicBody2D"]
 
@@ -12,10 +17,18 @@ height = 40.2843
 scale = Vector2( 4.00945, 4.00945 )
 frames = ExtResource( 1 )
 animation = "idle"
-frame = 6
+frame = 2
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 9.52441, 46.0346 )
 rotation = 1.5708
 shape = SubResource( 1 )
+
+[node name="TalkRadius" parent="." instance=ExtResource( 2 )]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TalkRadius"]
+shape = SubResource( 2 )
+
+[node name="SimpleTalkCycle" parent="." instance=ExtResource( 3 )]
+dialogues = [ PoolStringArray( "*giraffe noise*", "the fuck sound does a giraffe make", "grnph!" ) ]

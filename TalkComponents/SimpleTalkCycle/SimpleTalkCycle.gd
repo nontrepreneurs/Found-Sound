@@ -7,6 +7,7 @@ var dialogue_index = 0
 const ON_TALK_SIGNAL = "on_talk_signal"
 
 func _ready():
+	assert(dialogues, "ERROR: SimpleTalkCycle dialogue property is probably null.")
 	assert(dialogues.size() > 0, "ERROR: SimpleTalkCycle requires at least one dialogue.")
 	
 	assert(talk_radius, "ERROR: SimpleTalkCycle requires TalkRadius sibling.")

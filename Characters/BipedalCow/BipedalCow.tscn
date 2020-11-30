@@ -15,6 +15,7 @@
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 20.8941
+height = 0.0
 
 [sub_resource type="Animation" id=2]
 resource_name = "PlayCowbell"
@@ -51,11 +52,11 @@ play_cowbell = ExtResource( 6 )
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = ExtResource( 1 )
 animation = "idle"
-frame = 6
+frame = 4
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 0, 19.578 )
+position = Vector2( 0.629959, 29.2374 )
 shape = SubResource( 1 )
 
 [node name="SoundListener" parent="." instance=ExtResource( 3 )]

@@ -1,10 +1,12 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Characters/TreeCat/treeCat_spriteframes.tres" type="SpriteFrames" id=1]
 [ext_resource path="res://Samples/CatMeow/CatMeow.tres" type="Resource" id=2]
 [ext_resource path="res://SoundSource/SoundSource.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Tidbits/DogHasBeenScaredAway.tres" type="Resource" id=4]
 [ext_resource path="res://TidbitResponses/StartAnimation/StartAnimation.tscn" type="PackedScene" id=5]
+[ext_resource path="res://TalkComponents/SimpleTalkCycle/SimpleTalkCycle.tscn" type="PackedScene" id=6]
+[ext_resource path="res://TalkRadius/TalkRadius.tscn" type="PackedScene" id=7]
 
 [sub_resource type="Animation" id=1]
 resource_name = "meowPeriodically"
@@ -31,12 +33,15 @@ tracks/0/keys = {
 } ]
 }
 
+[sub_resource type="CircleShape2D" id=2]
+radius = 133.243
+
 [node name="TreeCat" type="Node2D"]
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = ExtResource( 1 )
 animation = "idle"
-frame = 8
+frame = 11
 playing = true
 
 [node name="SoundSource" parent="." instance=ExtResource( 3 )]
@@ -49,3 +54,13 @@ anims/meowPeriodically = SubResource( 1 )
 tidbit = ExtResource( 4 )
 compare_on_change = true
 animation_name = "meowPeriodically"
+
+[node name="TalkRadiusPrefab" type="Node2D" parent="."]
+
+[node name="TalkRadius" parent="TalkRadiusPrefab" instance=ExtResource( 7 )]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TalkRadiusPrefab/TalkRadius"]
+shape = SubResource( 2 )
+
+[node name="SimpleTalkCycle" parent="TalkRadiusPrefab" instance=ExtResource( 6 )]
+dialogues = [ PoolStringArray( "meoah meow" ) ]

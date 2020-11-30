@@ -1,8 +1,14 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Characters/Townsfolk/WingGuy/wingGuy_spriteframes.tres" type="SpriteFrames" id=1]
+[ext_resource path="res://TalkComponents/SimpleTalkCycle/SimpleTalkCycle.tscn" type="PackedScene" id=2]
+[ext_resource path="res://TalkRadius/TalkRadius.tscn" type="PackedScene" id=3]
 
 [sub_resource type="CapsuleShape2D" id=1]
+height = 7.98883
+
+[sub_resource type="CircleShape2D" id=2]
+radius = 133.243
 
 [node name="WingGuy" type="KinematicBody2D"]
 
@@ -12,5 +18,16 @@ animation = "idle"
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 0, 31.429 )
+position = Vector2( 0, 37.774 )
+rotation = 1.5708
 shape = SubResource( 1 )
+
+[node name="TalkRadiusPrefab" type="Node2D" parent="."]
+
+[node name="TalkRadius" parent="TalkRadiusPrefab" instance=ExtResource( 3 )]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TalkRadiusPrefab/TalkRadius"]
+shape = SubResource( 2 )
+
+[node name="SimpleTalkCycle" parent="TalkRadiusPrefab" instance=ExtResource( 2 )]
+dialogues = [ PoolStringArray( "i am wing guy" ) ]

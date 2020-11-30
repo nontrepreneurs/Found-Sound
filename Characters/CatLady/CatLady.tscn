@@ -8,18 +8,18 @@
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 17.7795
-height = 28.2435
+height = 0.0
 
 [node name="CatLady" type="KinematicBody2D"]
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = ExtResource( 1 )
 animation = "idle"
-frame = 11
+frame = 18
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 0, 4.44946 )
+position = Vector2( 0, 19.5776 )
 shape = SubResource( 1 )
 
 [node name="SetTidbit" parent="." instance=ExtResource( 3 )]
