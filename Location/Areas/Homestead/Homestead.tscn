@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=2]
+[gd_scene load_steps=26 format=2]
 
 [ext_resource path="res://Location/Areas/Homestead/Homestead.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Collidable/Deciduous Tree Variant.tscn" type="PackedScene" id=2]
@@ -15,6 +15,8 @@
 [ext_resource path="res://Location/LocationTransitionTrigger.tscn" type="PackedScene" id=13]
 [ext_resource path="res://Assets/Collidable/Metal fence.png" type="Texture" id=14]
 [ext_resource path="res://SoundtrackArea/SoundtrackArea.tscn" type="PackedScene" id=15]
+[ext_resource path="res://Tidbits/CatLadyIsSatisfied.tres" type="Resource" id=16]
+[ext_resource path="res://TidbitResponses/DestroyParent/DestroyParent.tscn" type="PackedScene" id=17]
 
 [sub_resource type="Gradient" id=1]
 offsets = PoolRealArray( 0, 0.992353, 0.998301, 1 )
@@ -302,6 +304,27 @@ texture = ExtResource( 14 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Map/Fence"]
 position = Vector2( 0.339401, 10.8607 )
 shape = SubResource( 3 )
+
+[node name="DestroyParent" parent="Map/Fence" instance=ExtResource( 17 )]
+tidbit = ExtResource( 16 )
+compare_on_change = true
+compare_on_ready = true
+
+[node name="Fence(Moved)" type="StaticBody2D" parent="Map"]
+position = Vector2( 774.43, -207.129 )
+
+[node name="Sprite" type="Sprite" parent="Map/Fence(Moved)"]
+texture = ExtResource( 14 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Map/Fence(Moved)"]
+position = Vector2( 0.339401, 10.8607 )
+shape = SubResource( 3 )
+
+[node name="DestroyParent" parent="Map/Fence(Moved)" instance=ExtResource( 17 )]
+tidbit = ExtResource( 16 )
+target_value = false
+compare_on_change = true
+compare_on_ready = true
 
 [node name="LocationTransitionTrigger" parent="." instance=ExtResource( 13 )]
 position = Vector2( 615.597, 917.102 )

@@ -63,6 +63,7 @@ compare_on_change = true
 
 [node name="DestroyParent" parent="Map/Dad" instance=ExtResource( 13 )]
 tidbit = ExtResource( 11 )
+compare_on_ready = true
 
 [node name="LocationTransitionTrigger" type="Area2D" parent="."]
 position = Vector2( -3.12384, 1133.68 )
@@ -138,6 +139,7 @@ polygon = PoolVector2Array( 1884.29, 1291.69, 1804.03, 1061.94, 1823.43, 1058.9,
 [node name="DestroyParent" parent="Collisions/DadBlocker" instance=ExtResource( 13 )]
 tidbit = ExtResource( 11 )
 compare_on_change = true
+compare_on_ready = true
 [connection signal="body_entered" from="LocationTransitionTrigger" to="LocationTransitionTrigger" method="_on_LocationTransition_body_entered"]
 [connection signal="body_entered" from="LocationTransitionTrigger2" to="LocationTransitionTrigger2" method="_on_LocationTransition_body_entered"]
 
