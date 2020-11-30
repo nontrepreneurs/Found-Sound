@@ -79,7 +79,7 @@ texture = SubResource( 2 )
 [node name="Map" type="YSort" parent="."]
 
 [node name="Player" parent="Map" instance=ExtResource( 7 )]
-position = Vector2( 621.271, 437.865 )
+position = Vector2( 461.866, 439.138 )
 speed = 200
 
 [node name="Camera" parent="Map/Player" instance=ExtResource( 9 )]
@@ -320,7 +320,7 @@ delay = 0.1
 coordinates = Vector2( -850, -800 )
 
 [node name="CollisionShape2D" parent="LocationTransitionTrigger2" index="0"]
-position = Vector2( 3.54535, -1192.67 )
+position = Vector2( 3.54535, -1191.46 )
 shape = SubResource( 4 )
 
 [node name="Left Wall" type="StaticBody2D" parent="."]

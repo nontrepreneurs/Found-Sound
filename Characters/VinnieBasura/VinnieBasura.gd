@@ -5,7 +5,7 @@ export var has_recorded_vinnie: Resource = null
 onready var sound_source: SoundSource = $SoundSource
 onready var talk_radius: TalkRadius = $TalkRadius
 
-var vinnie_dialogue = [Dialogue.new("YOU'RE TALKING TO vinnie basura MOTHAFUCKA")]
+var vinnie_dialogue = [Dialogue.new("YOU'RE TALKING TO vinnie basura")]
 
 const ON_TALK_SIGNAL = "on_talk_signal"
 

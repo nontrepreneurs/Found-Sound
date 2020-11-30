@@ -361,6 +361,7 @@ region_enabled = true
 region_rect = Rect2( 327, 197, 205, 148 )
 
 [node name="Sprite2" type="Sprite" parent="Map"]
+visible = false
 position = Vector2( 729.534, 826.493 )
 texture = ExtResource( 14 )
 region_enabled = true

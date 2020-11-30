@@ -1,10 +1,11 @@
-[gd_scene load_steps=25 format=2]
+[gd_scene load_steps=26 format=2]
 
 [ext_resource path="res://DialogueBox/DialogueBox.gd" type="Script" id=1]
 [ext_resource path="res://Characters/Dad/DAD_ANIMATION_sheet.png" type="Texture" id=2]
 [ext_resource path="res://DialogueBox/Control.gd" type="Script" id=3]
 [ext_resource path="res://Assets/Fonts/VT323/VT323-Regular.ttf" type="DynamicFontData" id=4]
 [ext_resource path="res://Assets/SFX/UI/Confirm.wav" type="AudioStream" id=5]
+[ext_resource path="res://Resources/Voice/Default/Default.wav" type="AudioStream" id=6]
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0, 0, 0, 1 )
@@ -205,6 +206,7 @@ anims/slide_down_old = SubResource( 17 )
 anims/slide_up = SubResource( 18 )
 
 [node name="DialogueVoicebox" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 6 )
 
 [node name="DialogueTimer" type="Timer" parent="."]
 wait_time = 0.05

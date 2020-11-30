@@ -35,7 +35,6 @@ func fileHandler(name: String, path: String, _details: Dictionary):
 	var fileIsParentFolderName: bool = path.get_base_dir().get_file() == targetKey
 	if path.get_extension() == "tres" and fileIsParentFolderName:
 		var newVoice = load(path)
-		print("dumb ass fucking shit: ", newVoice)
 		resources[targetKey] = newVoice
 
 var fh = funcref(self, "fileHandler")

@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/downinthedumps.ogg-ed7211823de6e5e372caf0e0ebeaf2c3.oggstr"
+
+[deps]
+
+source_file="res://Assets/Music/downinthedumps.ogg"
+dest_files=[ "res://.import/downinthedumps.ogg-ed7211823de6e5e372caf0e0ebeaf2c3.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=8.27
