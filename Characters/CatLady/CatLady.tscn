@@ -1,21 +1,28 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://Characters/CatLady/catLady_spriteframes.tres" type="SpriteFrames" id=1]
 [ext_resource path="res://Tidbits/CatLadyIsSatisfied.tres" type="Resource" id=2]
 [ext_resource path="res://SoundResponses/SetTidbit/SetTidbit.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Samples/CatMeow/CatMeow.tres" type="Resource" id=4]
 [ext_resource path="res://SoundListener/SoundListener.tscn" type="PackedScene" id=5]
+[ext_resource path="res://TalkComponents/ConditionalDialogue/ConditionalDialogue.tscn" type="PackedScene" id=6]
+[ext_resource path="res://TidbitResponses/DestroyParent/DestroyParent.tscn" type="PackedScene" id=7]
+[ext_resource path="res://SoundResponses/SayDialogue/SayDialogue.tscn" type="PackedScene" id=8]
+[ext_resource path="res://TalkRadius/TalkRadius.tscn" type="PackedScene" id=9]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 17.7795
 height = 0.0
+
+[sub_resource type="CircleShape2D" id=2]
+radius = 176.257
 
 [node name="CatLady" type="KinematicBody2D"]
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = ExtResource( 1 )
 animation = "idle"
-frame = 18
+frame = 10
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -28,3 +35,36 @@ tidbit = ExtResource( 2 )
 [node name="SoundListener" parent="." instance=ExtResource( 5 )]
 target_sample = ExtResource( 4 )
 start_listening = true
+
+[node name="DestroyParent" parent="SoundListener" instance=ExtResource( 7 )]
+tidbit = ExtResource( 2 )
+compare_on_change = true
+compare_on_ready = true
+
+[node name="ConditionalDialogue" parent="." instance=ExtResource( 6 )]
+condition = ExtResource( 2 )
+false_dialogues = [ PoolStringArray( "find me cat" ) ]
+true_dialogues = [ PoolStringArray( "thanks for rescuing my cat", "i have opened up dat back gate" ) ]
+
+[node name="Node2D" type="Node2D" parent="."]
+
+[node name="SoundListener" parent="Node2D" instance=ExtResource( 5 )]
+any_sound_but_target = true
+target_sample = ExtResource( 4 )
+start_listening = true
+
+[node name="DestroyParent" parent="Node2D" instance=ExtResource( 7 )]
+tidbit = ExtResource( 2 )
+compare_on_change = true
+compare_on_ready = true
+
+[node name="SayDialogue" parent="Node2D" instance=ExtResource( 8 )]
+dialogues = [ PoolStringArray( "that doesn\'t sound like my cat" ) ]
+
+[node name="TalkRadius" parent="." instance=ExtResource( 9 )]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TalkRadius"]
+shape = SubResource( 2 )
+
+[node name="SayDialogue" parent="." instance=ExtResource( 8 )]
+dialogues = [ PoolStringArray( "Oh nice that sounds like my cat.", "and it sounds happy, I\'ll open up my back gate for you" ) ]
