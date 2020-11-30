@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/birdandwind.ogg-67cb694d1c832fa79ff102caeade1b4e.oggstr"
+
+[deps]
+
+source_file="res://Assets/Music/birdandwind.ogg"
+dest_files=[ "res://.import/birdandwind.ogg-67cb694d1c832fa79ff102caeade1b4e.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

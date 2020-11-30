@@ -1,41 +1,49 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://Assets/Tiles/Trail/TrailMid.png" type="Texture" id=1]
+[ext_resource path="res://SoundtrackArea/SoundtrackArea.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Camera/Camera.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Assets/Tiles/Trail/TrailBack.png" type="Texture" id=4]
 [ext_resource path="res://Player/Player.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Location/Areas/Trail/Trail.gd" type="Script" id=6]
 [ext_resource path="res://Location/LocationTransitionTrigger.tscn" type="PackedScene" id=7]
 
-[sub_resource type="StreamTexture" id=6]
+[sub_resource type="StreamTexture" id=1]
+flags = 4
 load_path = "res://.import/Trail.png-399b22209eaf58afdb475779848be7f9.stex"
 
-[sub_resource type="RectangleShape2D" id=1]
+[sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 155.997, 64.9192 )
 
-[sub_resource type="RectangleShape2D" id=7]
+[sub_resource type="RectangleShape2D" id=3]
 extents = Vector2( 78.5499, 64.6352 )
 
-[sub_resource type="RectangleShape2D" id=2]
+[sub_resource type="RectangleShape2D" id=4]
 extents = Vector2( 801.057, 16.9888 )
 
-[sub_resource type="RectangleShape2D" id=3]
+[sub_resource type="RectangleShape2D" id=5]
 extents = Vector2( 38.2642, 82.8613 )
 
-[sub_resource type="RectangleShape2D" id=8]
+[sub_resource type="RectangleShape2D" id=6]
 extents = Vector2( 190.04, 82.8613 )
 
-[sub_resource type="RectangleShape2D" id=4]
+[sub_resource type="RectangleShape2D" id=7]
 extents = Vector2( 56.0872, 1966.77 )
 
-[sub_resource type="RectangleShape2D" id=5]
+[sub_resource type="RectangleShape2D" id=8]
 extents = Vector2( 63.1867, 44.178 )
+
+[sub_resource type="RectangleShape2D" id=9]
+extents = Vector2( 153.819, 128.177 )
+
+[sub_resource type="RectangleShape2D" id=10]
+extents = Vector2( 889.075, 128.177 )
 
 [node name="Location" type="Node2D"]
 script = ExtResource( 6 )
 
 [node name="Sprite" type="Sprite" parent="."]
-texture = SubResource( 6 )
+texture = SubResource( 1 )
 
 [node name="Map" type="YSort" parent="."]
 
@@ -90,7 +98,7 @@ delay = 0.0
 coordinates = Vector2( 1820, 510 )
 
 [node name="CollisionShape2D" parent="LocationTransition" index="0"]
-shape = SubResource( 1 )
+shape = SubResource( 2 )
 
 [node name="LocationTransition2" parent="." instance=ExtResource( 7 )]
 position = Vector2( -1934.95, 252.553 )
@@ -101,7 +109,7 @@ coordinates = Vector2( 32, 450 )
 
 [node name="CollisionShape2D" parent="LocationTransition2" index="0"]
 position = Vector2( 9.57275, -3896.25 )
-shape = SubResource( 1 )
+shape = SubResource( 2 )
 
 [node name="LocationTransition3" parent="." instance=ExtResource( 7 )]
 position = Vector2( -4111.72, -11.803 )
@@ -112,43 +120,65 @@ coordinates = Vector2( 6, 830 )
 
 [node name="CollisionShape2D" parent="LocationTransition3" index="0"]
 position = Vector2( -121.337, -4136.73 )
-shape = SubResource( 7 )
+shape = SubResource( 3 )
 
 [node name="Collisions" type="StaticBody2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Collisions"]
 position = Vector2( -1101.45, 171.206 )
-shape = SubResource( 2 )
+shape = SubResource( 4 )
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="Collisions"]
 position = Vector2( 1134.5, 169.351 )
-shape = SubResource( 2 )
+shape = SubResource( 4 )
 
 [node name="CollisionShape2D3" type="CollisionShape2D" parent="Collisions"]
 position = Vector2( 374.647, 68.2226 )
-shape = SubResource( 3 )
+shape = SubResource( 5 )
 
 [node name="CollisionShape2D4" type="CollisionShape2D" parent="Collisions"]
 position = Vector2( -356.445, 68.2226 )
-shape = SubResource( 3 )
+shape = SubResource( 5 )
 
 [node name="CollisionShape2D5" type="CollisionShape2D" parent="Collisions"]
 position = Vector2( -229.573, -98.441 )
-shape = SubResource( 8 )
+shape = SubResource( 6 )
 
 [node name="CollisionShape2D8" type="CollisionShape2D" parent="Collisions"]
 position = Vector2( 279.645, -98.441 )
-shape = SubResource( 8 )
+shape = SubResource( 6 )
 
 [node name="CollisionShape2D6" type="CollisionShape2D" parent="Collisions"]
 position = Vector2( 0.36792, 464.426 )
 rotation = 1.5708
-shape = SubResource( 4 )
+shape = SubResource( 7 )
 
 [node name="CollisionShape2D7" type="CollisionShape2D" parent="Collisions"]
 position = Vector2( 1886.26, 345.38 )
 rotation = 1.5708
-shape = SubResource( 5 )
+shape = SubResource( 8 )
+
+[node name="SoundtrackArea" parent="." instance=ExtResource( 2 )]
+position = Vector2( 971.581, 292.711 )
+song = 2
+
+[node name="CollisionShape2D" parent="SoundtrackArea" index="0"]
+shape = SubResource( 9 )
+
+[node name="SoundtrackArea2" parent="." instance=ExtResource( 2 )]
+position = Vector2( 971.581, 292.711 )
+
+[node name="CollisionShape2D" parent="SoundtrackArea2" index="0"]
+position = Vector2( -2059.33, 6.85889 )
+shape = SubResource( 9 )
+
+[node name="SoundtrackArea3" parent="." instance=ExtResource( 2 )]
+position = Vector2( 971.581, 292.711 )
+song = 3
+
+[node name="CollisionShape2D" parent="SoundtrackArea3" index="0"]
+position = Vector2( -1025.38, -1.71448 )
+shape = SubResource( 10 )
 
 [editable path="Map/Player/Camera"]
 
@@ -157,3 +187,9 @@ shape = SubResource( 5 )
 [editable path="LocationTransition2"]
 
 [editable path="LocationTransition3"]
+
+[editable path="SoundtrackArea"]
+
+[editable path="SoundtrackArea2"]
+
+[editable path="SoundtrackArea3"]

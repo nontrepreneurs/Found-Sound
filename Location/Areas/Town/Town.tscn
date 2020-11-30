@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=2]
+[gd_scene load_steps=42 format=2]
 
 [ext_resource path="res://Location/Areas/Town/Town.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Tiles/town.png" type="Texture" id=2]
@@ -34,25 +34,28 @@
 [ext_resource path="res://Characters/Townsfolk/DrumMan/DrumMan.tscn" type="PackedScene" id=32]
 [ext_resource path="res://Characters/Townsfolk/DiseasedGiraffe/DiseasedGiraffe.tscn" type="PackedScene" id=33]
 
-[sub_resource type="RectangleShape2D" id=3]
+[sub_resource type="RectangleShape2D" id=8]
+extents = Vector2( 43.7292, 151.759 )
+
+[sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 461.535, 62.4028 )
 
-[sub_resource type="RectangleShape2D" id=4]
+[sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 550.471, 56.2081 )
 
-[sub_resource type="RectangleShape2D" id=5]
+[sub_resource type="RectangleShape2D" id=3]
 extents = Vector2( 1161.08, 58.4204 )
 
-[sub_resource type="RectangleShape2D" id=6]
-extents = Vector2( 48.0258, 504.772 )
+[sub_resource type="RectangleShape2D" id=4]
+extents = Vector2( 44.3354, 608.691 )
 
-[sub_resource type="RectangleShape2D" id=7]
+[sub_resource type="RectangleShape2D" id=5]
 extents = Vector2( 79.6821, 1058.41 )
 
-[sub_resource type="RectangleShape2D" id=8]
+[sub_resource type="RectangleShape2D" id=6]
 extents = Vector2( 51.3031, 457.898 )
 
-[sub_resource type="RectangleShape2D" id=9]
+[sub_resource type="RectangleShape2D" id=7]
 extents = Vector2( 477.331, 405.57 )
 
 [node name="Location" type="Node2D"]
@@ -79,15 +82,18 @@ delay = 0.0
 coordinates = Vector2( 3680, 1110 )
 
 [node name="ToTrail" parent="." instance=ExtResource( 19 )]
-position = Vector2( 656.12, -671.474 )
+position = Vector2( 1897.59, 519.407 )
 location = 3
 delay = 0.0
 coordinates = Vector2( -1830, 250 )
 
+[node name="CollisionShape2D" parent="ToTrail" index="0"]
+shape = SubResource( 8 )
+
 [node name="Map" type="YSort" parent="."]
 
 [node name="Player" parent="Map" instance=ExtResource( 3 )]
-position = Vector2( 1820, 510 )
+position = Vector2( 1815.73, 508.578 )
 speed = 200
 
 [node name="Camera" parent="Map/Player" instance=ExtResource( 4 )]
@@ -2642,35 +2648,39 @@ position = Vector2( 271.928, 863.244 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Collisions"]
 position = Vector2( 93.5018, -671.262 )
-shape = SubResource( 3 )
+shape = SubResource( 1 )
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="Collisions"]
 position = Vector2( 1345.64, -664.005 )
-shape = SubResource( 4 )
+shape = SubResource( 2 )
 
 [node name="CollisionShape2D5" type="CollisionShape2D" parent="Collisions"]
 position = Vector2( 707.4, 1461.45 )
-shape = SubResource( 5 )
+shape = SubResource( 3 )
 
 [node name="CollisionShape2D3" type="CollisionShape2D" parent="Collisions"]
-position = Vector2( 1893.11, -117.437 )
-shape = SubResource( 6 )
+position = Vector2( 1892.76, -186.555 )
+shape = SubResource( 4 )
 
 [node name="CollisionShape2D6" type="CollisionShape2D" parent="Collisions"]
 position = Vector2( -436.388, 355.271 )
-shape = SubResource( 7 )
+shape = SubResource( 5 )
 
 [node name="CollisionShape2D4" type="CollisionShape2D" parent="Collisions"]
 position = Vector2( 1893.39, 1092.85 )
-shape = SubResource( 8 )
+shape = SubResource( 6 )
 
 [node name="ZoomArea" type="Area2D" parent="."]
 position = Vector2( 685.107, 514.776 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ZoomArea"]
 position = Vector2( -3.78503, 24.6033 )
-shape = SubResource( 9 )
+shape = SubResource( 7 )
 [connection signal="body_entered" from="ZoomArea" to="." method="_on_ZoomArea_body_entered"]
 [connection signal="body_exited" from="ZoomArea" to="." method="_on_ZoomArea_body_exited"]
+
+[editable path="ToOutskirts"]
+
+[editable path="ToTrail"]
 
 [editable path="Map/Player/Camera"]

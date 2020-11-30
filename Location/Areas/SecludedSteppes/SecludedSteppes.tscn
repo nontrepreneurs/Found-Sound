@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://Location/Areas/SecludedSteppes/SecludedSteppes.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Tiles/secluded_steppes.png" type="Texture" id=2]
@@ -9,8 +9,16 @@
 [ext_resource path="res://Assets/Collidable/Coniferous Tree.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Assets/Collidable/Deciduous Tree.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Characters/CatLady/CatLady.tscn" type="PackedScene" id=9]
+[ext_resource path="res://SoundtrackArea/SoundtrackArea.tscn" type="PackedScene" id=10]
+[ext_resource path="res://Location/LocationTransitionTrigger.gd" type="Script" id=11]
 
-[sub_resource type="Shader" id=1]
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 57.5442, 64.9192 )
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 63.5148, 62.1605 )
+
+[sub_resource type="Shader" id=3]
 code = "shader_type canvas_item;
 
 // Gonkee's fog shader for Godot 3 - full tutorial https://youtu.be/QEaTsz_0o44
@@ -60,27 +68,30 @@ void fragment() {
 	COLOR = vec4(color, final * 0.5);
 }"
 
-[sub_resource type="ShaderMaterial" id=2]
-shader = SubResource( 1 )
+[sub_resource type="ShaderMaterial" id=4]
+shader = SubResource( 3 )
 shader_param/color = Vector3( 0.35, 0.48, 0.95 )
 shader_param/OCTAVES = 4
 
-[sub_resource type="RectangleShape2D" id=3]
-extents = Vector2( 57.5585, 954.343 )
-
-[sub_resource type="RectangleShape2D" id=4]
-extents = Vector2( 70.6842, 714.038 )
-
 [sub_resource type="RectangleShape2D" id=5]
-extents = Vector2( 34.6632, 180.126 )
+extents = Vector2( 62.2084, 93.7985 )
 
 [sub_resource type="RectangleShape2D" id=6]
-extents = Vector2( 429.332, 24.5028 )
+extents = Vector2( 57.5585, 954.343 )
 
 [sub_resource type="RectangleShape2D" id=7]
-extents = Vector2( 999.28, 56.6716 )
+extents = Vector2( 70.6842, 714.038 )
 
 [sub_resource type="RectangleShape2D" id=8]
+extents = Vector2( 34.6632, 180.126 )
+
+[sub_resource type="RectangleShape2D" id=9]
+extents = Vector2( 429.332, 24.5028 )
+
+[sub_resource type="RectangleShape2D" id=10]
+extents = Vector2( 999.28, 56.6716 )
+
+[sub_resource type="RectangleShape2D" id=11]
 extents = Vector2( 175.279, 56.6716 )
 
 [node name="Location" type="Node2D"]
@@ -104,11 +115,18 @@ position = Vector2( -946.376, -786.844 )
 delay = 0.0
 coordinates = Vector2( 620, -260 )
 
-[node name="LocationTransition2" parent="Sprite" instance=ExtResource( 6 )]
+[node name="CollisionShape2D" parent="Sprite/LocationTransition" index="0"]
+shape = SubResource( 1 )
+
+[node name="LocationTransition2" type="Area2D" parent="Sprite"]
 position = Vector2( -950.013, 741.298 )
+script = ExtResource( 11 )
 location = 4
 delay = 0.0
 coordinates = Vector2( 480, -775 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite/LocationTransition2"]
+shape = SubResource( 2 )
 
 [node name="LocationTransition3" parent="Sprite" instance=ExtResource( 6 )]
 position = Vector2( 2.78848, 974.675 )
@@ -2832,44 +2850,59 @@ position = Vector2( 265.15, 553.221 )
 position = Vector2( 237.44, 510.117 )
 
 [node name="ColorRect" type="ColorRect" parent="."]
-material = SubResource( 2 )
-margin_left = -1991.29
-margin_top = -1825.84
-margin_right = 2261.71
-margin_bottom = 1492.16
+material = SubResource( 4 )
+margin_left = -1983.51
+margin_top = -1873.47
+margin_right = 2269.49
+margin_bottom = 1444.53
 color = Color( 0, 0, 0, 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="StaticBody2D" type="StaticBody2D" parent="."]
+[node name="SoundtrackArea" parent="." instance=ExtResource( 10 )]
+position = Vector2( -876.876, 697.994 )
+song = 4
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2( 952.255, -1.16107 )
-shape = SubResource( 3 )
-
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2( -945.832, -29.1595 )
-shape = SubResource( 4 )
-
-[node name="CollisionShape2D7" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2( -923.153, 983.432 )
+[node name="CollisionShape2D" parent="SoundtrackArea" index="0"]
+position = Vector2( 41.3102, 42.7683 )
 shape = SubResource( 5 )
 
-[node name="CollisionShape2D3" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2( -489.214, 936.433 )
+[node name="Collisions" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Collisions"]
+position = Vector2( 952.255, -1.16107 )
 shape = SubResource( 6 )
 
-[node name="CollisionShape2D4" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2( 492.846, 936.265 )
-shape = SubResource( 6 )
-
-[node name="CollisionShape2D5" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2( -112.182, -965.383 )
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Collisions"]
+position = Vector2( -945.832, -29.1595 )
 shape = SubResource( 7 )
 
-[node name="CollisionShape2D6" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2( -1061.3, -908.837 )
+[node name="CollisionShape2D7" type="CollisionShape2D" parent="Collisions"]
+position = Vector2( -923.153, 983.432 )
 shape = SubResource( 8 )
 
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="Collisions"]
+position = Vector2( -489.214, 936.433 )
+shape = SubResource( 9 )
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="Collisions"]
+position = Vector2( 492.846, 936.265 )
+shape = SubResource( 9 )
+
+[node name="CollisionShape2D5" type="CollisionShape2D" parent="Collisions"]
+position = Vector2( -112.182, -965.383 )
+shape = SubResource( 10 )
+
+[node name="CollisionShape2D6" type="CollisionShape2D" parent="Collisions"]
+position = Vector2( -1061.3, -908.837 )
+shape = SubResource( 11 )
+[connection signal="body_entered" from="Sprite/LocationTransition2" to="Sprite/LocationTransition2" method="_on_LocationTransition_body_entered"]
+
+[editable path="Sprite/LocationTransition"]
+
+[editable path="Sprite/LocationTransition3"]
+
 [editable path="Map/Player/Camera"]
+
+[editable path="SoundtrackArea"]

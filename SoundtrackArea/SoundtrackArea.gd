@@ -10,7 +10,10 @@ func _ready():
 	pass # Replace with function body.
 
 func _on_SoundtrackArea_body_entered(body):
-	print("FUCK")
+	print("got body enter: ", SoundtrackManager.deck.playing, song, SoundtrackManager.currentTrack)
 	if body == player:
-		print("we got a body")
-		SoundtrackManager.transitionSong(song)
+		print("also player")
+		if song != SoundtrackManager.currentTrack or SoundtrackManager.currentTrack == null:
+			SoundtrackManager.transitionSong(song)
+#		else:
+#			print("pass")
