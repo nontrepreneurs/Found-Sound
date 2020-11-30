@@ -52,7 +52,7 @@ play_cowbell = ExtResource( 6 )
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = ExtResource( 1 )
 animation = "idle"
-frame = 4
+frame = 7
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -83,7 +83,7 @@ tidbit = ExtResource( 6 )
 shape = SubResource( 3 )
 
 [node name="SayDialogue" parent="." instance=ExtResource( 12 )]
-dialogues = [ PoolStringArray( "ah ya, thats the shit" ) ]
+dialogues = [ PoolStringArray( "Oh ya! That\'s what I call a banger!", "Time to dance!" ) ]
 
 [node name="WrongSampleParent" type="Node2D" parent="."]
 
@@ -93,7 +93,7 @@ target_sample = ExtResource( 2 )
 start_listening = true
 
 [node name="SayDialogue" parent="WrongSampleParent" instance=ExtResource( 12 )]
-dialogues = [ PoolStringArray( "no that is the wrong sound", "dump on my face or whatever" ) ]
+dialogues = [ PoolStringArray( "This does not bang!", "This sounds like TRASH!", "That\'s a pity, I\'d LOVE to shake my DUMPy." ) ]
 
 [node name="DestroyParent" parent="WrongSampleParent" instance=ExtResource( 11 )]
 tidbit = ExtResource( 6 )
@@ -102,5 +102,5 @@ compare_on_ready = true
 
 [node name="ConditionalDialogue" parent="." instance=ExtResource( 10 )]
 condition = ExtResource( 6 )
-false_dialogues = [ PoolStringArray( "bruh you still gotta satisfy me" ) ]
-true_dialogues = [ PoolStringArray( "i have been satisfied" ) ]
+false_dialogues = [ PoolStringArray( "Hello there! Would you like to learn about cheese\?" ), PoolStringArray( "The best cheese comes from happy cows." ), PoolStringArray( "Happy cows like to dance. Know any BANG-ers\?" ) ]
+true_dialogues = [ PoolStringArray( "Thanks for playing me a banger!" ) ]
