@@ -153,7 +153,7 @@ _global_script_class_icons={
 [application]
 
 config/name="go2020"
-run/main_scene="res://Location/Areas/Homestead/Homestead.tscn"
+run/main_scene="res://TitleScreen/TitleScreen.tscn"
 config/icon="res://icon.png"
 
 [autoload]

@@ -151,6 +151,14 @@ song = 4
 [node name="CollisionShape2D" parent="SoundtrackArea" index="0"]
 shape = SubResource( 9 )
 
+[node name="SoundtrackArea2" parent="." instance=ExtResource( 6 )]
+position = Vector2( 719.966, 299.109 )
+song = 2
+
+[node name="CollisionShape2D" parent="SoundtrackArea2" index="0"]
+position = Vector2( -1580.88, -4.56244 )
+shape = SubResource( 9 )
+
 [editable path="Map/Player/Camera"]
 
 [editable path="LocationTransition"]
@@ -158,3 +166,5 @@ shape = SubResource( 9 )
 [editable path="LocationTransition2"]
 
 [editable path="SoundtrackArea"]
+
+[editable path="SoundtrackArea2"]
