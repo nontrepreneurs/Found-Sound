@@ -22,7 +22,7 @@ radius = 176.257
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = ExtResource( 1 )
 animation = "idle"
-frame = 15
+frame = 16
 playing = true
 flip_h = true
 

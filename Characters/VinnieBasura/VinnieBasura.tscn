@@ -42,7 +42,6 @@ has_recorded_vinnie = ExtResource( 5 )
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = ExtResource( 1 )
 animation = "idle"
-frame = 3
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -57,10 +56,6 @@ sample = ExtResource( 3 )
 autoplay = "PeriodicallyClang"
 anims/PeriodicallyClang = SubResource( 2 )
 
-[node name="VinniesTidbitResponse" parent="." instance=ExtResource( 6 )]
-tidbit = ExtResource( 5 )
-compare_on_change = true
-
 [node name="TalkRadius" parent="." instance=ExtResource( 7 )]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TalkRadius"]
@@ -70,3 +65,7 @@ shape = SubResource( 3 )
 condition = ExtResource( 5 )
 false_dialogues = [ PoolStringArray( "One man\'s trash is another mans... *BURP*... what the heck are you lookin\' at\?!\?" ) ]
 true_dialogues = [ PoolStringArray( "Glad you like my sounds bro!" ) ]
+
+[node name="VinniesTidbitResponse" parent="." instance=ExtResource( 6 )]
+tidbit = ExtResource( 5 )
+compare_on_change = true

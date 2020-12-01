@@ -1,14 +1,9 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://Characters/Townsfolk/SackOfFlour/sackOfFlour_spriteframes.tres" type="SpriteFrames" id=1]
-[ext_resource path="res://TalkComponents/SimpleTalkCycle/SimpleTalkCycle.tscn" type="PackedScene" id=2]
-[ext_resource path="res://TalkRadius/TalkRadius.tscn" type="PackedScene" id=3]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 248.299
-
-[sub_resource type="CircleShape2D" id=2]
-radius = 1665.67
 
 [node name="SackOfFlour" type="KinematicBody2D"]
 
@@ -16,19 +11,9 @@ radius = 1665.67
 position = Vector2( 22.156, -209.775 )
 frames = ExtResource( 1 )
 animation = "idle"
-frame = 11
+frame = 4
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 1.2435, 0.238983 )
 shape = SubResource( 1 )
-
-[node name="TalkRadiusPrefab" type="Node2D" parent="."]
-
-[node name="TalkRadius" parent="TalkRadiusPrefab" instance=ExtResource( 3 )]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="TalkRadiusPrefab/TalkRadius"]
-shape = SubResource( 2 )
-
-[node name="SimpleTalkCycle" parent="TalkRadiusPrefab" instance=ExtResource( 2 )]
-dialogues = [ PoolStringArray( "i am the lumpy flour boy" ) ]

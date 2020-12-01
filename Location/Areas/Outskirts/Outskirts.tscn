@@ -44,6 +44,7 @@ position = Vector2( 60.4871, 280.872 )
 
 [node name="Dad" parent="Map" instance=ExtResource( 3 )]
 position = Vector2( 1798.11, 1082.98 )
+scale = Vector2( 0.75, 0.75 )
 
 [node name="LocationTransitionTrigger" type="Area2D" parent="."]
 position = Vector2( -3.12384, 1133.68 )

@@ -16,7 +16,7 @@ radius = 43.6865
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = ExtResource( 1 )
 animation = "idle"
-frame = 6
+frame = 15
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -30,4 +30,4 @@ shape = SubResource( 1 )
 shape = SubResource( 2 )
 
 [node name="SimpleTalkCycle" parent="." instance=ExtResource( 3 )]
-dialogues = [ PoolStringArray( "conor talkin" ) ]
+dialogues = [ PoolStringArray( "Hey there! My name is CONOR!" ), PoolStringArray( "Have you ever heard of terpenes\?" ) ]

@@ -30,4 +30,4 @@ shape = SubResource( 1 )
 shape = SubResource( 2 )
 
 [node name="SimpleTalkCycle" parent="TalkRadiusPrefab" instance=ExtResource( 2 )]
-dialogues = [ PoolStringArray( "Vampire Otter guy am i" ) ]
+dialogues = [ PoolStringArray( "I\'m feeling positively vampiric!" ) ]

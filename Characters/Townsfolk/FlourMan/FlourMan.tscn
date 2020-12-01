@@ -4,11 +4,11 @@
 [ext_resource path="res://TalkComponents/SimpleTalkCycle/SimpleTalkCycle.tscn" type="PackedScene" id=2]
 [ext_resource path="res://TalkRadius/TalkRadius.tscn" type="PackedScene" id=3]
 
-[sub_resource type="CapsuleShape2D" id=2]
+[sub_resource type="CapsuleShape2D" id=1]
 radius = 14.6667
 height = 23.3333
 
-[sub_resource type="CircleShape2D" id=1]
+[sub_resource type="CircleShape2D" id=2]
 radius = 133.243
 
 [node name="FlourMan" type="KinematicBody2D"]
@@ -21,14 +21,14 @@ playing = true
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0, 29.6667 )
 rotation = 1.5708
-shape = SubResource( 2 )
+shape = SubResource( 1 )
 
 [node name="TalkRadiusPrefab" type="Node2D" parent="."]
 
 [node name="TalkRadius" parent="TalkRadiusPrefab" instance=ExtResource( 3 )]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TalkRadiusPrefab/TalkRadius"]
-shape = SubResource( 1 )
+shape = SubResource( 2 )
 
 [node name="SimpleTalkCycle" parent="TalkRadiusPrefab" instance=ExtResource( 2 )]
-dialogues = [ PoolStringArray( "i am the flour man with lil legs" ) ]
+dialogues = [ PoolStringArray( "Dude you can\'t go gluten free! You\'re a sack of flour!", "Do you understand what gluten is\?" ) ]

@@ -79,7 +79,7 @@ false_dialogues = [ PoolStringArray( "You found my old field recorder!", "Can\'t
 true_dialogues = [ PoolStringArray( "That was fantastic son!", "Why don\'t you go find some other things to record and play back!" ), PoolStringArray( "Are you winning son\?" ) ]
 
 [node name="SayDialogue" parent="." instance=ExtResource( 9 )]
-dialogues = [ PoolStringArray( "Oh that must be the tire swing! That\'s fantastic!", "Why don\'t you go record some other stuff around town!", "I bet some other folks would love to hear what you record!", "I heard some cool sounds coming form the dump the other day!" ) ]
+dialogues = [ PoolStringArray( "Oh that must be the tire swing! That\'s fantastic!", "Why don\'t you go record some other stuff around town!", "I bet some other folks would love to hear what you record!", "I heard some cool sounds coming from the dump the other day!" ) ]
 
 [node name="DestroyParent" parent="." instance=ExtResource( 10 )]
 tidbit = ExtResource( 8 )
