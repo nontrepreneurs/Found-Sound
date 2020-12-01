@@ -196,6 +196,7 @@ __meta__ = {
 frames = SubResource( 8 )
 
 [node name="Sprite" type="AnimatedSprite" parent="Control"]
+visible = false
 position = Vector2( 98.897, 252.114 )
 scale = Vector2( 2.35445, 2.35445 )
 frames = SubResource( 15 )

@@ -2,11 +2,11 @@
 
 [ext_resource path="res://Assets/Fonts/VT323/VT323-Regular.ttf" type="DynamicFontData" id=1]
 
-[sub_resource type="DynamicFont" id=1]
+[sub_resource type="DynamicFont" id=13]
 size = 64
 font_data = ExtResource( 1 )
 
-[sub_resource type="DynamicFont" id=2]
+[sub_resource type="DynamicFont" id=14]
 size = 45
 font_data = ExtResource( 1 )
 
@@ -36,7 +36,7 @@ margin_left = 0.326416
 margin_top = 0.304085
 margin_right = -0.513611
 margin_bottom = -0.0959167
-custom_fonts/normal_font = SubResource( 1 )
+custom_fonts/normal_font = SubResource( 13 )
 text = "Thanks for playing!"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -51,7 +51,7 @@ margin_left = -0.560013
 margin_top = 0.197815
 margin_right = 0.0799561
 margin_bottom = -0.122192
-custom_fonts/normal_font = SubResource( 2 )
+custom_fonts/normal_font = SubResource( 14 )
 text = "development: mvann & bitsbybrad
 
 character concepts: ehlzi
@@ -72,7 +72,7 @@ margin_left = -0.0491333
 margin_top = 0.305389
 margin_right = -0.40918
 margin_bottom = -0.2146
-custom_fonts/normal_font = SubResource( 2 )
+custom_fonts/normal_font = SubResource( 14 )
 text = "dialogue and plot: nugglord
 
 character art:

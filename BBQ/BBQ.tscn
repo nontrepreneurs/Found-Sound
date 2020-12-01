@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=2]
+[gd_scene load_steps=30 format=2]
 
 [ext_resource path="res://BBQ/BBQ.gd" type="Script" id=1]
 [ext_resource path="res://Tidbits/CatLadyIsSatisfied.tres" type="Resource" id=2]
@@ -7,8 +7,7 @@
 [ext_resource path="res://Tidbits/FrogSatisfied.tres" type="Resource" id=5]
 [ext_resource path="res://Tidbits/WinCondition.tres" type="Resource" id=6]
 [ext_resource path="res://Characters/BipedalCow/bipedalCow_spriteframes.tres" type="SpriteFrames" id=7]
-[ext_resource path="res://Characters/BipedalCow/BipedalCow.gd" type="Script" id=8]
-[ext_resource path="res://Characters/VinnieBasura/VinnieBasura.gd" type="Script" id=9]
+[ext_resource path="res://Assets/Fonts/VT323/VT323-Regular.ttf" type="DynamicFontData" id=8]
 [ext_resource path="res://Characters/Frog/frog_spriteframes.tres" type="SpriteFrames" id=10]
 [ext_resource path="res://Characters/Dad/DAD_CHEF_ANIMATION_sheet.png" type="Texture" id=11]
 [ext_resource path="res://Characters/CatLady/catLady_spriteframes.tres" type="SpriteFrames" id=12]
@@ -73,6 +72,14 @@ animations = [ {
 [sub_resource type="CircleShape2D" id=12]
 radius = 133.243
 
+[sub_resource type="DynamicFont" id=13]
+size = 64
+font_data = ExtResource( 8 )
+
+[sub_resource type="DynamicFont" id=14]
+size = 45
+font_data = ExtResource( 8 )
+
 [node name="BBQ" type="Node2D"]
 script = ExtResource( 1 )
 conditions = [ ExtResource( 2 ), ExtResource( 4 ), ExtResource( 5 ), ExtResource( 3 ) ]
@@ -82,13 +89,11 @@ win_condition = ExtResource( 6 )
 
 [node name="VinnieBasura" type="KinematicBody2D" parent="CHARS"]
 position = Vector2( 177.249, 108.423 )
-script = ExtResource( 9 )
-has_recorded_vinnie = ExtResource( 3 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="CHARS/VinnieBasura"]
 frames = ExtResource( 13 )
 animation = "idle"
-frame = 1
+frame = 2
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CHARS/VinnieBasura"]
@@ -102,7 +107,7 @@ position = Vector2( 51.3832, -55.1545 )
 [node name="AnimatedSprite" type="AnimatedSprite" parent="CHARS/PsyFrog"]
 frames = ExtResource( 10 )
 animation = "idle"
-frame = 2
+frame = 7
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CHARS/PsyFrog"]
@@ -112,13 +117,11 @@ shape = SubResource( 2 )
 
 [node name="BipedalCow" type="KinematicBody2D" parent="CHARS"]
 position = Vector2( 3.29987, 29.2271 )
-script = ExtResource( 8 )
-play_cowbell = ExtResource( 4 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="CHARS/BipedalCow"]
 frames = ExtResource( 7 )
 animation = "idle"
-frame = 4
+frame = 1
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CHARS/BipedalCow"]
@@ -131,7 +134,7 @@ position = Vector2( 125.394, -56.0973 )
 [node name="AnimatedSprite" type="AnimatedSprite" parent="CHARS/CatLady"]
 frames = ExtResource( 12 )
 animation = "idle"
-frame = 17
+frame = 18
 playing = true
 flip_h = true
 
@@ -150,7 +153,7 @@ shape = SubResource( 4 )
 scale = Vector2( 0.75, 0.75 )
 frames = SubResource( 11 )
 animation = "idle"
-frame = 2
+frame = 3
 playing = true
 
 [node name="TalkRadiusPrefab" type="Node2D" parent="CHARS/BBQDad"]
@@ -167,3 +170,77 @@ script = ExtResource( 15 )
 position = Vector2( 127.28, 19.799 )
 scale = Vector2( 0.75, 0.75 )
 texture = ExtResource( 16 )
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0, 0, 0, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Control" type="Control" parent="CanvasLayer/ColorRect"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RichTextLabel3" type="RichTextLabel" parent="CanvasLayer/ColorRect/Control"]
+anchor_left = 0.294
+anchor_top = 0.157
+anchor_right = 0.697
+anchor_bottom = 0.277
+margin_left = 0.326416
+margin_top = 0.304085
+margin_right = -0.513611
+margin_bottom = -0.0959167
+custom_fonts/normal_font = SubResource( 13 )
+text = "Thanks for playing!"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer/ColorRect/Control"]
+anchor_left = 0.077
+anchor_top = 0.414
+anchor_right = 0.539
+anchor_bottom = 0.87
+margin_left = -0.560013
+margin_top = 0.197815
+margin_right = 0.0799561
+margin_bottom = -0.122192
+custom_fonts/normal_font = SubResource( 14 )
+text = "development: mvann & bitsbybrad
+
+character concepts: ehlzi
+
+music and sound design:
+bitsbybrad & miscfriend
+"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="CanvasLayer/ColorRect/Control"]
+anchor_left = 0.566
+anchor_top = 0.413
+anchor_right = 0.953
+anchor_bottom = 0.854
+margin_left = -0.0491333
+margin_top = 0.305389
+margin_right = -0.40918
+margin_bottom = -0.2146
+custom_fonts/normal_font = SubResource( 14 )
+text = "dialogue and plot: nugglord
+
+character art:
+miscfriend & chibo
+
+world design: miscfriend"
+__meta__ = {
+"_edit_use_anchors_": true
+}
