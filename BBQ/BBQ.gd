@@ -11,14 +11,12 @@ func _ready():
 	assert(win_condition, "BBQ requires a win condition tidbit.")
 	var all_true = true
 	for condition in conditions:
-		if !condition.value:
+		if condition.value == false:
 			all_true = false
 	if all_true:
 		you_win()
 	else:
 		you_aint_win_yet()
-		win_condition.value = true
-		print("YOU WIN MAFK!")
 
 func you_win():
 	win_condition.value = true

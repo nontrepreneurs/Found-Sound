@@ -1,8 +1,8 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://BBQ/BBQ.gd" type="Script" id=1]
 [ext_resource path="res://Tidbits/CatLadyIsSatisfied.tres" type="Resource" id=2]
-[ext_resource path="res://Tidbits/DogHasBeenScaredAway.tres" type="Resource" id=3]
+[ext_resource path="res://Tidbits/HasRecordedVinnie.tres" type="Resource" id=3]
 [ext_resource path="res://Tidbits/CowSatisfied.tres" type="Resource" id=4]
 [ext_resource path="res://Tidbits/FrogSatisfied.tres" type="Resource" id=5]
 [ext_resource path="res://Tidbits/WinCondition.tres" type="Resource" id=6]
@@ -10,11 +10,49 @@
 [ext_resource path="res://Characters/VinnieBasura/VinnieBasura.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Characters/Frog/Frog.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Characters/CatLady/CatLady.tscn" type="PackedScene" id=10]
-[ext_resource path="res://Characters/Dad/Dad.tscn" type="PackedScene" id=11]
+[ext_resource path="res://Characters/Dad/DAD_CHEF_ANIMATION_sheet.png" type="Texture" id=11]
+
+[sub_resource type="AtlasTexture" id=1]
+flags = 4
+atlas = ExtResource( 11 )
+region = Rect2( 0, 0, 99, 216 )
+
+[sub_resource type="AtlasTexture" id=2]
+flags = 4
+atlas = ExtResource( 11 )
+region = Rect2( 99, 0, 99, 216 )
+
+[sub_resource type="AtlasTexture" id=3]
+flags = 4
+atlas = ExtResource( 11 )
+region = Rect2( 198, 0, 99, 216 )
+
+[sub_resource type="AtlasTexture" id=4]
+flags = 4
+atlas = ExtResource( 11 )
+region = Rect2( 297, 0, 99, 216 )
+
+[sub_resource type="AtlasTexture" id=5]
+flags = 4
+atlas = ExtResource( 11 )
+region = Rect2( 396, 0, 99, 216 )
+
+[sub_resource type="AtlasTexture" id=6]
+flags = 4
+atlas = ExtResource( 11 )
+region = Rect2( 495, 0, 99, 216 )
+
+[sub_resource type="SpriteFrames" id=7]
+animations = [ {
+"frames": [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ) ],
+"loop": true,
+"name": "idle",
+"speed": 5.0
+} ]
 
 [node name="BBQ" type="Node2D"]
 script = ExtResource( 1 )
-conditions = [ ExtResource( 2 ), ExtResource( 4 ), ExtResource( 3 ), ExtResource( 5 ) ]
+conditions = [ ExtResource( 2 ), ExtResource( 4 ), ExtResource( 5 ), ExtResource( 3 ) ]
 win_condition = ExtResource( 6 )
 
 [node name="CHARS" type="Node2D" parent="."]
@@ -39,6 +77,12 @@ position = Vector2( 3.29987, 29.2271 )
 [node name="CatLady" parent="CHARS" instance=ExtResource( 10 )]
 position = Vector2( 125.394, -56.0973 )
 
-[node name="Dad" parent="CHARS" instance=ExtResource( 11 )]
-position = Vector2( 192.805, -6.12826 )
+[node name="BBQDad" type="KinematicBody2D" parent="CHARS"]
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="CHARS/BBQDad"]
+position = Vector2( 208.833, -23.0989 )
 scale = Vector2( 0.75, 0.75 )
+frames = SubResource( 7 )
+animation = "idle"
+frame = 1
+playing = true
