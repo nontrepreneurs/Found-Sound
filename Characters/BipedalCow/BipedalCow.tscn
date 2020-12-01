@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://Characters/BipedalCow/bipedalCow_spriteframes.tres" type="SpriteFrames" id=1]
 [ext_resource path="res://Samples/BasuraPercussion/BasuraPercussion.tres" type="Resource" id=2]
@@ -12,6 +12,7 @@
 [ext_resource path="res://TalkComponents/ConditionalDialogue/ConditionalDialogue.tscn" type="PackedScene" id=10]
 [ext_resource path="res://TidbitResponses/DestroyParent/DestroyParent.tscn" type="PackedScene" id=11]
 [ext_resource path="res://SoundResponses/SayDialogue/SayDialogue.tscn" type="PackedScene" id=12]
+[ext_resource path="res://Tidbits/WinCondition.tres" type="Resource" id=13]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 20.8941
@@ -52,7 +53,7 @@ play_cowbell = ExtResource( 6 )
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = ExtResource( 1 )
 animation = "idle"
-frame = 7
+frame = 5
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -71,8 +72,16 @@ compare_on_ready = true
 [node name="SoundSource" parent="." instance=ExtResource( 4 )]
 sample = ExtResource( 5 )
 
+[node name="DestroyParent" parent="SoundSource" instance=ExtResource( 11 )]
+tidbit = ExtResource( 13 )
+compare_on_ready = true
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/PlayCowbell = SubResource( 2 )
+
+[node name="DestroyParent" parent="AnimationPlayer" instance=ExtResource( 11 )]
+tidbit = ExtResource( 13 )
+compare_on_ready = true
 
 [node name="SetTidbit" parent="." instance=ExtResource( 8 )]
 tidbit = ExtResource( 6 )

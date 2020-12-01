@@ -1,3 +1,44 @@
-[gd_scene format=2]
+[gd_scene load_steps=12 format=2]
+
+[ext_resource path="res://BBQ/BBQ.gd" type="Script" id=1]
+[ext_resource path="res://Tidbits/CatLadyIsSatisfied.tres" type="Resource" id=2]
+[ext_resource path="res://Tidbits/DogHasBeenScaredAway.tres" type="Resource" id=3]
+[ext_resource path="res://Tidbits/CowSatisfied.tres" type="Resource" id=4]
+[ext_resource path="res://Tidbits/FrogSatisfied.tres" type="Resource" id=5]
+[ext_resource path="res://Tidbits/WinCondition.tres" type="Resource" id=6]
+[ext_resource path="res://Characters/BipedalCow/BipedalCow.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Characters/VinnieBasura/VinnieBasura.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Characters/Frog/Frog.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Characters/CatLady/CatLady.tscn" type="PackedScene" id=10]
+[ext_resource path="res://Characters/Dad/Dad.tscn" type="PackedScene" id=11]
 
 [node name="BBQ" type="Node2D"]
+script = ExtResource( 1 )
+conditions = [ ExtResource( 2 ), ExtResource( 4 ), ExtResource( 3 ), ExtResource( 5 ) ]
+win_condition = ExtResource( 6 )
+
+[node name="CHARS" type="Node2D" parent="."]
+
+[node name="Label" type="Label" parent="CHARS"]
+margin_right = 40.0
+margin_bottom = 14.0
+text = "TESTESTESTES"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VinnieBasura" parent="CHARS" instance=ExtResource( 8 )]
+position = Vector2( 177.249, 108.423 )
+
+[node name="PsyFrog" parent="CHARS" instance=ExtResource( 9 )]
+position = Vector2( 51.3832, -55.1545 )
+
+[node name="BipedalCow" parent="CHARS" instance=ExtResource( 7 )]
+position = Vector2( 3.29987, 29.2271 )
+
+[node name="CatLady" parent="CHARS" instance=ExtResource( 10 )]
+position = Vector2( 125.394, -56.0973 )
+
+[node name="Dad" parent="CHARS" instance=ExtResource( 11 )]
+position = Vector2( 192.805, -6.12826 )
+scale = Vector2( 0.75, 0.75 )

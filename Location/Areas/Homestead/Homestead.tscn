@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=2]
+[gd_scene load_steps=27 format=2]
 
 [ext_resource path="res://Location/Areas/Homestead/Homestead.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Collidable/Deciduous Tree Variant.tscn" type="PackedScene" id=2]
@@ -17,6 +17,7 @@
 [ext_resource path="res://SoundtrackArea/SoundtrackArea.tscn" type="PackedScene" id=15]
 [ext_resource path="res://Tidbits/CatLadyIsSatisfied.tres" type="Resource" id=16]
 [ext_resource path="res://TidbitResponses/DestroyParent/DestroyParent.tscn" type="PackedScene" id=17]
+[ext_resource path="res://BBQ/BBQ.tscn" type="PackedScene" id=18]
 
 [sub_resource type="Gradient" id=1]
 offsets = PoolRealArray( 0, 0.992353, 0.998301, 1 )
@@ -325,6 +326,9 @@ tidbit = ExtResource( 16 )
 target_value = false
 compare_on_change = true
 compare_on_ready = true
+
+[node name="BBQ" parent="Map" instance=ExtResource( 18 )]
+position = Vector2( 770.259, 36.9993 )
 
 [node name="LocationTransitionTrigger" parent="." instance=ExtResource( 13 )]
 position = Vector2( 615.597, 917.102 )
