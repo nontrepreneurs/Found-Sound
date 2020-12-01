@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/meow.wav-459bc240241d96366d1a0ec6fd417c03.sample"
+
+[deps]
+
+source_file="res://Samples/CatMeow/meow.wav"
+dest_files=[ "res://.import/meow.wav-459bc240241d96366d1a0ec6fd417c03.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

@@ -1,4 +1,4 @@
-[gd_scene load_steps=42 format=2]
+[gd_scene load_steps=41 format=2]
 
 [ext_resource path="res://Location/Areas/Town/Town.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Tiles/town.png" type="Texture" id=2]
@@ -21,7 +21,6 @@
 [ext_resource path="res://Location/LocationTransitionTrigger.tscn" type="PackedScene" id=19]
 [ext_resource path="res://Characters/TreeDog/TreeDog.tscn" type="PackedScene" id=20]
 [ext_resource path="res://Characters/TreeCat/TreeCat.tscn" type="PackedScene" id=21]
-[ext_resource path="res://Characters/SusCheesecake/SusCheesecake.tscn" type="PackedScene" id=22]
 [ext_resource path="res://Characters/Townsfolk/SackOfFlour/SackOfFlour.tscn" type="PackedScene" id=23]
 [ext_resource path="res://Characters/Townsfolk/BlueFrog/BlueFrog.tscn" type="PackedScene" id=24]
 [ext_resource path="res://Characters/Townsfolk/SillyDog/SillyDog.tscn" type="PackedScene" id=25]
@@ -2602,9 +2601,6 @@ position = Vector2( 861.28, 296.854 )
 
 [node name="TreeDog" parent="Map" instance=ExtResource( 20 )]
 position = Vector2( 613.501, 471 )
-
-[node name="SusCheesecake" parent="Map" instance=ExtResource( 22 )]
-position = Vector2( 1162.5, -141 )
 
 [node name="HattedFrog" parent="Map" instance=ExtResource( 26 )]
 position = Vector2( 429, 1188 )

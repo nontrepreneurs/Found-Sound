@@ -1,7 +1,7 @@
 extends Area2D
 class_name TalkRadius
 
-onready var label: Label = $Label
+#onready var label: Label = $Label
 var talkable = false
 var someone_is_talking: Resource = load("res://Tidbits/SomeoneIsTalking.tres")
 
@@ -16,12 +16,12 @@ func _input(event):
 func _on_Area2D_body_entered(body):
 	if body is Player:
 		talkable = true
-		label.visible = true
+		#label.visible = true
 
 func _on_Area2D_body_exited(body):
 	if body is Player and talkable == true:
 		talkable = false
-		label.visible = false
+		#label.visible = false
 
 
 func _on_TalkRadius_input_event(viewport, event, shape_idx):

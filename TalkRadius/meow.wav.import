@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/meow.wav-a1074da770efc9c92a3c64ac8736e160.sample"
+
+[deps]
+
+source_file="res://TalkRadius/meow.wav"
+dest_files=[ "res://.import/meow.wav-a1074da770efc9c92a3c64ac8736e160.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0
