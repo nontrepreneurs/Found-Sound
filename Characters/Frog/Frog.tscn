@@ -25,7 +25,7 @@ tidbit = ExtResource( 4 )
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = ExtResource( 1 )
 animation = "idle"
-frame = 7
+frame = 1
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -46,11 +46,11 @@ compare_on_ready = true
 
 [node name="ConditionalDialogue" parent="." instance=ExtResource( 7 )]
 condition = ExtResource( 4 )
-false_dialogues = [ PoolStringArray( "i am frog, i am unsatisfied" ) ]
-true_dialogues = [ PoolStringArray( "i am frog, i am hella satisfied" ) ]
+false_dialogues = [ PoolStringArray( "Well, well, well... what brings you down to the crick\?" ), PoolStringArray( "I\'m about to embark on a vision quest!", "I could use some sounds to set the moo\'d." ) ]
+true_dialogues = [ PoolStringArray( "That was great!", "I\'m ready to explore my own mind, ya dig\?" ) ]
 
 [node name="SayDialogue" parent="." instance=ExtResource( 9 )]
-dialogues = [ PoolStringArray( "oh nice, i love cowbell" ) ]
+dialogues = [ PoolStringArray( "It\'s beautiful, I\'m positively buggin!", "Slimy and grimey!" ) ]
 
 [node name="WrongSound" type="Node2D" parent="."]
 
@@ -65,7 +65,7 @@ compare_on_change = true
 compare_on_ready = true
 
 [node name="SayDialogue" parent="WrongSound" instance=ExtResource( 9 )]
-dialogues = [ PoolStringArray( "needs more cowbell" ) ]
+dialogues = [ PoolStringArray( "Nah nah... needs more cowbell!", "That sounds worse than the caterwaul of a baby possum!", "I\'ve got some folksy wisdom for ya, don\'t quit your day job!" ) ]
 
 [node name="TalkRadius" parent="." instance=ExtResource( 10 )]
 

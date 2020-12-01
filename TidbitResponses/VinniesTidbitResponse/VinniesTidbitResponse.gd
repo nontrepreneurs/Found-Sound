@@ -1,6 +1,6 @@
 extends TidbitResponse
 
-var dia = [Dialogue.new("mmmm ya record my sounds")]
+var dia = [Dialogue.new("Aw nice! Nice to have my sounds appreciated, y'know!")]
 
 func _on_target_matched() -> void:
 	DialogueManager.loadDialogue(dia)

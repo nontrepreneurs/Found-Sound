@@ -22,8 +22,9 @@ radius = 176.257
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = ExtResource( 1 )
 animation = "idle"
-frame = 10
+frame = 15
 playing = true
+flip_h = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0, 19.5776 )
@@ -43,8 +44,8 @@ compare_on_ready = true
 
 [node name="ConditionalDialogue" parent="." instance=ExtResource( 6 )]
 condition = ExtResource( 2 )
-false_dialogues = [ PoolStringArray( "find me cat" ) ]
-true_dialogues = [ PoolStringArray( "thanks for rescuing my cat", "i have opened up dat back gate" ) ]
+false_dialogues = [ PoolStringArray( "My kitty has gone missing!" ), PoolStringArray( "She\'s probably being bothered by that mangey mutt again!", "I just need to hear her voice again to know she\'s okay..." ) ]
+true_dialogues = [ PoolStringArray( "Thank you so much for finding my kitty!", "I have  opened up my back gate for you!" ) ]
 
 [node name="Node2D" type="Node2D" parent="."]
 
@@ -59,7 +60,7 @@ compare_on_change = true
 compare_on_ready = true
 
 [node name="SayDialogue" parent="Node2D" instance=ExtResource( 8 )]
-dialogues = [ PoolStringArray( "that doesn\'t sound like my cat" ) ]
+dialogues = [ PoolStringArray( "Mm that sound is nice and all... but I really can\'t focus on anything until I\'ve heard that my kitty is doing alright." ) ]
 
 [node name="TalkRadius" parent="." instance=ExtResource( 9 )]
 
@@ -67,4 +68,4 @@ dialogues = [ PoolStringArray( "that doesn\'t sound like my cat" ) ]
 shape = SubResource( 2 )
 
 [node name="SayDialogue" parent="." instance=ExtResource( 8 )]
-dialogues = [ PoolStringArray( "Oh nice that sounds like my cat.", "and it sounds happy, I\'ll open up my back gate for you" ) ]
+dialogues = [ PoolStringArray( "Oh that sounds like my kitty! ", "She sounds happy! Thank you kindly! I\'ll open up my back gate for you." ) ]
