@@ -328,7 +328,7 @@ compare_on_change = true
 compare_on_ready = true
 
 [node name="BBQ" parent="Map" instance=ExtResource( 18 )]
-position = Vector2( 770.259, 36.9993 )
+position = Vector2( 593.111, 31.3933 )
 
 [node name="LocationTransitionTrigger" parent="." instance=ExtResource( 13 )]
 position = Vector2( 615.597, 917.102 )

@@ -20,7 +20,7 @@ func _ready():
 
 func you_win():
 	win_condition.value = true
-	DialogueManager.loadDialogue([Dialogue.new("Foley! Why don't you come join us!")])
+	DialogueManager.loadDialogue([Dialogue.new("Hey Foley! Why don't you come join us!")])
 	print("YOU WIN MAFK!")
 
 func you_aint_win_yet():

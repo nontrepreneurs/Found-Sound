@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=29 format=2]
 
 [ext_resource path="res://BBQ/BBQ.gd" type="Script" id=1]
 [ext_resource path="res://Tidbits/CatLadyIsSatisfied.tres" type="Resource" id=2]
@@ -6,49 +6,72 @@
 [ext_resource path="res://Tidbits/CowSatisfied.tres" type="Resource" id=4]
 [ext_resource path="res://Tidbits/FrogSatisfied.tres" type="Resource" id=5]
 [ext_resource path="res://Tidbits/WinCondition.tres" type="Resource" id=6]
-[ext_resource path="res://Characters/BipedalCow/BipedalCow.tscn" type="PackedScene" id=7]
-[ext_resource path="res://Characters/VinnieBasura/VinnieBasura.tscn" type="PackedScene" id=8]
-[ext_resource path="res://Characters/Frog/Frog.tscn" type="PackedScene" id=9]
-[ext_resource path="res://Characters/CatLady/CatLady.tscn" type="PackedScene" id=10]
+[ext_resource path="res://Characters/BipedalCow/bipedalCow_spriteframes.tres" type="SpriteFrames" id=7]
+[ext_resource path="res://Characters/BipedalCow/BipedalCow.gd" type="Script" id=8]
+[ext_resource path="res://Characters/VinnieBasura/VinnieBasura.gd" type="Script" id=9]
+[ext_resource path="res://Characters/Frog/frog_spriteframes.tres" type="SpriteFrames" id=10]
 [ext_resource path="res://Characters/Dad/DAD_CHEF_ANIMATION_sheet.png" type="Texture" id=11]
+[ext_resource path="res://Characters/CatLady/catLady_spriteframes.tres" type="SpriteFrames" id=12]
+[ext_resource path="res://Characters/VinnieBasura/basura_spriteframes.tres" type="SpriteFrames" id=13]
+[ext_resource path="res://TalkRadius/TalkRadius.tscn" type="PackedScene" id=14]
+[ext_resource path="res://BBQ/FinishGameScript.gd" type="Script" id=15]
+[ext_resource path="res://BBQ/BARBEQUE_static.png" type="Texture" id=16]
 
-[sub_resource type="AtlasTexture" id=1]
-flags = 4
-atlas = ExtResource( 11 )
-region = Rect2( 0, 0, 99, 216 )
+[sub_resource type="CapsuleShape2D" id=1]
+radius = 14.8185
+height = 23.7206
 
-[sub_resource type="AtlasTexture" id=2]
-flags = 4
-atlas = ExtResource( 11 )
-region = Rect2( 99, 0, 99, 216 )
+[sub_resource type="CapsuleShape2D" id=2]
+radius = 14.2195
 
-[sub_resource type="AtlasTexture" id=3]
-flags = 4
-atlas = ExtResource( 11 )
-region = Rect2( 198, 0, 99, 216 )
+[sub_resource type="CapsuleShape2D" id=3]
+radius = 20.8941
+height = 0.0
 
-[sub_resource type="AtlasTexture" id=4]
-flags = 4
-atlas = ExtResource( 11 )
-region = Rect2( 297, 0, 99, 216 )
+[sub_resource type="CapsuleShape2D" id=4]
+radius = 17.7795
+height = 0.0
 
 [sub_resource type="AtlasTexture" id=5]
 flags = 4
 atlas = ExtResource( 11 )
-region = Rect2( 396, 0, 99, 216 )
+region = Rect2( 0, 0, 99, 216 )
 
 [sub_resource type="AtlasTexture" id=6]
 flags = 4
 atlas = ExtResource( 11 )
+region = Rect2( 99, 0, 99, 216 )
+
+[sub_resource type="AtlasTexture" id=7]
+flags = 4
+atlas = ExtResource( 11 )
+region = Rect2( 198, 0, 99, 216 )
+
+[sub_resource type="AtlasTexture" id=8]
+flags = 4
+atlas = ExtResource( 11 )
+region = Rect2( 297, 0, 99, 216 )
+
+[sub_resource type="AtlasTexture" id=9]
+flags = 4
+atlas = ExtResource( 11 )
+region = Rect2( 396, 0, 99, 216 )
+
+[sub_resource type="AtlasTexture" id=10]
+flags = 4
+atlas = ExtResource( 11 )
 region = Rect2( 495, 0, 99, 216 )
 
-[sub_resource type="SpriteFrames" id=7]
+[sub_resource type="SpriteFrames" id=11]
 animations = [ {
-"frames": [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ) ],
+"frames": [ SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ), SubResource( 10 ) ],
 "loop": true,
 "name": "idle",
 "speed": 5.0
 } ]
+
+[sub_resource type="CircleShape2D" id=12]
+radius = 133.243
 
 [node name="BBQ" type="Node2D"]
 script = ExtResource( 1 )
@@ -57,32 +80,90 @@ win_condition = ExtResource( 6 )
 
 [node name="CHARS" type="Node2D" parent="."]
 
-[node name="Label" type="Label" parent="CHARS"]
-margin_right = 40.0
-margin_bottom = 14.0
-text = "TESTESTESTES"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="VinnieBasura" parent="CHARS" instance=ExtResource( 8 )]
+[node name="VinnieBasura" type="KinematicBody2D" parent="CHARS"]
 position = Vector2( 177.249, 108.423 )
+script = ExtResource( 9 )
+has_recorded_vinnie = ExtResource( 3 )
 
-[node name="PsyFrog" parent="CHARS" instance=ExtResource( 9 )]
-position = Vector2( 51.3832, -55.1545 )
-
-[node name="BipedalCow" parent="CHARS" instance=ExtResource( 7 )]
-position = Vector2( 3.29987, 29.2271 )
-
-[node name="CatLady" parent="CHARS" instance=ExtResource( 10 )]
-position = Vector2( 125.394, -56.0973 )
-
-[node name="BBQDad" type="KinematicBody2D" parent="CHARS"]
-
-[node name="AnimatedSprite" type="AnimatedSprite" parent="CHARS/BBQDad"]
-position = Vector2( 208.833, -23.0989 )
-scale = Vector2( 0.75, 0.75 )
-frames = SubResource( 7 )
+[node name="AnimatedSprite" type="AnimatedSprite" parent="CHARS/VinnieBasura"]
+frames = ExtResource( 13 )
 animation = "idle"
 frame = 1
 playing = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CHARS/VinnieBasura"]
+position = Vector2( 0, 24.063 )
+rotation = 1.5708
+shape = SubResource( 1 )
+
+[node name="PsyFrog" type="KinematicBody2D" parent="CHARS"]
+position = Vector2( 51.3832, -55.1545 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="CHARS/PsyFrog"]
+frames = ExtResource( 10 )
+animation = "idle"
+frame = 2
+playing = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CHARS/PsyFrog"]
+position = Vector2( 0, 34.261 )
+rotation = 1.5708
+shape = SubResource( 2 )
+
+[node name="BipedalCow" type="KinematicBody2D" parent="CHARS"]
+position = Vector2( 3.29987, 29.2271 )
+script = ExtResource( 8 )
+play_cowbell = ExtResource( 4 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="CHARS/BipedalCow"]
+frames = ExtResource( 7 )
+animation = "idle"
+frame = 4
+playing = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CHARS/BipedalCow"]
+position = Vector2( 0.629959, 29.2374 )
+shape = SubResource( 3 )
+
+[node name="CatLady" type="KinematicBody2D" parent="CHARS"]
+position = Vector2( 125.394, -56.0973 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="CHARS/CatLady"]
+frames = ExtResource( 12 )
+animation = "idle"
+frame = 17
+playing = true
+flip_h = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CHARS/CatLady"]
+position = Vector2( 0, 19.5776 )
+shape = SubResource( 4 )
+
+[node name="BBQDad" type="KinematicBody2D" parent="CHARS"]
+position = Vector2( 183.377, -11.3137 )
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="CHARS/BBQDad"]
+position = Vector2( 15.085, 56.5687 )
+shape = SubResource( 4 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="CHARS/BBQDad"]
+scale = Vector2( 0.75, 0.75 )
+frames = SubResource( 11 )
+animation = "idle"
+frame = 2
+playing = true
+
+[node name="TalkRadiusPrefab" type="Node2D" parent="CHARS/BBQDad"]
+
+[node name="TalkRadius" parent="CHARS/BBQDad/TalkRadiusPrefab" instance=ExtResource( 14 )]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CHARS/BBQDad/TalkRadiusPrefab/TalkRadius"]
+shape = SubResource( 12 )
+
+[node name="finishGameScript" type="Node2D" parent="CHARS/BBQDad/TalkRadiusPrefab"]
+script = ExtResource( 15 )
+
+[node name="barby" type="Sprite" parent="CHARS"]
+position = Vector2( 127.28, 19.799 )
+scale = Vector2( 0.75, 0.75 )
+texture = ExtResource( 16 )
